@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administrador Usuarios</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0; /* Light gray background */
+      }
+
+      .div-container {
+        background-color: #c9e2f2; /* Light blue background */
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 500px; /* Adjust width as needed */
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .header button {
+        background-color: transparent;
+        border: none;
+        font-size: 16px;
+        padding: 10px 20px;
+        cursor: pointer;
+        color: #333; /* Dark gray text */
+      }
+
+      .header button.active {
+        background-color: #fff; /* White background for active button */
+        border-radius: 5px;
+      }
+
+      .form-group {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        width: 40%;
+        text-align: left;
+        padding-top: 5px;
+        color: #333; /* Dark gray text */
+      }
+
+      .form-group input {
+        width: 55%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .form-group input[type="text"],
+      .form-group input[type="password"],
+      .form-group input[type="email"],
+      .form-group input[type="tel"] {
+        box-sizing: border-box; /* Include padding and border in the element's total width and height */
+      }
+
+      .form-group input[type="text"]::placeholder,
+      .form-group input[type="password"]::placeholder,
+      .form-group input[type="email"]::placeholder,
+      .form-group input[type="tel"]::placeholder {
+        color: #999; /* Light gray placeholder text */
+      }
+
+      .form-group input[type="text"]:focus,
+      .form-group input[type="password"]:focus,
+      .form-group input[type="email"]:focus,
+      .form-group input[type="tel"]:focus {
+        outline: none;
+        border-color: #007bff; /* Blue border on focus */
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Blue shadow on focus */
+      }
+
+      .form-group input[type="text"].error,
+      .form-group input[type="password"].error,
+      .form-group input[type="email"].error,
+      .form-group input[type="tel"].error {
+        border-color: #dc3545; /* Red border for error */
+      }
+
+      .form-group input[type="text"].error::placeholder,
+      .form-group input[type="password"].error::placeholder,
+      .form-group input[type="email"].error::placeholder,
+      .form-group input[type="tel"].error::placeholder {
+        color: #dc3545; /* Red placeholder text for error */
+      }
+
+      .buttons {
+        text-align: center;
+        margin-top: 30px;
+      }
+
+      .buttons button {
+        background-color: #333; /* Dark gray background */
+        color: #fff; /* White text */
+        border: none;
+        padding: 12px 30px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 0 10px;
+      }
+
+      .buttons button:hover {
+        background-color: #555; /* Slightly lighter dark gray on hover */
+      }
+
+      .buttons button.log-in {
+        background-color: transparent;
+        color: #333; /* Dark gray text */
+        border: none;
+        padding: 12px 30px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .buttons button.log-in:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="div-container">
+      <div class="header">
+        <button class="active">Administrador</button>
+        <button>Usuarios</button>
+      </div>
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" placeholder="Nombre Completo" />
+      </div>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="---" />
+      </div>
+      <div class="form-group">
+        <label for="cedula">Cédula de Identidad</label>
+        <input type="text" id="cedula" placeholder="Cédula Física / Jurídica" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="4 letras y 4 números" />
+      </div>
+      <div class="form-group">
+        <label for="email">Correo Electrónico</label>
+        <input type="email" id="email" placeholder="example.001@email.com" />
+      </div>
+      <div class="form-group">
+        <label for="telefono">Número Telefónico</label>
+        <input type="tel" id="telefono" placeholder="+506 #### ####" />
+      </div>
+      <div class="buttons">
+        <button>Registrar</button>
+        <button class="log-in">Log In</button>
+      </div>
+    </div>
+  </body>
+</html>
