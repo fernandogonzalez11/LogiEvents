@@ -8,14 +8,14 @@
 
 .admin-dashboard .div {
   background-color: #b3d5e6;
-  width: 1280px;
+  width: 100%;
   height: 720px;
   position: relative;
 }
 
 .admin-dashboard .overlap-group {
   position: absolute;
-  width: 1280px;
+  width: 100%;
   height: 100px;
   top: 0;
   left: 0;
@@ -201,15 +201,7 @@
   overflow: hidden;
   border: 1.47px solid;
   border-color: #2c2c2c;
-}
 
-.admin-dashboard .button-2 {
-  all: unset;
-  box-sizing: border-box;
-  position: relative;
-  width: fit-content;
-  margin-top: -7.14px;
-  margin-bottom: -4.20px;
   font-family: "Inter-Regular", Helvetica;
   font-weight: 400;
   color: #f5f5f5;
@@ -217,6 +209,10 @@
   letter-spacing: 0;
   line-height: 23.6px;
   white-space: nowrap;
+}
+
+.admin-dashboard .button:hover {
+  background-color: #494848;
 }
 
 .admin-dashboard .edit-and-delete {
@@ -291,15 +287,7 @@
   background-color: #b3b3b3;
   border-radius: 8.53px;
   overflow: hidden;
-}
 
-.admin-dashboard .button-4 {
-  all: unset;
-  box-sizing: border-box;
-  position: relative;
-  width: fit-content;
-  margin-top: -7.14px;
-  margin-bottom: -4.20px;
   font-family: "Inter-Regular", Helvetica;
   font-weight: 400;
   color: #1e1e1e;
@@ -307,4 +295,8 @@
   letter-spacing: 0;
   line-height: 23.6px;
   white-space: nowrap;
+}
+
+.admin-dashboard .button-3:hover {
+  background-color: #949494;
 }

@@ -1,0 +1,164 @@
+/* Reset some default styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Inter, sans-serif;
+    background: #b4d5e7
+}
+
+.main-container {
+    width: 100%;
+    height: 720px;
+    position: relative;
+    background: #b4d5e7; /* var(--almost-pluey, #b4d5e7); */
+    overflow: hidden;
+}
+
+.event-details-container {
+    width: 763px;
+    height: 503px;
+    left: 22px;
+    top: 163px;
+    position: absolute;
+    background: #a3c8dc; /* var(--something-pluey, #a3c8dc); */
+    border-radius: 20px;
+}
+
+.header {
+    width: 100%;
+    height: 100px;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    background: #7ab1cd;
+}
+
+.event-title {
+    width: 269px;
+    height: 50px;
+    left: 22px;
+    top: 25px;
+    position: absolute;
+    color: black;
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 48px;
+    word-wrap: break-word;
+}
+
+.back-button {
+    width: 87px;
+    height: 52px;
+    left: 1139px;
+    top: 614px;
+    position: absolute;
+    background: #d9d9d9;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.reserve-button {
+    width: 154px;
+    height: 52px;
+    left: 966px;
+    top: 614px;
+    position: absolute;
+    background: #219bff;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+}
+
+.event-name-label,
+.event-date-label,
+.organizer-label,
+.available-seats-label,
+.category-label,
+.status-label,
+.time-label {
+    width: 269px;
+    height: 30px;
+    left: 74px;
+    position: absolute;
+    color: black;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    word-wrap: break-word;
+}
+
+.event-name-label { top: 353px; }
+.event-date-label { top: 393px; }
+.organizer-label { top: 438px; }
+.available-seats-label { top: 478px; }
+.category-label { top: 522px; }
+.status-label { top: 567px; }
+.time-label { top: 611px; }
+
+.event-name,
+.event-date,
+.organizer,
+.available-seats,
+.category,
+.status,
+.time {
+    width: 269px;
+    height: 30px;
+    left: 411px;
+    position: absolute;
+    color: black;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    word-wrap: break-word;
+}
+
+.event-name { top: 353px; }
+.event-date { top: 393px; }
+.organizer { top: 438px; }
+.available-seats { top: 478px; }
+.category { top: 522px; }
+.status { top: 567px; }
+.time { top: 611px; }
+
+.description-label {
+    width: 269px;
+    height: 35px;
+    left: 839px;
+    top: 181px;
+    position: absolute;
+    color: black;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    word-wrap: break-word;
+}
+
+.description {
+    width: 398px;
+    height: 329px;
+    left: 836px;
+    top: 226px;
+    position: absolute;
+    color: black;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 33.6px;
+    word-wrap: break-word;
+}
+
+.event-image {
+    width: 431px;
+    height: 157px;
+    left: 188px;
+    top: 174px;
+    position: absolute;
+}

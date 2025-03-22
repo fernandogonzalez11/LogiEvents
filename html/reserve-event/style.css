@@ -1,0 +1,237 @@
+/* Reset and General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #b4d5e7;
+  }
+
+  input {
+    font-size: 26px;
+  }
+  
+  /* Main Container Styles */
+  #main-container {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    background: #b4d5e7;
+    overflow: hidden;
+  }
+  
+  /* Form Container Styles */
+  #form-container {
+    width: 1011.27px;
+    height: 664.93px;
+    left: 111px;
+    top: 40px;
+    position: absolute;
+    background: #a3c8dc;
+    border-radius: 38.28px;
+  }
+  
+  /* Form Group Styles */
+  .form-group {
+    width: 516.74px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 8px;
+    position: absolute;
+  }
+  
+  .form-group:nth-child(1) {
+    top: 216px;
+    left: 19px;
+  }
+  
+  .form-group:nth-child(2) {
+    top: 362.41px;
+    left: 19px;
+  }
+  
+  .form-group:nth-child(3) {
+    top: 507.55px;
+    left: 19px;
+  }
+  
+  /* Form Label Styles */
+  .form-label {
+    align-self: stretch;
+    color: #1e1e1e;
+    font-size: 26.59px;
+    font-weight: 400;
+    line-height: 37.23px;
+    word-wrap: break-word;
+  }
+  
+  /* Form Input Styles */
+  .form-input {
+    align-self: stretch;
+    min-width: 398.87px;
+    padding: 19.94px 26.59px;
+    background: white;
+    border-radius: 6.65px;
+    outline: 1.66px #4f7ea5 solid;
+    outline-offset: -0.83px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 26.59px;
+    color: #1e1e1e;
+    font-weight: 400;
+    line-height: 26.59px;
+    word-wrap: break-word;
+  }
+  
+  /* Spaces Box Styles */
+  #spaces-box {
+    width: 290px;
+    height: 171px;
+    left: 696px;
+    top: 216px;
+    position: absolute;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 13.3px;
+    display: inline-flex;
+  }
+  
+  #spaces-selection {
+    width: 163px;
+    height: 72px;
+    background: white;
+    border-radius: 10px;
+    border: 1px black solid;
+    padding-left: 20px;
+  }
+  
+  /* Event Title and Name Styles */
+  #event-title {
+    width: 721px;
+    left: 145px;
+    top: 42px;
+    position: absolute;
+    text-align: center;
+    color: black;
+    font-size: 45px;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  
+  #event-name {
+    width: 194px;
+    height: 59px;
+    left: 408px;
+    top: 107px;
+    position: absolute;
+    text-align: center;
+    color: #4f7ea5;
+    font-size: 35px;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  
+  /* Reserve and Cancel Button Styles */
+  #reserve-button,
+  #cancel-button {
+    width: 188px;
+    height: 88px;
+    position: absolute;
+    border-radius: 50px;
+    cursor: pointer;
+  }
+  
+  #reserve-button {
+    left: 801px;
+    top: 550px;
+    background: #219bff;
+  }
+  
+  #cancel-button {
+    left: 602px;
+    top: 550px;
+    background: #838383;
+  }
+  
+  #reserve-text,
+  #cancel-text {
+    width: 130px;
+    height: 40px;
+    position: absolute;
+    color: black;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 38.4px;
+    word-wrap: break-word;
+    /*centering the text*/
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* Icons Container Styles */
+  #icons-container {
+    width: 232.75px;
+    height: 61.62px;
+    left: 524px;
+    top: 9px;
+    position: absolute;
+    display: flex;
+  }
+  
+  /* Icon Styles */
+  .icon {
+    width: 61.4px;
+    height: 61.24px;
+    overflow: hidden;
+    position: absolute;
+  }
+  
+  .icon:nth-child(1) {
+    left: 171.35px;
+    top: 0px;
+  }
+  
+  .icon:nth-child(2) {
+    left: 86.76px;
+    top: 0.38px;
+  }
+  
+  .icon:nth-child(3) {
+    left: 0px;
+    top: 0.38px;
+  }
+  
+  .icon[data-size="48"]>div {
+    position: absolute;
+    outline: 5.1px #1e1e1e solid;
+    outline-offset: -2.55px;
+  }
+  
+  .icon:nth-child(1)>div {
+    width: 46.05px;
+    height: 45.93px;
+    left: 7.67px;
+    top: 7.66px;
+  }
+  
+  .icon:nth-child(2)>div {
+    width: 40.93px;
+    height: 45.93px;
+    left: 10.23px;
+    top: 7.66px;
+  }
+  
+  .icon:nth-child(3)>div {
+    width: 46.05px;
+    height: 51.03px;
+    left: 7.67px;
+    top: 5.1px;
+  }
