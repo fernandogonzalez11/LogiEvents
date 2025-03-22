@@ -1,0 +1,506 @@
+/* Reset and Font Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: rgb(180, 213, 231);
+}
+
+/* Main Container */
+.main-container {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    background: #b4d5e7;
+    overflow: hidden;
+}
+
+/* Form Container */
+.form-container {
+    width: 933px;
+    height: 627px;
+    left: 173px;
+    top: 46px;
+    position: absolute;
+    background: #a3c8dc;
+    border-radius: 25px;
+}
+
+/* Input Field Group */
+.input-field-group {
+    width: 403.82px;
+    position: absolute;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 8px;
+    display: inline-flex;
+}
+
+.input-field-group:nth-child(1) {
+    top: 104px;
+    left: 76px;
+}
+
+.input-field-group:nth-child(2) {
+    top: 202.24px;
+    left: 76px;
+}
+
+.input-field-group:nth-child(3) {
+    top: 294px;
+    left: 76px;
+    height: 103px;
+}
+
+.input-field-group:nth-child(4) {
+    top: 397px;
+    left: 76px;
+    height: 102px;
+}
+
+.input-field-group:nth-child(5) {
+    top: 104px;
+    left: 519px;
+    width: 339.99px;
+}
+
+.input-field-group:nth-child(6) {
+    top: 200.93px;
+    left: 522.8px;
+    width: 336.08px;
+    height: 102.91px;
+}
+
+.input-field-group:nth-child(7) {
+    top: 299px;
+    left: 523px;
+    width: 339.99px;
+}
+
+.input-field-group:nth-child(8) {
+    top: 395.93px;
+    left: 526.8px;
+    width: 336.08px;
+    height: 102.91px;
+}
+
+/* Label Styles */
+label {
+    align-self: stretch;
+    color: black;
+    font-size: 20.84px;
+    font-weight: 400;
+    line-height: 29.18px;
+    word-wrap: break-word;
+}
+
+/* Input Wrapper Styles */
+.input-wrapper {
+    align-self: stretch;
+    min-width: 312.63px;
+    padding: 15.63px 20.84px;
+    background: white;
+    overflow: hidden;
+    border-radius: 5.21px;
+    outline: 1.3px #d9d9d9 solid;
+    outline-offset: -0.65px;
+    justify-content: flex-start;
+    align-items: center;
+    display: inline-flex;
+    color: #1e1e1e;
+    font-size: 20.84px;
+    font-weight: 400;
+    line-height: 20.84px;
+    word-wrap: break-word;
+}
+
+/* Register Button Styles */
+.register-button {
+    padding: 12px;
+    left: 420px;
+    top: 512px;
+    position: absolute;
+    background: #2c2c2c;
+    overflow: hidden;
+    border-radius: 5.21px;
+    outline: 1px #2c2c2c solid;
+    outline-offset: -1px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    display: inline-flex;
+    color: #f5f5f5;
+    font-size: 20.84px;
+    font-weight: 400;
+    line-height: 20.84px;
+    word-wrap: break-word;
+    border: none;
+}
+
+.register-button:hover {
+    background-color: #494848;
+}
+
+/* Admin User Toggle Styles */
+.admin-user-toggle {
+    width: 312.63px;
+    left: 311px;
+    top: 39px;
+    position: absolute;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20.84px;
+    display: inline-flex;
+}
+
+.admin-button, .user-button {
+    flex: 1 1 0;
+    padding: 15.63px;
+    border-radius: 5.21px;
+    justify-content: center;
+    align-items: center;
+    gap: 10.42px;
+    display: flex;
+    font-size: 20.84px;
+    font-weight: 400;
+    line-height: 20.84px;
+    word-wrap: break-word;
+    border: none;
+}
+
+.admin-button {
+    background: #4f7ea5;
+    color: #f5f5f5;
+    overflow: hidden;
+}
+
+.user-button {
+    overflow: hidden;
+    color: #303030;
+}
+
+/* Log In Link Styles */
+.log-in-link {
+    left: 449px;
+    top: 578px;
+    position: absolute;
+    color: #1e1e1e;
+    font-size: 20.84px;
+    font-weight: 400;
+    text-decoration: underline;
+    line-height: 29.18px;
+    word-wrap: break-word;
+}
+
+/* Logo Group Styles */
+.logo-group {
+    width: 232.75px;
+    height: 61.62px;
+    left: 364px;
+    top: -36px;
+    position: absolute;
+}
+
+.logo-item {
+    width: 61.4px;
+    height: 61.24px;
+    position: absolute;
+    overflow: hidden;
+}
+
+.logo-item:nth-child(1) {
+    left: 171.35px;
+    top: 0px;
+}
+
+.logo-item:nth-child(2) {
+    left: 86.76px;
+    top: 0.38px;
+}
+
+.logo-item:nth-child(3) {
+    left: 0px;
+    top: 0.38px;
+}
+
+.logo-item div {
+    position: absolute;
+    outline: 5.1px #1e1e1e solid;
+    outline-offset: -2.55px;
+}
+
+.logo-item:nth-child(1) div {
+    width: 46.05px;
+    height: 45.93px;
+    left: 7.67px;
+    top: 7.66px;
+}
+
+.logo-item:nth-child(2) div {
+    width: 40.93px;
+    height: 45.93px;
+    left: 10.23px;
+    top: 7.66px;
+}
+
+.logo-item:nth-child(3) div {
+    width: 46.05px;
+    height: 51.03px;
+    left: 7.67px;
+    top: 5.1px;
+}/* Reset and Font Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Main Container */
+.main-container {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    background: #b4d5e7;
+    overflow: hidden;
+}
+
+/* Form Container */
+.form-container {
+    width: 933px;
+    height: 627px;
+    left: 173px;
+    top: 46px;
+    position: absolute;
+    background: #a3c8dc;
+    border-radius: 25px;
+}
+
+/* Input Field Group */
+.input-field-group {
+    width: 403.82px;
+    position: absolute;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 8px;
+    display: inline-flex;
+}
+
+.input-field-group:nth-child(1) {
+    top: 104px;
+    left: 76px;
+}
+
+.input-field-group:nth-child(2) {
+    top: 202.24px;
+    left: 76px;
+}
+
+.input-field-group:nth-child(3) {
+    top: 294px;
+    left: 76px;
+    height: 103px;
+}
+
+.input-field-group:nth-child(4) {
+    top: 397px;
+    left: 76px;
+    height: 102px;
+}
+
+.input-field-group:nth-child(5) {
+    top: 104px;
+    left: 519px;
+    width: 339.99px;
+}
+
+.input-field-group:nth-child(6) {
+    top: 200.93px;
+    left: 522.8px;
+    width: 336.08px;
+    height: 102.91px;
+}
+
+.input-field-group:nth-child(7) {
+    top: 299px;
+    left: 523px;
+    width: 339.99px;
+}
+
+.input-field-group:nth-child(8) {
+    top: 395.93px;
+    left: 526.8px;
+    width: 336.08px;
+    height: 102.91px;
+}
+
+/* Label Styles */
+label {
+    align-self: stretch;
+    color: black;
+    font-size: 20.84px;
+    font-weight: 400;
+    line-height: 29.18px;
+    word-wrap: break-word;
+}
+
+/* Input Wrapper Styles */
+.input-wrapper {
+    align-self: stretch;
+    min-width: 312.63px;
+    padding: 15.63px 20.84px;
+    background: white;
+    overflow: hidden;
+    border-radius: 5.21px;
+    outline: 1.3px #d9d9d9 solid;
+    outline-offset: -0.65px;
+    justify-content: flex-start;
+    align-items: center;
+    display: inline-flex;
+    color: #1e1e1e;
+    font-size: 20.84px;
+    font-weight: 400;
+    line-height: 20.84px;
+    word-wrap: break-word;
+}
+
+/* Register Button Styles */
+.register-button {
+    padding: 12px;
+    left: 420px;
+    top: 512px;
+    position: absolute;
+    background: #2c2c2c;
+    overflow: hidden;
+    border-radius: 5.21px;
+    outline: 1px #2c2c2c solid;
+    outline-offset: -1px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    display: inline-flex;
+    color: #f5f5f5;
+    font-size: 20.84px;
+    font-weight: 400;
+    line-height: 20.84px;
+    word-wrap: break-word;
+    border: none;
+}
+
+/* Admin User Toggle Styles */
+.admin-user-toggle {
+    width: 312.63px;
+    left: 311px;
+    top: 39px;
+    position: absolute;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20.84px;
+    display: inline-flex;
+}
+
+.admin-button, .user-button {
+    flex: 1 1 0;
+    padding: 15.63px;
+    border-radius: 5.21px;
+    justify-content: center;
+    align-items: center;
+    gap: 10.42px;
+    display: flex;
+    font-size: 20.84px;
+    font-weight: 400;
+    line-height: 20.84px;
+    word-wrap: break-word;
+    border: none;
+}
+
+.admin-button {
+    background: #4f7ea5;
+    color: #f5f5f5;
+    overflow: hidden;
+}
+
+.user-button {
+    overflow: hidden;
+    color: #303030;
+}
+
+/* Log In Link Styles */
+.log-in-link {
+    left: 449px;
+    top: 578px;
+    position: absolute;
+    color: #1e1e1e;
+    font-size: 20.84px;
+    font-weight: 400;
+    text-decoration: underline;
+    line-height: 29.18px;
+    word-wrap: break-word;
+}
+
+/* Logo Group Styles */
+.logo-group {
+    width: 232.75px;
+    height: 61.62px;
+    left: 364px;
+    top: -36px;
+    position: absolute;
+}
+
+.logo-item {
+    width: 61.4px;
+    height: 61.24px;
+    position: absolute;
+    overflow: hidden;
+}
+
+.logo-item:nth-child(1) {
+    left: 171.35px;
+    top: 0px;
+}
+
+.logo-item:nth-child(2) {
+    left: 86.76px;
+    top: 0.38px;
+}
+
+.logo-item:nth-child(3) {
+    left: 0px;
+    top: 0.38px;
+}
+
+.logo-item div {
+    position: absolute;
+    outline: 5.1px #1e1e1e solid;
+    outline-offset: -2.55px;
+}
+
+.logo-item:nth-child(1) div {
+    width: 46.05px;
+    height: 45.93px;
+    left: 7.67px;
+    top: 7.66px;
+}
+
+.logo-item:nth-child(2) div {
+    width: 40.93px;
+    height: 45.93px;
+    left: 10.23px;
+    top: 7.66px;
+}
+
+.logo-item:nth-child(3) div {
+    width: 46.05px;
+    height: 51.03px;
+    left: 7.67px;
+    top: 5.1px;
+}
