@@ -120,7 +120,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 11px;
+    padding: 5px 11px;
     position: relative;
     flex: 0 0 auto;
     border-radius: 100px;
@@ -130,7 +130,6 @@
     position: relative;
     width: 18px;
     height: 18px;
-    background-color: #1d1b20;
     border-radius: 2px;
   }
   
@@ -217,8 +216,6 @@
     width: 18px;
     height: 18px;
     border-radius: 2px;
-    border: 2px solid;
-    border-color: #1d1b20;
   }
   
   .home-page .group-4 {
@@ -330,6 +327,11 @@
     border: 1px solid;
     border-color: #2c2c2c;
   }
+
+  .home-page .icon-button:hover,
+  .home-page .message-square-wrapper:hover {
+    background-color: #494848;
+  }
   
   .home-page .img {
     position: relative;
@@ -401,4 +403,12 @@
 #adminbutton {
   color: white;
   font-family: Inter;
+}
+
+.event-unavailable {
+  background-color: red;
+}
+
+.event-available {
+  background-color: green;
 }

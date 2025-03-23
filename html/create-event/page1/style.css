@@ -265,13 +265,6 @@ body {
     top: 0.38px;
 }
 
-.icon::before {
-    content: "";
-    position: absolute;
-    outline: 5.1px var(--Icon-Default-Default) solid;
-    outline-offset: -2.55px;
-}
-
 .icon:nth-child(1)::before {
     width: 46.05px;
     height: 45.93px;
