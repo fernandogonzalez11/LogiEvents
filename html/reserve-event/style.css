@@ -141,22 +141,21 @@
   /* Reserve and Cancel Button Styles */
   #reserve-button,
   #cancel-button {
-    width: 188px;
-    height: 88px;
+    width: 170px;
+    height: 60px;
     position: absolute;
     border-radius: 50px;
     cursor: pointer;
+    top: 560px;
   }
   
   #reserve-button {
     left: 801px;
-    top: 550px;
     background: #219bff;
   }
   
   #cancel-button {
     left: 602px;
-    top: 550px;
     background: #838383;
   }
   
