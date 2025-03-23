@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 .home-page {
     background-color: #b3d5e6;
     display: flex;
@@ -8,7 +10,7 @@
   
   .home-page .div {
     background-color: #b3d5e6;
-    width: 1280px;
+    width: 100%;
     height: 720px;
     position: relative;
   }
@@ -30,7 +32,8 @@
   
   .home-page .text-wrapper {
     position: relative;
-    width: 175px;
+    width: 180px;
+    text-align: center;
     margin-top: -19.50px;
     font-family: var(--m3-headline-small-font-family);
     font-weight: var(--m3-headline-small-font-weight);
@@ -291,7 +294,7 @@
   
   .home-page .div-wrapper {
     position: absolute;
-    width: 1280px;
+    width: 100%;
     height: 100px;
     top: 0;
     left: 0;
@@ -302,7 +305,7 @@
     position: absolute;
     top: 18px;
     left: 25px;
-    font-family: "Inter-Regular", Helvetica;
+    font-family: "Inter", Helvetica;
     font-weight: 400;
     color: #000000;
     font-size: 50px;
@@ -371,6 +374,11 @@
     border: 1.47px solid;
     border-color: #2c2c2c;
   }
+
+  .button:hover {
+    background-color: #505050;
+    border: 1px solid #505050;
+  }
   
   .home-page .button-2 {
     all: unset;
@@ -381,7 +389,7 @@
     margin-bottom: -4.20px;
     margin-left: -8.17px;
     margin-right: -8.17px;
-    font-family: "Inter-Regular", Helvetica;
+    font-family: "Inter", Helvetica;
     font-weight: 400;
     color: #f5f5f5;
     font-size: 23.6px;
@@ -390,3 +398,7 @@
     white-space: nowrap;
   }
   
+#adminbutton {
+  color: white;
+  font-family: Inter;
+}
