@@ -11,7 +11,8 @@
       <div class="div">
         <div class="frame">
           <div class="text-wrapper">Lista de Eventos</div>
-          <p class="p">Nombre | Capacidad | Fecha | Disponibilidad</p>
+          <p class="p">Nombre |
+Capacidad | Fecha | Disponibilidad</p>
           <div class="frame-2">
             <div class="group">
               <div class="overlap">
@@ -131,7 +132,8 @@
         </div>
         <div class="frame-3">
           <div class="text-wrapper">Mis Eventos</div>
-          <p class="p">Nombre | Capacidad | Fecha | Disponibilidad</p>
+          <p class="p">Nombre |
+Capacidad | Fecha | Disponibilidad</p>
           <div class="frame-2">
             <div class="group-8">
               <div class="overlap">
@@ -191,5 +193,29 @@
         <button class="button" id="adminbutton">Admin</button>
       </div>
     </div>
+    <div id="chatbot-sidebar" style="display: none;">
+      <div class="chatbot">
+        <div class="chatbot-header">
+          <div class="chatbot-title">ChatBot</div>
+        </div>
+        <div class="chatbot-body"></div>
+        <input class="chatbot-input-container" />
+        <div class="chatbot-send-button">
+          <div class="send-icon">
+            <img alt="Send" src="img/send.svg">
+          </div>
+        </div>
+        <div class="chatbot-message-bubble"></div>
+        <div class="chatbot-message-text">¿En qué te puedo ayudar?</div>
+      </div>
+    </div>    
+    <script>
+      const chatButton = document.querySelector('.message-square-wrapper');
+      const chatbotSidebar = document.getElementById('chatbot-sidebar');
+
+      chatButton.addEventListener('click', () => {
+        chatbotSidebar.style.display = chatbotSidebar.style.display === 'none' ? 'block' : 'none';
+      });
+    </script>
   </body>
 </html>
