@@ -96,7 +96,7 @@ body, html {
 }
 
 .event-name-label { top: 353px; }
-.event-date-label { top: 393px; }
+.event-date-label { top: 395px; }
 .organizer-label { top: 438px; }
 .available-seats-label { top: 478px; }
 .category-label { top: 522px; }
@@ -122,7 +122,7 @@ body, html {
 }
 
 .event-name { top: 353px; }
-.event-date { top: 393px; }
+.event-date { top: 395px; }
 .organizer { top: 438px; }
 .available-seats { top: 478px; }
 .category { top: 522px; }
