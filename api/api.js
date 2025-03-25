@@ -1,5 +1,5 @@
 const express = require('express');
-const sqlite3 = require('sqlite3');
+const { Database } = require("@sqlitecloud/drivers");
 const path = require('path');
 const crypto = require('crypto');
 const session = require('express-session');
@@ -18,7 +18,7 @@ app.use((req, res, next) => {
     next();
 });
 
-let db = new sqlite3.Database(path.join(__dirname, '..', 'logievents.db'), (err) => {
+const db = new Database(process.env.SQLITE_CONNECTION, (err) => {
 	if(err) {
 		return console.log(err.message);
 	}
@@ -72,7 +72,7 @@ app.get('/trylogin/', (req, res) => {
     const pw_hash = crypto.createHash('md5').update(q["password"]).digest("hex");
 
     db.get(
-        "SELECT id FROM User WHERE username = ? AND password = ?",
+        "USE DATABASE logievents; SELECT id FROM User WHERE username = ? AND password = ?",
         [q["user"], pw_hash],
         (err, row) => {
             if (err) {
@@ -97,10 +97,9 @@ app.get('/trysignup/', (req, res) => {
     const pw_hash = crypto.createHash('md5').update(q["password"]).digest("hex");
 
     db.run(
-        'INSERT INTO User(id, cedula, name, mail, phone, username, password, type) ' +
-        'VALUES(?, ?, ?, ?, ?, ?, ?, ?)',
+        'USE DATABASE logievents; INSERT INTO User(cedula, name, mail, phone, username, password, type) ' +
+        'VALUES(?, ?, ?, ?, ?, ?, ?)',
         [
-            q["id"],
             q["cedula"],
             q["name"],
             q["email"],
