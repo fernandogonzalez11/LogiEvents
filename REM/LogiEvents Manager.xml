@@ -191,7 +191,7 @@ None</rem:comments>
 <rem:number>2</rem:number>
 <rem:systemAction>
 <rem:description>
-Despliega el formulario con los datos para registrar un nuevo evento</rem:description>
+Despliega el formulario con los datos para registrar un nuevo evento (Nombre, Fecha, Hora, Descripción, Ubicación, Capacidad, Categoría, Estado, Precio, Imagen/Banner)</rem:description>
 </rem:systemAction>
 <rem:comments>
 None</rem:comments>
@@ -268,6 +268,80 @@ Actualizar y agregar la reserva a la base de datos.</rem:postcondition>
 </rem:value>
 <rem:timeUnit value = "TUV-0008"/>
 </rem:frequency>
+<rem:step oid = "STP-0006">
+<rem:number>1</rem:number>
+<rem:actorAction actor = "ACT-0002">
+<rem:description>
+selecciona un evento de la página principal de eventos<br/></rem:description>
+</rem:actorAction>
+<rem:comments>
+None</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0007">
+<rem:number>2</rem:number>
+<rem:systemAction>
+<rem:description>
+enseña las propiedades del evento junto a la opción para reservar evento</rem:description>
+</rem:systemAction>
+<rem:comments>
+None</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0008">
+<rem:number>3</rem:number>
+<rem:actorAction actor = "ACT-0002">
+<rem:description>
+selecciona la opción de reservar evento<br/></rem:description>
+</rem:actorAction>
+<rem:comments>
+None</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0009">
+<rem:number>4</rem:number>
+<rem:systemAction>
+<rem:description>
+pide al usuario confirmar su correo, nombre y teléfono e indicar la cantidad de espacios en la reserva</rem:description>
+</rem:systemAction>
+<rem:comments>
+None</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0010">
+<rem:number>5</rem:number>
+<rem:actorAction actor = "ACT-0002">
+<rem:description>
+llena el formulario pedido</rem:description>
+</rem:actorAction>
+<rem:comments>
+None</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0011">
+<rem:number>6</rem:number>
+<rem:systemAction>
+<rem:description>
+pide al usuario un número de teléfono para enviar un código de verificación<br/></rem:description>
+</rem:systemAction>
+<rem:comments>
+None</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0012">
+<rem:number>7</rem:number>
+<rem:actorAction actor = "ACT-0002">
+<rem:description>
+ingresa el número de teléfono, selecciona enviar y espera el mensaje para poder insertar el código de confirmación<br/></rem:description>
+</rem:actorAction>
+<rem:comments>
+None</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0013">
+<rem:number>8</rem:number>
+<rem:condition>
+si la palabra de confirmación es correcta</rem:condition>
+<rem:systemAction>
+<rem:description>
+realiza la transacción para agregar la reserva y envía la confirmación al correo del usuario<br/></rem:description>
+</rem:systemAction>
+<rem:comments>
+None</rem:comments>
+</rem:step>
 </rem:useCase>
 <rem:useCase
  oid = "UC-0003">
@@ -302,6 +376,53 @@ Modificar los datos en la base de datos</rem:postcondition>
 </rem:value>
 <rem:timeUnit value = "TUV-0007"/>
 </rem:frequency>
+<rem:step oid = "STP-0014">
+<rem:number>1</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>
+desde el dashboard the administrador, selecciona la opción para editar un evento</rem:description>
+</rem:actorAction>
+<rem:comments>
+None</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0015">
+<rem:number>2</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>
+modifica los datos necesarios del evento<br/></rem:description>
+</rem:actorAction>
+<rem:stepException oid = "STX-0003">
+<rem:condition>
+los datos son inválidos</rem:condition>
+<rem:systemAction>
+<rem:description>
+indica que hay un error y pide reingresar los cambios<br/></rem:description>
+</rem:systemAction>
+<rem:termination value = "TEV-0003"/>
+<rem:comments>
+None</rem:comments>
+</rem:stepException>
+<rem:comments>
+None</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0016">
+<rem:number>3</rem:number>
+<rem:systemAction>
+<rem:description>
+registra los datos en la base de datos<br/></rem:description>
+</rem:systemAction>
+<rem:comments>
+None</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0017">
+<rem:number>4</rem:number>
+<rem:systemAction>
+<rem:description>
+notifica al usuario y actualiza la visualización en el dashboard<br/></rem:description>
+</rem:systemAction>
+<rem:comments>
+None</rem:comments>
+</rem:step>
 </rem:useCase>
 <rem:useCase
  oid = "UC-0004">
@@ -336,6 +457,62 @@ Agregar el nuevo usuario a la base de datos</rem:postcondition>
 </rem:value>
 <rem:timeUnit value = "TUV-0008"/>
 </rem:frequency>
+<rem:step oid = "STP-0018">
+<rem:number>1</rem:number>
+<rem:actorAction actor = "ACT-0002">
+<rem:description>
+dentro del log in, ingresa a la opción de registrar usuario</rem:description>
+</rem:actorAction>
+<rem:comments>
+None</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0019">
+<rem:number>2</rem:number>
+<rem:systemAction>
+<rem:description>
+muestra un formulario que pide la información del usuario  (Nombre, Nombre de usuario, identificación, contraseña, correo electrónico, y número de teléfono)</rem:description>
+</rem:systemAction>
+<rem:comments>
+None</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0020">
+<rem:number>3</rem:number>
+<rem:actorAction actor = "ACT-0002">
+<rem:description>
+llena el formulario con sus datos y presiona registrar<br/></rem:description>
+</rem:actorAction>
+<rem:comments>
+None</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0021">
+<rem:number>4</rem:number>
+<rem:systemAction>
+<rem:description>
+verifica la información en el sistema, que no se repitan ciertos campos como correo electrónico, identificación, nombre de usuario y teléfono</rem:description>
+</rem:systemAction>
+<rem:comments>
+None</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0022">
+<rem:number>5</rem:number>
+<rem:systemAction>
+<rem:description>
+guarda la información en la base de datos y notifica al usuario que se guardó exitosamente<br/></rem:description>
+</rem:systemAction>
+<rem:stepException oid = "STX-0004">
+<rem:condition>
+si hay campos repetidos o se encuentra algún error por parte de la base de datos</rem:condition>
+<rem:systemAction>
+<rem:description>
+indica al usuario que lo intente de nuevo, en caso de información repetida, indicar cuál está repetida</rem:description>
+</rem:systemAction>
+<rem:termination value = "TEV-0003"/>
+<rem:comments>
+None</rem:comments>
+</rem:stepException>
+<rem:comments>
+None</rem:comments>
+</rem:step>
 </rem:useCase>
 </rem:c_requirementsSpecification>
 <rem:d_requirementsSpecification oid = "DRS-0002">
@@ -512,8 +689,8 @@ Hour:minutes:seconds</rem:description>
 </rem:predefinedValueType>
 </rem:predefinedValueTypes>
 <rem:predefinedValues>
-<rem:changeRequestStatusValue oid = "CRV-0005">
-<rem:name>verified</rem:name>
+<rem:changeRequestStatusValue oid = "CRV-0002">
+<rem:name>to be analyzed</rem:name>
 </rem:changeRequestStatusValue>
 <rem:changeRequestStatusValue oid = "CRV-0006">
 <rem:name>rejected</rem:name>
@@ -521,14 +698,14 @@ Hour:minutes:seconds</rem:description>
 <rem:changeRequestStatusValue oid = "CRV-0004">
 <rem:name>to be performed</rem:name>
 </rem:changeRequestStatusValue>
+<rem:changeRequestStatusValue oid = "CRV-0001">
+<rem:name>TBD</rem:name>
+</rem:changeRequestStatusValue>
 <rem:changeRequestStatusValue oid = "CRV-0003">
 <rem:name>to be approved/rejected</rem:name>
 </rem:changeRequestStatusValue>
-<rem:changeRequestStatusValue oid = "CRV-0002">
-<rem:name>to be analyzed</rem:name>
-</rem:changeRequestStatusValue>
-<rem:changeRequestStatusValue oid = "CRV-0001">
-<rem:name>TBD</rem:name>
+<rem:changeRequestStatusValue oid = "CRV-0005">
+<rem:name>verified</rem:name>
 </rem:changeRequestStatusValue>
 <rem:conflictStatusValue oid = "CSV-0001">
 <rem:name>TBD</rem:name>
@@ -542,76 +719,22 @@ Hour:minutes:seconds</rem:description>
 <rem:conflictStatusValue oid = "CSV-0004">
 <rem:name>solved</rem:name>
 </rem:conflictStatusValue>
-<rem:defectStatusValue oid = "DSV-0004">
-<rem:name>solved</rem:name>
+<rem:defectStatusValue oid = "DSV-0001">
+<rem:name>TBD</rem:name>
 </rem:defectStatusValue>
 <rem:defectStatusValue oid = "DSV-0002">
 <rem:name>not solved</rem:name>
 </rem:defectStatusValue>
-<rem:defectStatusValue oid = "DSV-0001">
-<rem:name>TBD</rem:name>
-</rem:defectStatusValue>
 <rem:defectStatusValue oid = "DSV-0003">
 <rem:name>under negotiation</rem:name>
 </rem:defectStatusValue>
-<rem:defectTypeValue oid = "DTV-0011">
-<rem:name>Imprecision</rem:name>
-<rem:description>
-<![CDATA[The requirement or requirements are not stated in a precise way, i.e. using numerical quantities whenever possible with the right level of precision]]>
-</rem:description>
-</rem:defectTypeValue>
-<rem:defectTypeValue oid = "DTV-0014">
-<rem:name>No stability</rem:name>
-<rem:description>
-<![CDATA[The stability of the requirement or requirements have not been estimated]]>
-</rem:description>
-</rem:defectTypeValue>
-<rem:defectTypeValue oid = "DTV-0016">
-<rem:name>No traceability</rem:name>
-<rem:description>
-<![CDATA[The requirement or requirements are not traced to their origins, either higher-level requirements (i.e. objectives) or stakeholders]]>
-</rem:description>
-</rem:defectTypeValue>
-<rem:defectTypeValue oid = "DTV-0012">
-<rem:name>No completeness</rem:name>
-<rem:description>
-<![CDATA[The requirement or requirements do not describe everything the system is supposed to do, do not describe the responses of the system to all realizable situations, or include to-be-determined (TBD) elements]]>
-</rem:description>
-</rem:defectTypeValue>
-<rem:defectTypeValue oid = "DTV-0008">
-<rem:name>Verbosity</rem:name>
-<rem:description>
-<![CDATA[The requirement or requirements can be expressed in a more concise way without altering their meaning]]>
-</rem:description>
-</rem:defectTypeValue>
-<rem:defectTypeValue oid = "DTV-0010">
-<rem:name>Redundancy</rem:name>
-<rem:description>
-<![CDATA[The requirement or requirements are redundant or contain redundant elements]]>
-</rem:description>
-</rem:defectTypeValue>
-<rem:defectTypeValue oid = "DTV-0013">
-<rem:name>No priority</rem:name>
-<rem:description>
-<![CDATA[The priority, i.e. the importance and urgency of the requirement or requirements have not been determined]]>
-</rem:description>
-</rem:defectTypeValue>
+<rem:defectStatusValue oid = "DSV-0004">
+<rem:name>solved</rem:name>
+</rem:defectStatusValue>
 <rem:defectTypeValue oid = "DTV-0007">
 <rem:name>No achievability</rem:name>
 <rem:description>
 <![CDATA[The requirement or requirements cannot be implemented with current technology o under reasonable cost]]>
-</rem:description>
-</rem:defectTypeValue>
-<rem:defectTypeValue oid = "DTV-0003">
-<rem:name>No necessity</rem:name>
-<rem:description>
-<![CDATA[The requirement or requirements are not necessary because they do not satisfy any customers' or users' need]]>
-</rem:description>
-</rem:defectTypeValue>
-<rem:defectTypeValue oid = "DTV-0009">
-<rem:name>Design-dependence</rem:name>
-<rem:description>
-<![CDATA[The requirement or requirements contain design-dependant elements]]>
 </rem:description>
 </rem:defectTypeValue>
 <rem:defectTypeValue oid = "DTV-0015">
@@ -620,34 +743,64 @@ Hour:minutes:seconds</rem:description>
 <![CDATA[The requirement or requirements are not stated at the right level of detail, i.e. they are too abstract or too detailed]]>
 </rem:description>
 </rem:defectTypeValue>
-<rem:defectTypeValue oid = "DTV-0004">
-<rem:name>No understanding</rem:name>
-<rem:description>
-<![CDATA[The requirement or requirements cannot be understood by some reader]]>
-</rem:description>
-</rem:defectTypeValue>
-<rem:defectTypeValue oid = "DTV-0001">
-<rem:name>TBD</rem:name>
-<rem:description>
-<![CDATA[To Be Determined]]>
-</rem:description>
-</rem:defectTypeValue>
-<rem:defectTypeValue oid = "DTV-0002">
-<rem:name>Ambiguity</rem:name>
-<rem:description>
-<![CDATA[The requirement or requirements, although understandable, have more than one possible interpretation]]>
-</rem:description>
-</rem:defectTypeValue>
 <rem:defectTypeValue oid = "DTV-0005">
 <rem:name>No verificability</rem:name>
 <rem:description>
 <![CDATA[It cannot be verified that the requirement or requirements are satisfied by the system]]>
 </rem:description>
 </rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0016">
+<rem:name>No traceability</rem:name>
+<rem:description>
+<![CDATA[The requirement or requirements are not traced to their origins, either higher-level requirements (i.e. objectives) or stakeholders]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0009">
+<rem:name>Design-dependence</rem:name>
+<rem:description>
+<![CDATA[The requirement or requirements contain design-dependant elements]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0014">
+<rem:name>No stability</rem:name>
+<rem:description>
+<![CDATA[The stability of the requirement or requirements have not been estimated]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0012">
+<rem:name>No completeness</rem:name>
+<rem:description>
+<![CDATA[The requirement or requirements do not describe everything the system is supposed to do, do not describe the responses of the system to all realizable situations, or include to-be-determined (TBD) elements]]>
+</rem:description>
+</rem:defectTypeValue>
 <rem:defectTypeValue oid = "DTV-0006">
 <rem:name>No consistency</rem:name>
 <rem:description>
 <![CDATA[The requirement or requirements are not consistent, i.e. they are in conflict]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0010">
+<rem:name>Redundancy</rem:name>
+<rem:description>
+<![CDATA[The requirement or requirements are redundant or contain redundant elements]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0011">
+<rem:name>Imprecision</rem:name>
+<rem:description>
+<![CDATA[The requirement or requirements are not stated in a precise way, i.e. using numerical quantities whenever possible with the right level of precision]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0008">
+<rem:name>Verbosity</rem:name>
+<rem:description>
+<![CDATA[The requirement or requirements can be expressed in a more concise way without altering their meaning]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0013">
+<rem:name>No priority</rem:name>
+<rem:description>
+<![CDATA[The priority, i.e. the importance and urgency of the requirement or requirements have not been determined]]>
 </rem:description>
 </rem:defectTypeValue>
 <rem:defectTypeValue oid = "DTV-0023">
@@ -662,26 +815,50 @@ Hour:minutes:seconds</rem:description>
 <![CDATA[The requirement or requirements are not correctly organized according to applied standards or the document does not contain mandatory sections]]>
 </rem:description>
 </rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0001">
+<rem:name>TBD</rem:name>
+<rem:description>
+<![CDATA[To Be Determined]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0004">
+<rem:name>No understanding</rem:name>
+<rem:description>
+<![CDATA[The requirement or requirements cannot be understood by some reader]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0002">
+<rem:name>Ambiguity</rem:name>
+<rem:description>
+<![CDATA[The requirement or requirements, although understandable, have more than one possible interpretation]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0003">
+<rem:name>No necessity</rem:name>
+<rem:description>
+<![CDATA[The requirement or requirements are not necessary because they do not satisfy any customers' or users' need]]>
+</rem:description>
+</rem:defectTypeValue>
 <rem:importanceValue oid = "IMV-0003">
 <rem:name>important</rem:name>
 </rem:importanceValue>
 <rem:importanceValue oid = "IMV-0001">
 <rem:name>TBD</rem:name>
 </rem:importanceValue>
-<rem:importanceValue oid = "IMV-0002">
-<rem:name>vital</rem:name>
-</rem:importanceValue>
 <rem:importanceValue oid = "IMV-0004">
 <rem:name>would be nice</rem:name>
 </rem:importanceValue>
-<rem:stabilityValue oid = "SBV-0001">
-<rem:name>TBD</rem:name>
+<rem:importanceValue oid = "IMV-0002">
+<rem:name>vital</rem:name>
+</rem:importanceValue>
+<rem:stabilityValue oid = "SBV-0003">
+<rem:name>medium</rem:name>
 </rem:stabilityValue>
 <rem:stabilityValue oid = "SBV-0004">
 <rem:name>high</rem:name>
 </rem:stabilityValue>
-<rem:stabilityValue oid = "SBV-0003">
-<rem:name>medium</rem:name>
+<rem:stabilityValue oid = "SBV-0001">
+<rem:name>TBD</rem:name>
 </rem:stabilityValue>
 <rem:stabilityValue oid = "SBV-0002">
 <rem:name>low</rem:name>
@@ -689,11 +866,11 @@ Hour:minutes:seconds</rem:description>
 <rem:statusValue oid = "STV-0001">
 <rem:name>TBD</rem:name>
 </rem:statusValue>
-<rem:statusValue oid = "STV-0005">
-<rem:name>validated</rem:name>
-</rem:statusValue>
 <rem:statusValue oid = "STV-0002">
 <rem:name>under construction</rem:name>
+</rem:statusValue>
+<rem:statusValue oid = "STV-0005">
+<rem:name>validated</rem:name>
 </rem:statusValue>
 <rem:statusValue oid = "STV-0003">
 <rem:name>needs verification</rem:name>
@@ -701,59 +878,59 @@ Hour:minutes:seconds</rem:description>
 <rem:statusValue oid = "STV-0004">
 <rem:name>needs validation</rem:name>
 </rem:statusValue>
+<rem:terminationValue oid = "TEV-0003">
+<rem:name>is cancelled</rem:name>
+</rem:terminationValue>
 <rem:terminationValue oid = "TEV-0002">
 <rem:name>resumes</rem:name>
 </rem:terminationValue>
 <rem:terminationValue oid = "TEV-0001">
 <rem:name>TBD</rem:name>
 </rem:terminationValue>
-<rem:terminationValue oid = "TEV-0003">
-<rem:name>is cancelled</rem:name>
-</rem:terminationValue>
+<rem:timeUnitValue oid = "TUV-0008">
+<rem:name>day(s)</rem:name>
+</rem:timeUnitValue>
 <rem:timeUnitValue oid = "TUV-0002">
 <rem:name>year(s)</rem:name>
-</rem:timeUnitValue>
-<rem:timeUnitValue oid = "TUV-0005">
-<rem:name>month(s)</rem:name>
-</rem:timeUnitValue>
-<rem:timeUnitValue oid = "TUV-0001">
-<rem:name>TBD</rem:name>
 </rem:timeUnitValue>
 <rem:timeUnitValue oid = "TUV-0007">
 <rem:name>week(s)</rem:name>
 </rem:timeUnitValue>
-<rem:timeUnitValue oid = "TUV-0008">
-<rem:name>day(s)</rem:name>
+<rem:timeUnitValue oid = "TUV-0001">
+<rem:name>TBD</rem:name>
 </rem:timeUnitValue>
-<rem:timeUnitValue oid = "TUV-0014">
-<rem:name>millisecond(s)</rem:name>
-</rem:timeUnitValue>
-<rem:timeUnitValue oid = "TUV-0012">
-<rem:name>tenth(s) of a second</rem:name>
+<rem:timeUnitValue oid = "TUV-0005">
+<rem:name>month(s)</rem:name>
 </rem:timeUnitValue>
 <rem:timeUnitValue oid = "TUV-0013">
 <rem:name>hundreth(s) of a second</rem:name>
 </rem:timeUnitValue>
-<rem:timeUnitValue oid = "TUV-0010">
-<rem:name>minute(s)</rem:name>
-</rem:timeUnitValue>
 <rem:timeUnitValue oid = "TUV-0011">
 <rem:name>second(s)</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0012">
+<rem:name>tenth(s) of a second</rem:name>
 </rem:timeUnitValue>
 <rem:timeUnitValue oid = "TUV-0009">
 <rem:name>hour(s)</rem:name>
 </rem:timeUnitValue>
-<rem:urgencyValue oid = "URV-0002">
-<rem:name>immediately</rem:name>
-</rem:urgencyValue>
+<rem:timeUnitValue oid = "TUV-0010">
+<rem:name>minute(s)</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0014">
+<rem:name>millisecond(s)</rem:name>
+</rem:timeUnitValue>
 <rem:urgencyValue oid = "URV-0001">
 <rem:name>TBD</rem:name>
 </rem:urgencyValue>
-<rem:urgencyValue oid = "URV-0004">
-<rem:name>can wait</rem:name>
+<rem:urgencyValue oid = "URV-0002">
+<rem:name>immediately</rem:name>
 </rem:urgencyValue>
 <rem:urgencyValue oid = "URV-0003">
 <rem:name>under pressure</rem:name>
+</rem:urgencyValue>
+<rem:urgencyValue oid = "URV-0004">
+<rem:name>can wait</rem:name>
 </rem:urgencyValue>
 </rem:predefinedValues>
 </rem:requirementsProject>

@@ -384,7 +384,7 @@ Ingresa a la pantalla para agregar evento</em>
 <td>The
      
     system<em>
-Despliega el formulario con los datos para registrar un nuevo evento</em>
+Despliega el formulario con los datos para registrar un nuevo evento (Nombre, Fecha, Hora, Descripción, Ubicación, Capacidad, Categoría, Estado, Precio, Imagen/Banner)</em>
 </td>
 </tr>
 <tr>
@@ -543,17 +543,97 @@ Tener una cuenta de LogiEvents
 <br />Cupos disponibles en el evento</td>
 </tr>
 <tr>
-<th align="left" valign="top" rowspan="2">Ordinary sequence</th>
+<th align="left" valign="top" rowspan="9">Ordinary sequence</th>
 <th align="center" valign="top">Step</th>
 <th align="left" valign="top" width="100%">Action</th>
 </tr>
 <tr>
-<td align="center" valign="top">
-                        -
-                    </td>
-<td>
-                        -
-                    </td>
+<a name="STP-0006" />
+<td align="center" valign="top">1</td>
+<td>Actor<a href="#ACT-0002" title="This actor represents usuario común que reserva eventos">
+Usuario (ACT-0002)
+    </a>
+<em>
+selecciona un evento de la página principal de eventos
+<br />
+</em>
+</td>
+</tr>
+<tr>
+<a name="STP-0007" />
+<td align="center" valign="top">2</td>
+<td>The
+     
+    system<em>
+enseña las propiedades del evento junto a la opción para reservar evento</em>
+</td>
+</tr>
+<tr>
+<a name="STP-0008" />
+<td align="center" valign="top">3</td>
+<td>Actor<a href="#ACT-0002" title="This actor represents usuario común que reserva eventos">
+Usuario (ACT-0002)
+    </a>
+<em>
+selecciona la opción de reservar evento
+<br />
+</em>
+</td>
+</tr>
+<tr>
+<a name="STP-0009" />
+<td align="center" valign="top">4</td>
+<td>The
+     
+    system<em>
+pide al usuario confirmar su correo, nombre y teléfono e indicar la cantidad de espacios en la reserva</em>
+</td>
+</tr>
+<tr>
+<a name="STP-0010" />
+<td align="center" valign="top">5</td>
+<td>Actor<a href="#ACT-0002" title="This actor represents usuario común que reserva eventos">
+Usuario (ACT-0002)
+    </a>
+<em>
+llena el formulario pedido</em>
+</td>
+</tr>
+<tr>
+<a name="STP-0011" />
+<td align="center" valign="top">6</td>
+<td>The
+     
+    system<em>
+pide al usuario un número de teléfono para enviar un código de verificación
+<br />
+</em>
+</td>
+</tr>
+<tr>
+<a name="STP-0012" />
+<td align="center" valign="top">7</td>
+<td>Actor<a href="#ACT-0002" title="This actor represents usuario común que reserva eventos">
+Usuario (ACT-0002)
+    </a>
+<em>
+ingresa el número de teléfono, selecciona enviar y espera el mensaje para poder insertar el código de confirmación
+<br />
+</em>
+</td>
+</tr>
+<tr>
+<a name="STP-0013" />
+<td align="center" valign="top">8</td>
+<td>If<em>
+si la palabra de confirmación es correcta,
+                                </em>the
+     
+    system<em>
+realiza la transacción para agregar la reserva y envía la confirmación al correo del usuario
+<br />
+</em>
+</td>
 </tr>
 <tr>
 <th align="left" valign="top">Postcondition</th>
@@ -677,17 +757,53 @@ Permisos de Administrador
 </td>
 </tr>
 <tr>
-<th align="left" valign="top" rowspan="2">Ordinary sequence</th>
+<th align="left" valign="top" rowspan="5">Ordinary sequence</th>
 <th align="center" valign="top">Step</th>
 <th align="left" valign="top" width="100%">Action</th>
 </tr>
 <tr>
-<td align="center" valign="top">
-                        -
-                    </td>
-<td>
-                        -
-                    </td>
+<a name="STP-0014" />
+<td align="center" valign="top">1</td>
+<td>Actor<a href="#ACT-0001" title="This actor represents el personal autorizado para manejar la información de la aplicación">
+Administrador (ACT-0001)
+    </a>
+<em>
+desde el dashboard the administrador, selecciona la opción para editar un evento</em>
+</td>
+</tr>
+<tr>
+<a name="STP-0015" />
+<td align="center" valign="top">2</td>
+<td>Actor<a href="#ACT-0001" title="This actor represents el personal autorizado para manejar la información de la aplicación">
+Administrador (ACT-0001)
+    </a>
+<em>
+modifica los datos necesarios del evento
+<br />
+</em>
+</td>
+</tr>
+<tr>
+<a name="STP-0016" />
+<td align="center" valign="top">3</td>
+<td>The
+     
+    system<em>
+registra los datos en la base de datos
+<br />
+</em>
+</td>
+</tr>
+<tr>
+<a name="STP-0017" />
+<td align="center" valign="top">4</td>
+<td>The
+     
+    system<em>
+notifica al usuario y actualiza la visualización en el dashboard
+<br />
+</em>
+</td>
 </tr>
 <tr>
 <th align="left" valign="top">Postcondition</th>
@@ -700,12 +816,20 @@ Modificar los datos en la base de datos</td>
 <th align="left" valign="top" width="100%">Action</th>
 </tr>
 <tr>
-<td align="center" valign="top">
-                        -
-                    </td>
-<td>
-                        -
-                    </td>
+<a name="STX-0003" />
+<td align="center" valign="top">2</td>
+<td>If<em>
+los datos son inválidos,
+                            </em>the
+     
+    system<em>
+indica que hay un error y pide reingresar los cambios
+<br />
+</em>,
+                            then this use case
+                             
+                            <em>is cancelled</em>
+</td>
 </tr>
 <tr>
 <th align="left" valign="top" rowspan="2">Performance</th>
@@ -809,17 +933,60 @@ Tener nombre de usuario, documento de identidad, contraseña, correo electrónico 
 <br />Que no exista un usuario con mismo documento de identidad o correo registrado</td>
 </tr>
 <tr>
-<th align="left" valign="top" rowspan="2">Ordinary sequence</th>
+<th align="left" valign="top" rowspan="6">Ordinary sequence</th>
 <th align="center" valign="top">Step</th>
 <th align="left" valign="top" width="100%">Action</th>
 </tr>
 <tr>
-<td align="center" valign="top">
-                        -
-                    </td>
-<td>
-                        -
-                    </td>
+<a name="STP-0018" />
+<td align="center" valign="top">1</td>
+<td>Actor<a href="#ACT-0002" title="This actor represents usuario común que reserva eventos">
+Usuario (ACT-0002)
+    </a>
+<em>
+dentro del log in, ingresa a la opción de registrar usuario</em>
+</td>
+</tr>
+<tr>
+<a name="STP-0019" />
+<td align="center" valign="top">2</td>
+<td>The
+     
+    system<em>
+muestra un formulario que pide la información del usuario  (Nombre, Nombre de usuario, identificación, contraseña, correo electrónico, y número de teléfono)</em>
+</td>
+</tr>
+<tr>
+<a name="STP-0020" />
+<td align="center" valign="top">3</td>
+<td>Actor<a href="#ACT-0002" title="This actor represents usuario común que reserva eventos">
+Usuario (ACT-0002)
+    </a>
+<em>
+llena el formulario con sus datos y presiona registrar
+<br />
+</em>
+</td>
+</tr>
+<tr>
+<a name="STP-0021" />
+<td align="center" valign="top">4</td>
+<td>The
+     
+    system<em>
+verifica la información en el sistema, que no se repitan ciertos campos como correo electrónico, identificación, nombre de usuario y teléfono</em>
+</td>
+</tr>
+<tr>
+<a name="STP-0022" />
+<td align="center" valign="top">5</td>
+<td>The
+     
+    system<em>
+guarda la información en la base de datos y notifica al usuario que se guardó exitosamente
+<br />
+</em>
+</td>
 </tr>
 <tr>
 <th align="left" valign="top">Postcondition</th>
@@ -832,12 +999,18 @@ Agregar el nuevo usuario a la base de datos</td>
 <th align="left" valign="top" width="100%">Action</th>
 </tr>
 <tr>
-<td align="center" valign="top">
-                        -
-                    </td>
-<td>
-                        -
-                    </td>
+<a name="STX-0004" />
+<td align="center" valign="top">5</td>
+<td>If<em>
+si hay campos repetidos o se encuentra algún error por parte de la base de datos,
+                            </em>the
+     
+    system<em>
+indica al usuario que lo intente de nuevo, en caso de información repetida, indicar cuál está repetida</em>,
+                            then this use case
+                             
+                            <em>is cancelled</em>
+</td>
 </tr>
 <tr>
 <th align="left" valign="top" rowspan="2">Performance</th>

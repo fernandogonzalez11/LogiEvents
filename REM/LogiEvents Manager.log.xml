@@ -28,31 +28,13 @@
 <rem:description><![CDATA[Document saved]]></rem:description>
 </rem:change>
 <rem:change>
-<rem:type>S</rem:type>
-<rem:owner>DFS-0003</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Document saved]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>S</rem:type>
-<rem:owner>CHS-0004</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Document saved]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>S</rem:type>
+<rem:type>C</rem:type>
 <rem:owner>CRS-0001</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
 <rem:day>24</rem:day>
 </rem:date>
-<rem:description><![CDATA[Document saved]]></rem:description>
+<rem:description><![CDATA[Document created]]></rem:description>
 </rem:change>
 <rem:change>
 <rem:type>C</rem:type>
@@ -65,7 +47,7 @@
 </rem:change>
 <rem:change>
 <rem:type>S</rem:type>
-<rem:owner>DRS-0002</rem:owner><rem:date>
+<rem:owner>CRS-0001</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
 <rem:day>24</rem:day>
@@ -74,7 +56,7 @@
 </rem:change>
 <rem:change>
 <rem:type>S</rem:type>
-<rem:owner>CRS-0001</rem:owner><rem:date>
+<rem:owner>DRS-0002</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
 <rem:day>24</rem:day>
@@ -92,7 +74,7 @@
 </rem:change>
 <rem:change>
 <rem:type>S</rem:type>
-<rem:owner>CHS-0004</rem:owner><rem:date>
+<rem:owner>CRS-0001</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
 <rem:day>24</rem:day>
@@ -100,40 +82,13 @@
 <rem:description><![CDATA[Document saved]]></rem:description>
 </rem:change>
 <rem:change>
-<rem:type>C</rem:type>
-<rem:owner>CRS-0001</rem:owner><rem:date>
+<rem:type>S</rem:type>
+<rem:owner>CHS-0004</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
 <rem:day>24</rem:day>
 </rem:date>
-<rem:description><![CDATA[Document created]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>C</rem:type>
-<rem:owner>STK-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Cloned from [STK-0001] Sergio Andrés Zúñiga Castillo from project C:\Users\Sergio Z C\Documents\programmingProjects\LogiEvents\REM\LogiEvents Manager.rem]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>C</rem:type>
-<rem:owner>STK-0004</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Cloned from [STK-0003] Copy of Copy of Sergio Andrés Zúñiga Castillo from project C:\Users\Sergio Z C\Documents\programmingProjects\LogiEvents\REM\LogiEvents Manager.rem]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>C</rem:type>
-<rem:owner>STK-0003</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Cloned from [STK-0002] Copy of Sergio Andrés Zúñiga Castillo from project C:\Users\Sergio Z C\Documents\programmingProjects\LogiEvents\REM\LogiEvents Manager.rem]]></rem:description>
+<rem:description><![CDATA[Document saved]]></rem:description>
 </rem:change>
 <rem:change>
 <rem:type>C</rem:type>
@@ -145,637 +100,220 @@
 <rem:description><![CDATA[Creation]]></rem:description>
 </rem:change>
 <rem:change>
-<rem:type>C</rem:type>
-<rem:owner>STK-0005</rem:owner><rem:date>
+<rem:type>U</rem:type>
+<rem:owner>UC-0002</rem:owner><rem:date>
+<rem:year>2025</rem:year>
+<rem:month>3</rem:month>
+<rem:day>25</rem:day>
+</rem:date>
+<rem:description><![CDATA[Added child #3 (Actor Usuario selecciona la op...)]]></rem:description>
+</rem:change>
+<rem:change>
+<rem:type>S</rem:type>
+<rem:owner>CHS-0004</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
 <rem:day>24</rem:day>
 </rem:date>
-<rem:description><![CDATA[Creation]]></rem:description>
+<rem:description><![CDATA[Document saved]]></rem:description>
+</rem:change>
+<rem:change>
+<rem:type>S</rem:type>
+<rem:owner>DFS-0003</rem:owner><rem:date>
+<rem:year>2025</rem:year>
+<rem:month>3</rem:month>
+<rem:day>24</rem:day>
+</rem:date>
+<rem:description><![CDATA[Document saved]]></rem:description>
 </rem:change>
 <rem:change>
 <rem:type>U</rem:type>
 <rem:owner>UC-0002</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
-<rem:day>24</rem:day>
+<rem:day>25</rem:day>
 </rem:date>
-<rem:description><![CDATA[Property [Urgency] updated: [TBD] -> [under pressure]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>STK-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Name] updated: [Copy of Sergio Andrés Zúñiga Castillo] -> [José David Chaves Mena]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>C</rem:type>
-<rem:owner>ACT-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Creation]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>STK-0003</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Name] updated: [Copy of Copy of Sergio Andrés Zúñiga Castillo] -> [Fernando Andrés Gonzales Robles]]]></rem:description>
+<rem:description><![CDATA[Added child #2 (The system enseña las propieda...)]]></rem:description>
 </rem:change>
 <rem:change>
 <rem:type>U</rem:type>
 <rem:owner>UC-0002</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
-<rem:day>24</rem:day>
+<rem:day>25</rem:day>
 </rem:date>
-<rem:description><![CDATA[Added author [STK-0004] José Ignacio Madriz Ortiz]]></rem:description>
+<rem:description><![CDATA[Added child #1 (Actor Usuario selecciona un ev...)]]></rem:description>
 </rem:change>
 <rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0002</rem:owner><rem:date>
+<rem:type>S</rem:type>
+<rem:owner>DFS-0003</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
 <rem:day>24</rem:day>
 </rem:date>
-<rem:description><![CDATA[Added source [STK-0005] LogiEvents]]></rem:description>
+<rem:description><![CDATA[Document saved]]></rem:description>
 </rem:change>
 <rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0002</rem:owner><rem:date>
+<rem:type>S</rem:type>
+<rem:owner>DRS-0002</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
 <rem:day>24</rem:day>
 </rem:date>
-<rem:description><![CDATA[Property [Precondition] updated: [TBD] -> [Tener una cuenta de LogiEvents
-Cupos disponibles en el evento]]]></rem:description>
+<rem:description><![CDATA[Document saved]]></rem:description>
 </rem:change>
 <rem:change>
-<rem:type>U</rem:type>
-<rem:owner>STK-0004</rem:owner><rem:date>
+<rem:type>S</rem:type>
+<rem:owner>CHS-0004</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
 <rem:day>24</rem:day>
 </rem:date>
-<rem:description><![CDATA[Property [Name] updated: [Copy of Copy of Copy of Sergio Andrés Zúñiga Castillo] -> [José Ignacio Madriz Ortiz]]]></rem:description>
+<rem:description><![CDATA[Document saved]]></rem:description>
 </rem:change>
 <rem:change>
-<rem:type>C</rem:type>
-<rem:owner>UC-0002</rem:owner><rem:date>
+<rem:type>S</rem:type>
+<rem:owner>CRS-0001</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
 <rem:day>24</rem:day>
 </rem:date>
-<rem:description><![CDATA[Creation]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>C</rem:type>
-<rem:owner>UC-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Creation]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>ACT-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Description] updated: [TBD] -> [el personal autorizado para manejar la información de la aplicación]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>C</rem:type>
-<rem:owner>UC-0003</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Creation]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>ACT-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added author [STK-0001] Sergio Andrés Zúñiga Castillo]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>ACT-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added source [STK-0005] LogiEvents]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>C</rem:type>
-<rem:owner>ACT-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Creation]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [TriggeringEvent] updated: [TBD] -> [un usuario se quiere inscribir a participar en un evento]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Postcondition] updated: [TBD] -> [Actualizar y agregar la reserva a la base de datos.]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>ACT-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added source [STK-0005] LogiEvents]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added author [STK-0001] Sergio Andrés Zúñiga Castillo]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added source [STK-0005] LogiEvents]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>C</rem:type>
-<rem:owner>UC-0004</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Creation]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>ACT-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added author [STK-0001] Sergio Andrés Zúñiga Castillo]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [FrequencyTimeUnit] updated: [TBD] -> [week(s)]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [FrequencyValue] updated: [0.000000] -> [5.000000]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Status] updated: [TBD] -> [under construction]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [FrequencyValue] updated: [5.000000] -> [10.000000]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Importance] updated: [TBD] -> [vital]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [FrequencyTimeUnit] updated: [TBD] -> [day(s)]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Stability] updated: [TBD] -> [high]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [FrequencyValue] updated: [0.000000] -> [1.000000]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added child #2 (The system Despliega el formul...)]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [FrequencyValue] updated: [10.000000] -> [20.000000]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [FrequencyValue] updated: [1.000000] -> [5.000000]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added child #4 (The system intenta agregar el ...)]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added child #5 (The system al insertar correct...)]]></rem:description>
+<rem:description><![CDATA[Document saved]]></rem:description>
 </rem:change>
 <rem:change>
 <rem:type>U</rem:type>
 <rem:owner>UC-0003</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
-<rem:day>24</rem:day>
+<rem:day>25</rem:day>
 </rem:date>
-<rem:description><![CDATA[Property [TriggeringEvent] updated: [TBD] -> [un administrador desee cambiar la información respecto un evento]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0003</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Postcondition] updated: [TBD] -> [Modificar los datos en la base de datos]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0003</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Precondition] updated: [TBD] -> [Permisos de Administrador
-El evento sigue activo
+<rem:description><![CDATA[Property [Description] of exception #1 of step #2 updated: [TBD] -> [indica que hay un error y pide reingresar los cambios
 ]]]></rem:description>
 </rem:change>
 <rem:change>
 <rem:type>U</rem:type>
-<rem:owner>UC-0004</rem:owner><rem:date>
+<rem:owner>UC-0002</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
-<rem:day>24</rem:day>
+<rem:day>25</rem:day>
 </rem:date>
-<rem:description><![CDATA[Added author [STK-0003] Fernando Andrés Gonzales Robles]]></rem:description>
+<rem:description><![CDATA[Added child #7 (Actor Usuario ingresa el númer...)]]></rem:description>
 </rem:change>
 <rem:change>
 <rem:type>U</rem:type>
 <rem:owner>UC-0003</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
-<rem:day>24</rem:day>
+<rem:day>25</rem:day>
 </rem:date>
-<rem:description><![CDATA[Added source [STK-0005] LogiEvents]]></rem:description>
+<rem:description><![CDATA[Added child #1 (Actor Administrador desde el d...)]]></rem:description>
+</rem:change>
+<rem:change>
+<rem:type>U</rem:type>
+<rem:owner>UC-0002</rem:owner><rem:date>
+<rem:year>2025</rem:year>
+<rem:month>3</rem:month>
+<rem:day>25</rem:day>
+</rem:date>
+<rem:description><![CDATA[Added child #8 (If si la palabra de confirmaci...)]]></rem:description>
 </rem:change>
 <rem:change>
 <rem:type>U</rem:type>
 <rem:owner>UC-0003</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
-<rem:day>24</rem:day>
+<rem:day>25</rem:day>
 </rem:date>
-<rem:description><![CDATA[Added author [STK-0002] José David Chaves Mena]]></rem:description>
+<rem:description><![CDATA[Added child #2 (Actor Administrador modifica l...)]]></rem:description>
 </rem:change>
 <rem:change>
 <rem:type>U</rem:type>
-<rem:owner>UC-0001</rem:owner><rem:date>
+<rem:owner>UC-0002</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
-<rem:day>24</rem:day>
+<rem:day>25</rem:day>
 </rem:date>
-<rem:description><![CDATA[Added child #3 (Actor Administrador Ingresa lo...)]]></rem:description>
+<rem:description><![CDATA[Added child #6 (The system pide al usuario un ...)]]></rem:description>
+</rem:change>
+<rem:change>
+<rem:type>U</rem:type>
+<rem:owner>UC-0002</rem:owner><rem:date>
+<rem:year>2025</rem:year>
+<rem:month>3</rem:month>
+<rem:day>25</rem:day>
+</rem:date>
+<rem:description><![CDATA[Added child #4 (The system pide al usuario con...)]]></rem:description>
+</rem:change>
+<rem:change>
+<rem:type>U</rem:type>
+<rem:owner>UC-0002</rem:owner><rem:date>
+<rem:year>2025</rem:year>
+<rem:month>3</rem:month>
+<rem:day>25</rem:day>
+</rem:date>
+<rem:description><![CDATA[Added child #5 (Actor Usuario llena el formula...)]]></rem:description>
 </rem:change>
 <rem:change>
 <rem:type>U</rem:type>
 <rem:owner>UC-0004</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
-<rem:day>24</rem:day>
+<rem:day>25</rem:day>
 </rem:date>
-<rem:description><![CDATA[Added source [STK-0005] LogiEvents]]></rem:description>
+<rem:description><![CDATA[Added child #3 (Actor Usuario llena el formula...)]]></rem:description>
+</rem:change>
+<rem:change>
+<rem:type>U</rem:type>
+<rem:owner>UC-0004</rem:owner><rem:date>
+<rem:year>2025</rem:year>
+<rem:month>3</rem:month>
+<rem:day>25</rem:day>
+</rem:date>
+<rem:description><![CDATA[Added child #5 (The system guarda la informaci...)]]></rem:description>
+</rem:change>
+<rem:change>
+<rem:type>U</rem:type>
+<rem:owner>UC-0004</rem:owner><rem:date>
+<rem:year>2025</rem:year>
+<rem:month>3</rem:month>
+<rem:day>25</rem:day>
+</rem:date>
+<rem:description><![CDATA[Added child #4 (The system verifica la informa...)]]></rem:description>
 </rem:change>
 <rem:change>
 <rem:type>U</rem:type>
 <rem:owner>UC-0003</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
-<rem:day>24</rem:day>
+<rem:day>25</rem:day>
 </rem:date>
-<rem:description><![CDATA[Property [Urgency] updated: [TBD] -> [under pressure]]]></rem:description>
+<rem:description><![CDATA[Added child #3 (The system registra los datos ...)]]></rem:description>
 </rem:change>
 <rem:change>
 <rem:type>U</rem:type>
-<rem:owner>UC-0001</rem:owner><rem:date>
+<rem:owner>UC-0004</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
-<rem:day>24</rem:day>
+<rem:day>25</rem:day>
 </rem:date>
-<rem:description><![CDATA[Property [Urgency] updated: [TBD] -> [under pressure]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [TriggeringEvent] updated: [TBD] -> [un administrador quiere agregar un evento a la lista de eventos disponibles]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Postcondition] updated: [TBD] -> [Agregar el evento a la base de datos]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Precondition] updated: [TBD] -> [Permisos de administrador]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Importance] updated: [TBD] -> [vital]]]></rem:description>
+<rem:description><![CDATA[Added child #1 (Actor Usuario dentro del log i...)]]></rem:description>
 </rem:change>
 <rem:change>
 <rem:type>U</rem:type>
 <rem:owner>UC-0003</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
-<rem:day>24</rem:day>
+<rem:day>25</rem:day>
 </rem:date>
-<rem:description><![CDATA[Property [Importance] updated: [TBD] -> [important]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Status] updated: [TBD] -> [under construction]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0003</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Status] updated: [TBD] -> [under construction]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0003</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Stability] updated: [TBD] -> [medium]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Stability] updated: [TBD] -> [high]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added child #1 (Actor Administradores TBD)]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>ACT-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Name] updated: [Usuarios] -> [Usuario]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Description] of child #1 updated: [TBD] -> [Ingresa a la pantalla para agregar evento]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0003</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [FrequencyTimeUnit] updated: [TBD] -> [week(s)]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>ACT-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Name] updated: [Administradores] -> [Administrador]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0003</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [FrequencyValue] updated: [0.000000] -> [3.000000]]]></rem:description>
+<rem:description><![CDATA[Added child #4 (The system notifica al usuario...)]]></rem:description>
 </rem:change>
 <rem:change>
 <rem:type>U</rem:type>
 <rem:owner>UC-0004</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
-<rem:day>24</rem:day>
+<rem:day>25</rem:day>
 </rem:date>
-<rem:description><![CDATA[Property [FrequencyValue] updated: [0.000000] -> [15.000000]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0004</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Precondition] updated: [TBD] -> [Tener nombre de usuario, documento de identidad, contraseña, correo electrónico y número de teléfono
-Que no exista un usuario con mismo documento de identidad o correo registrado]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0004</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Status] updated: [TBD] -> [under construction]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0004</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Postcondition] updated: [TBD] -> [Agregar el nuevo usuario a la base de datos]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0004</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [TriggeringEvent] updated: [TBD] -> [un usuario nuevo quiere ingresar al sistema]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0004</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Stability] updated: [TBD] -> [high]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0004</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Urgency] updated: [TBD] -> [immediately]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0004</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [FrequencyTimeUnit] updated: [TBD] -> [day(s)]]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0004</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Property [Importance] updated: [TBD] -> [vital]]]></rem:description>
+<rem:description><![CDATA[Added child #2 (The system muestra un formular...)]]></rem:description>
 </rem:change>
 </rem:log>
