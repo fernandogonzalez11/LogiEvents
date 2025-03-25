@@ -5,15 +5,16 @@ conn = sqlite3.connect('logievents.db')
 cursor = conn.cursor()
 #-----------------------------------------------------------------------
 def CreateTable_Users(): 
-    
-    #TODO: USER_name TEXT, CEDULA TEXT, Phone TEXT
-
     query = """CREATE TABLE User (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cedula TEXT NOT NULL,
     name TEXT NOT NULL,
     mail TEXT NOT NULL UNIQUE,
+    phone TEXT NOT NULL,
+    username TEXT NOT NULL,
     password TEXT NOT NULL,
-    rol TEXT NOT NULL CHECK (rol IN ('administrador', 'usuario')),
+    type TEXT NOT NULL CHECK (type IN ('administrador', 'usuario')),
+    rol TEXT,
     id_empleado TEXT UNIQUE
     );"""
     
@@ -104,7 +105,7 @@ def UsersInEvent(EventsName):
     else:
         print(f"No hay usuarios registrados al evento '{EventsName}'.")
 #-----------------------------------------------------------------------
-#CreateTable_Users()
+CreateTable_Users()
 #CreateTable_Events()
 #CreateTable_Reservation()
 
@@ -139,8 +140,8 @@ def UsersInEvent(EventsName):
 # """, reservas)
 
 PrintUsers()
-PrintEvents()
-UsersInEvent("Feria del Libro")
+# PrintEvents()
+# UsersInEvent("Feria del Libro")
 
 conn.commit()
 

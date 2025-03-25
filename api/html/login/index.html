@@ -9,24 +9,34 @@
     <div class="log-in">
       <div class="div">
         <div class="lbl-welcome">¡Bienvenido!</div>
-        <div class="lbl-uname">Usuario</div>
         <img class="image" src="/login/img/lander.png" />
-        <input class="overlap"></input>
-        <div class="lbl-password">Contraseña</div>
-        <input class="overlap-group" type="password"></input>
-        <div class="btn-login">
-          <button class="div-wrapper button" onclick="goToEvents()"><div class="text-wrapper">Iniciar sesión</div></button>
-        </div>
+
+        <form id="login-form" action="/trylogin/" method="get">
+          <div class="lbl-uname">Usuario</div>
+          <input type="text" name="user" class="overlap"></input>
+          <div class="lbl-password">Contraseña</div>
+          <input type="password" name="password" class="overlap-group"></input>
+          <div class="btn-login">
+            <button class="div-wrapper button" type="submit"><div class="text-wrapper">Iniciar sesión</div></button>
+          </div>
+        </form>
         <div class="btn-register">
-          <button class="div-wrapper button" onclick=""><div class="text-wrapper-2">Registrar</div></buttonbutton>
+          <button class="div-wrapper button" onclick="goToSignup()"><div class="text-wrapper-2">Registrar</div></buttonbutton>
         </div>
         <a class="link-forgot" href="https://example.com">Olvidé mi contraseña</a>
       </div>
     </div>
 
     <script>
-      function goToEvents() {
-        window.location.href = '/trylogin/';
+      function goToSignup() {
+        window.location.href = '/signupuser/';
+      }
+
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get("error") === "invalid") {
+          alert("¡Usuario o contraseña incorrectos!");
+      } else if (urlParams.get("error") === "server") {
+          alert("Error de servidor, por favor intente de nuevo.");
       }
     </script>
   </body>
