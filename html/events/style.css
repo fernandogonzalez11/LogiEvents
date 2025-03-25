@@ -105,15 +105,11 @@
 }
 
 .home-page .checkboxes {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 4px 4px 4px 0px;
-  position: absolute;
-  top: 0;
-  left: 263px;
-  opacity: 0.38;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.38;
 }
 
 .home-page .state-layer {
@@ -514,3 +510,27 @@
   font-weight: 400;
   line-height: 20.84px;
 }
+
+
+.table-container {
+    height: 400px; /* Or any fixed height you prefer */
+    overflow-y: auto;
+    margin-top: 10px; /* Add space between heading and table */
+}
+
+.event-table {
+    width: 100%; /* Make the table fill its container */
+    border-collapse: collapse; /* Optional:  for visual styling */
+}
+
+.event-table th, .event-table td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd; /* Optional: Add borders between rows */
+    text-align: center;
+    font-family: Inter;
+}
+
+.event-table th {
+    background-color: #f0f0f0; /* Optional: Style table header */
+}
+  
