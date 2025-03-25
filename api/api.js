@@ -26,5 +26,12 @@ app.get('/reserve/', (req, res) => sendHTML(res, "reserve-event"));
 app.get('/signupadmin/', (req, res) => sendHTML(res, "signup/admin"));
 app.get('/signupuser/', (req, res) => sendHTML(res, "signup/user"));
 
+app.get('/trylogin/', (req, res) => {
+    if (true) {
+        console.log("login successful")
+        res.redirect('/events/')
+    }
+})
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

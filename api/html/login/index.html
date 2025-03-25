@@ -15,13 +15,19 @@
         <div class="lbl-password">Contraseña</div>
         <input class="overlap-group" type="password"></input>
         <div class="btn-login">
-          <button class="div-wrapper button"><div class="text-wrapper">Iniciar sesión</div></button>
+          <button class="div-wrapper button" onclick="goToEvents()"><div class="text-wrapper">Iniciar sesión</div></button>
         </div>
         <div class="btn-register">
-          <button class="div-wrapper button"><div class="text-wrapper-2">Registrar</div></buttonbutton>
+          <button class="div-wrapper button" onclick=""><div class="text-wrapper-2">Registrar</div></buttonbutton>
         </div>
         <a class="link-forgot" href="https://example.com">Olvidé mi contraseña</a>
       </div>
     </div>
+
+    <script>
+      function goToEvents() {
+        window.location.href = '/trylogin/';
+      }
+    </script>
   </body>
 </html>
