@@ -229,6 +229,24 @@ body {
     line-height: 37.23px;
     word-wrap: break-word;
 }
+.cancel-button {
+    padding: 10px;
+    left: 20px;
+    top: 596px;
+    position: absolute;
+    background: var(--grauey);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: black;
+    font-size: 26.59px;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: 37.23px;
+    word-wrap: break-word;
+}
 
 .next-button:hover {
     background-color: #b3b3b3;

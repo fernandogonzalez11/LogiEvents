@@ -277,3 +277,21 @@ input {
     outline: 5.1px var(--Icon-Default-Default) solid;
     outline-offset: -2.55px;
 }
+.cancel-button {
+    padding: 10px;
+    left: 20px;
+    top: 596px;
+    position: absolute;
+    background: var(--grauey);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: black;
+    font-size: 26.59px;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: 37.23px;
+    word-wrap: break-word;
+}

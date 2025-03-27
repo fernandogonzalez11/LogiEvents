@@ -335,6 +335,18 @@ input {
     gap: 10px;
     display: inline-flex;
 }
+.cancel-button {
+    padding: 10px;
+    left: 20px;
+    top: 592px;
+    position: absolute;
+    background: #b3b3b3;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    display: inline-flex;
+}
 
 .create-text {
     color: black;

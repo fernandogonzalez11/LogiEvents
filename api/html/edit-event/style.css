@@ -147,6 +147,26 @@ input {
     line-height: 37.23px;
     word-wrap: break-word;
 }
+.cancel-button {
+    padding: 10px;
+    left: 20px;
+    top: 579px;
+    position: absolute;
+    background: #b3b3b3;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    display: inline-flex;
+}
+
+.cancel-text {
+    color: black;
+    font-size: 26.59px;
+    font-weight: 400;
+    line-height: 37.23px;
+    word-wrap: break-word;
+}
 
 .image-input {
     width: 720px;

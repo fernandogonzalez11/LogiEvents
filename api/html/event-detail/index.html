@@ -8,6 +8,7 @@
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
     </style>
+    <script defer src="../script.js"></script>
 </head>
 <body>
     <div class="main-container">
@@ -16,8 +17,8 @@
         </div>
         <div class="header"></div>
         <div class="event-title">Evento 1</div>
-        <button class="back-button">Atrás</button>
-        <button class="reserve-button">Reservar Entrada</button>
+        <button class="back-button", onclick="goToEvents()">Atrás</button>
+        <button class="reserve-button", onclick="goToReserveEvent()">Reservar Entrada</button>
         <div class="event-name-label">Nombre de Evento:</div>
         <div class="event-name">Evento 1</div>
         <div class="event-date-label">Fecha del Evento:</div>

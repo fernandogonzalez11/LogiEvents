@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="/admin-panel/globals.css" />
     <link rel="stylesheet" href="/admin-panel/styleguide.css" />
     <link rel="stylesheet" href="/admin-panel/style.css" />
+    <script defer src="../script.js"></script>
   </head>
   <body>
     <div class="admin-dashboard">
@@ -55,7 +56,7 @@
                 </div>
               </div>
             </div>
-            <button class="button">Crear</button>
+            <button class="button", onclick="goToCreateEvent()">Crear</button>
           </div>
           <div class="edit-and-delete">
             <img class="trash" src="/admin-panel/img/trash.svg" /> <img class="edit" src="/admin-panel/img/edit.svg" />
@@ -73,7 +74,7 @@
             <img class="trash" src="/admin-panel/img/trash.svg" /> <img class="edit" src="/admin-panel/img/edit.svg" />
           </div>
         </div>
-        <button class="button-3">Volver</button>
+        <button class="button-3", onclick="goToEvents()">Volver</button>
       </div>
     </div>
   </body>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create event</title>
     <link rel="stylesheet" href="/create-event/page1/style.css">
+    <script defer src="../../script.js"></script>
 </head>
 <body>
     <div class="container">
@@ -29,7 +30,8 @@
                 <label for="location">Ubicación</label>
                 <input class="input-field" />
             </div>
-            <button class="next-button">Siguiente</button>
+            <button class="next-button", onclick="goToCreateEvent2()">Siguiente</button>
+            <button class="cancel-button", onclick="goToAdminPanel()">Cancel</button>
         </div>
         <div class="icons">
             <div class="icon">
