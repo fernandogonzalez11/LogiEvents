@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
 <rem:log xmlns:rem="http://rem.lsi.us.es">
 <rem:change>
+<rem:type>S</rem:type>
+<rem:owner>CRS-0001</rem:owner><rem:date>
+<rem:year>2025</rem:year>
+<rem:month>3</rem:month>
+<rem:day>24</rem:day>
+</rem:date>
+<rem:description><![CDATA[Document saved]]></rem:description>
+</rem:change>
+<rem:change>
+<rem:type>S</rem:type>
+<rem:owner>DFS-0003</rem:owner><rem:date>
+<rem:year>2025</rem:year>
+<rem:month>3</rem:month>
+<rem:day>24</rem:day>
+</rem:date>
+<rem:description><![CDATA[Document saved]]></rem:description>
+</rem:change>
+<rem:change>
 <rem:type>C</rem:type>
 <rem:owner>CHS-0004</rem:owner><rem:date>
 <rem:year>2025</rem:year>
@@ -10,53 +28,8 @@
 <rem:description><![CDATA[Document created]]></rem:description>
 </rem:change>
 <rem:change>
-<rem:type>C</rem:type>
-<rem:owner>DFS-0003</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Document created]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>S</rem:type>
-<rem:owner>DRS-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Document saved]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>C</rem:type>
-<rem:owner>CRS-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Document created]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>C</rem:type>
-<rem:owner>DRS-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Document created]]></rem:description>
-</rem:change>
-<rem:change>
 <rem:type>S</rem:type>
 <rem:owner>CRS-0001</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Document saved]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>S</rem:type>
-<rem:owner>DRS-0002</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
 <rem:day>24</rem:day>
@@ -73,13 +46,49 @@
 <rem:description><![CDATA[Document saved]]></rem:description>
 </rem:change>
 <rem:change>
-<rem:type>S</rem:type>
+<rem:type>C</rem:type>
 <rem:owner>CRS-0001</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
 <rem:day>24</rem:day>
 </rem:date>
+<rem:description><![CDATA[Document created]]></rem:description>
+</rem:change>
+<rem:change>
+<rem:type>S</rem:type>
+<rem:owner>DRS-0002</rem:owner><rem:date>
+<rem:year>2025</rem:year>
+<rem:month>3</rem:month>
+<rem:day>24</rem:day>
+</rem:date>
 <rem:description><![CDATA[Document saved]]></rem:description>
+</rem:change>
+<rem:change>
+<rem:type>S</rem:type>
+<rem:owner>CHS-0004</rem:owner><rem:date>
+<rem:year>2025</rem:year>
+<rem:month>3</rem:month>
+<rem:day>24</rem:day>
+</rem:date>
+<rem:description><![CDATA[Document saved]]></rem:description>
+</rem:change>
+<rem:change>
+<rem:type>S</rem:type>
+<rem:owner>DRS-0002</rem:owner><rem:date>
+<rem:year>2025</rem:year>
+<rem:month>3</rem:month>
+<rem:day>24</rem:day>
+</rem:date>
+<rem:description><![CDATA[Document saved]]></rem:description>
+</rem:change>
+<rem:change>
+<rem:type>C</rem:type>
+<rem:owner>DRS-0002</rem:owner><rem:date>
+<rem:year>2025</rem:year>
+<rem:month>3</rem:month>
+<rem:day>24</rem:day>
+</rem:date>
+<rem:description><![CDATA[Document created]]></rem:description>
 </rem:change>
 <rem:change>
 <rem:type>S</rem:type>
@@ -100,53 +109,8 @@
 <rem:description><![CDATA[Creation]]></rem:description>
 </rem:change>
 <rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>25</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added child #3 (Actor Usuario selecciona la op...)]]></rem:description>
-</rem:change>
-<rem:change>
 <rem:type>S</rem:type>
-<rem:owner>CHS-0004</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Document saved]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>S</rem:type>
-<rem:owner>DFS-0003</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>24</rem:day>
-</rem:date>
-<rem:description><![CDATA[Document saved]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>25</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added child #2 (The system enseña las propieda...)]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>25</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added child #1 (Actor Usuario selecciona un ev...)]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>S</rem:type>
-<rem:owner>DFS-0003</rem:owner><rem:date>
+<rem:owner>CRS-0001</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
 <rem:day>24</rem:day>
@@ -164,6 +128,24 @@
 </rem:change>
 <rem:change>
 <rem:type>S</rem:type>
+<rem:owner>DFS-0003</rem:owner><rem:date>
+<rem:year>2025</rem:year>
+<rem:month>3</rem:month>
+<rem:day>24</rem:day>
+</rem:date>
+<rem:description><![CDATA[Document saved]]></rem:description>
+</rem:change>
+<rem:change>
+<rem:type>C</rem:type>
+<rem:owner>DFS-0003</rem:owner><rem:date>
+<rem:year>2025</rem:year>
+<rem:month>3</rem:month>
+<rem:day>24</rem:day>
+</rem:date>
+<rem:description><![CDATA[Document created]]></rem:description>
+</rem:change>
+<rem:change>
+<rem:type>S</rem:type>
 <rem:owner>CHS-0004</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
@@ -172,148 +154,49 @@
 <rem:description><![CDATA[Document saved]]></rem:description>
 </rem:change>
 <rem:change>
-<rem:type>S</rem:type>
-<rem:owner>CRS-0001</rem:owner><rem:date>
+<rem:type>U</rem:type>
+<rem:owner>UC-0001</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
-<rem:day>24</rem:day>
+<rem:day>26</rem:day>
+</rem:date>
+<rem:description><![CDATA[Property [Precondition] updated: [Permisos de administrador] -> [Permisos de administrador
+Log in con cuenta válida]]]></rem:description>
+</rem:change>
+<rem:change>
+<rem:type>S</rem:type>
+<rem:owner>DRS-0002</rem:owner><rem:date>
+<rem:year>2025</rem:year>
+<rem:month>3</rem:month>
+<rem:day>25</rem:day>
 </rem:date>
 <rem:description><![CDATA[Document saved]]></rem:description>
 </rem:change>
 <rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0003</rem:owner><rem:date>
+<rem:type>S</rem:type>
+<rem:owner>DFS-0003</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
 <rem:day>25</rem:day>
 </rem:date>
-<rem:description><![CDATA[Property [Description] of exception #1 of step #2 updated: [TBD] -> [indica que hay un error y pide reingresar los cambios
-]]]></rem:description>
+<rem:description><![CDATA[Document saved]]></rem:description>
 </rem:change>
 <rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0002</rem:owner><rem:date>
+<rem:type>S</rem:type>
+<rem:owner>CRS-0001</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
 <rem:day>25</rem:day>
 </rem:date>
-<rem:description><![CDATA[Added child #7 (Actor Usuario ingresa el númer...)]]></rem:description>
+<rem:description><![CDATA[Document saved]]></rem:description>
 </rem:change>
 <rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0003</rem:owner><rem:date>
+<rem:type>S</rem:type>
+<rem:owner>CHS-0004</rem:owner><rem:date>
 <rem:year>2025</rem:year>
 <rem:month>3</rem:month>
 <rem:day>25</rem:day>
 </rem:date>
-<rem:description><![CDATA[Added child #1 (Actor Administrador desde el d...)]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>25</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added child #8 (If si la palabra de confirmaci...)]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0003</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>25</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added child #2 (Actor Administrador modifica l...)]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>25</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added child #6 (The system pide al usuario un ...)]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>25</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added child #4 (The system pide al usuario con...)]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0002</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>25</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added child #5 (Actor Usuario llena el formula...)]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0004</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>25</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added child #3 (Actor Usuario llena el formula...)]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0004</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>25</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added child #5 (The system guarda la informaci...)]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0004</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>25</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added child #4 (The system verifica la informa...)]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0003</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>25</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added child #3 (The system registra los datos ...)]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0004</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>25</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added child #1 (Actor Usuario dentro del log i...)]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0003</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>25</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added child #4 (The system notifica al usuario...)]]></rem:description>
-</rem:change>
-<rem:change>
-<rem:type>U</rem:type>
-<rem:owner>UC-0004</rem:owner><rem:date>
-<rem:year>2025</rem:year>
-<rem:month>3</rem:month>
-<rem:day>25</rem:day>
-</rem:date>
-<rem:description><![CDATA[Added child #2 (The system muestra un formular...)]]></rem:description>
+<rem:description><![CDATA[Document saved]]></rem:description>
 </rem:change>
 </rem:log>
