@@ -416,20 +416,20 @@
   position: fixed !important;
   z-index: 1;
   overflow: auto;
-  left: 0;
+  right: 0;
 }
 
 #chatbot-sidebar {
   position: fixed;
   top: 0;
-  right: 0;
+  right: 1000px;
 }
 
 .chatbot-header {
   width: 608px;
   height: 100px;
   position: absolute;
-  background: #7AB1CD;
+  background: #559dab;
 }
 
 .chatbot-title {
@@ -450,7 +450,7 @@
   height: 620px;
   position: absolute;
   top: 100px;
-  background: #E8E8E8;
+  background: #b1dbe3;
 }
 
 .chatbot-input-container {
