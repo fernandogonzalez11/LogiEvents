@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/events/styleguide.css" />
     <link rel="stylesheet" href="/events/style.css" />
     <script defer src="../script.js"></script>
+    <script defer src="chatbot.js"></script>
   </head>
   <body>
     <div class="home-page">
@@ -175,11 +176,15 @@
         <div class="chatbot-header">
           <div class="chatbot-title">ChatBot</div>
         </div>
-        <div class="chatbot-body"></div>
-        
+        <div class="chatbot-body">
+          <div class="chatbot-message-text">
+            <table class="tabla-mensajes"></table>
+          </div>
+        </div>
+        <div class="chatbot-input-spacer"></div>
         <select class="chatbot-input-container" id="chatbot-prompt">
           <option value="" disabled selected>Escoge tu pregunta...</option>
-          <option value="option1">Option 1</option>
+          <option value="option1">Esta es mi primera pregunta</option>
           <option value="option2">Option 2</option>
           <option value="option3">Option 3</option>
         </select>
@@ -188,8 +193,6 @@
             <img alt="Send" src="/events/img/send.svg">
           </div>
         </div>
-        <div class="chatbot-message-bubble"></div>
-        <div class="chatbot-message-text">¿En qué te puedo ayudar?</div>
       </div>
     </div>
     <script>
