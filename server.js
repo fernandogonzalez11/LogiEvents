@@ -3,8 +3,8 @@ const { Database } = require("@sqlitecloud/drivers");
 const path = require('path');
 const crypto = require('crypto');
 const session = require('express-session');
-const { User } = require('../models/User');
-const { validatePassword } = require('../controller/validation');
+const { User } = require('./models/User');
+const { validatePassword } = require('./controller/validation');
 
 const app = express();
 
@@ -189,7 +189,7 @@ app.get('/api/signup/admin', (req, res) => {
     )
 })
 
-const htmlPath = path.join(__dirname, 'html');
+const htmlPath = path.join(__dirname, 'view');
 // Set the "html" folder as the location for templates/static files
 app.use(express.static(htmlPath));
 
