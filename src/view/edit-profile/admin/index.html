@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
     <link rel="stylesheet" href="/edit-profile/admin/style.css">
-    <link rel="stylesheet" href="/edit-profile/admin/embedded-styles.css">
+    
     <script defer src="../../script.js"></script>
 </head>
 <body>
@@ -42,16 +42,16 @@
             </div>
         </div>
         <div class="icon-container">
-            <div class="icon">
-                <img alt="Home",onclick="goToEvents()", src="/edit-profile/admin/../../global_assets/home.svg">
-            </div>
+            <button class="icon", onclick="goToEvents()">
+                <img alt="Home", src="/edit-profile/admin/../../global_assets/home.svg">
+            </button>
             
-            <div class="icon">
+            <button class="icon">
                 <img alt="User" src="/edit-profile/admin/../../global_assets/user.svg">
-            </div>
-            <div class="icon">
+            </button>
+            <button class="icon", onclick="goToLogin()">
                 <img alt="Log out" src="/edit-profile/admin/../../global_assets/logout.svg">
-            </div>
+            </button>
         </div>
     </div>
 </body>

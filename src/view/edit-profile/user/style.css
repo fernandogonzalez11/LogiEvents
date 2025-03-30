@@ -111,6 +111,8 @@ label {
     height: 61.24px;
     position: absolute;
     overflow: hidden;
+    background: none;
+    border: none;
 }
 
 .icon:nth-child(1) {

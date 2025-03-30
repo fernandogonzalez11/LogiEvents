@@ -10,12 +10,12 @@ function goToCreateEvent2() {
 function goToEditEvent() {
     window.location.href='/edit-event/';
 }
-function goToEditProfileAdmin() {
+function goToEditProfile() {
+    //CHECK ROL IN DB
     window.location.href='/edit-profile/admin/';
+    //else: window.location.href='/edit-profile/user/'
 }
-function goToEditProfileUser() {
-    window.location.href='/edit-profile/user/';
-}
+
 function goToEvents() {
     window.location.href='/events/';
 }

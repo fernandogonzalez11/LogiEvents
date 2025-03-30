@@ -231,6 +231,8 @@ input {
     width: 61.4px;
     overflow: hidden;
     position: absolute;
+    background: none;
+    border: none;
 }
 
 .icon:nth-child(1) {

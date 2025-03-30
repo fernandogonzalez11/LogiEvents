@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <link rel="stylesheet" href="/edit-profile/user/style.css">
+    <script defer src="../../script.js"></script>
 </head>
 <body>
     <div class="container">
@@ -23,15 +24,15 @@
             </div>
         </div>
         <div class="icons">
-            <div class="icon">
+            <button class="icon", onclick="goToEvents()">
                 <img alt="Home" src="../../global_assets/logout.svg">
-            </div>
-            <div class="icon">
+            </button>
+            <button class="icon">
                 <img alt="User" src="/edit-profile/user/../../global_assets/user.svg">
-            </div>
-            <div class="icon">
+            </button>
+            <button class="icon", onclick="goToLogin()">
                 <img alt="Log out" src="/edit-profile/user/../../global_assets/home.svg">
-            </div>
+            </button>
         </div>
         <div class="name-title">Nombre Completo</div>
         <div class="username">@username</div>
