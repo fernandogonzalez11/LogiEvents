@@ -52,8 +52,8 @@ app.get('/events2/', (req, res) => {
     return res.send(`Welcome to events page, User ID: ${req.session.userId}`);
 });
 app.get('/reserve/', (req, res) => sendHTML(res, "reserve-event"));
-app.get('/signupadmin/', (req, res) => sendHTML(res, "signup/admin"));
-app.get('/signupuser/', (req, res) => sendHTML(res, "signup/user"));
+app.get('/signup/admin/', (req, res) => sendHTML(res, "signup/admin"));
+app.get('/signup/user/', (req, res) => sendHTML(res, "signup/user"));
 app.get('/logout/', (req, res) => {
     req.session.destroy((err) => {
         if (err) {
@@ -64,7 +64,7 @@ app.get('/logout/', (req, res) => {
 });
 
 
-app.get('/trylogin/', (req, res) => {
+app.get('/api/login/', (req, res) => {
     console.log("Before login:", req.session.userId);
     console.log(req.query);
 
@@ -90,7 +90,7 @@ app.get('/trylogin/', (req, res) => {
     )
 })
 
-app.get('/trysignup/', (req, res) => {
+app.get('/api/signup/user/', (req, res) => {
     console.log(req.query);
 
     const q = req.query;
@@ -107,6 +107,36 @@ app.get('/trysignup/', (req, res) => {
             q["username"],
             pw_hash,
             "usuario"
+        ],
+        function (err) {
+            if(err) {
+                return console.log(err.message); 
+            }
+            console.log(`Row was added to the table: ${this.lastID}`);
+            res.redirect('/')
+        }
+    )
+})
+
+app.get('/api/signup/admin', (req, res) => {
+    console.log(req.query);
+
+    const q = req.query;
+    const pw_hash = crypto.createHash('md5').update(q["password"]).digest("hex");
+
+    db.run(
+        'USE DATABASE logievents; INSERT INTO User(cedula, name, mail, phone, username, password, rol, id_empleado, type) ' +
+        'VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [
+            q["cedula"],
+            q["name"],
+            q["email"],
+            q["phone"],
+            q["username"],
+            pw_hash,
+            q["role"],
+            q["employee-id"],
+            "administrador"
         ],
         function (err) {
             if(err) {

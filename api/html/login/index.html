@@ -12,7 +12,7 @@
         <div class="lbl-welcome">¡Bienvenido!</div>
         <img class="image" src="/login/img/lander.png" />
 
-        <form id="login-form" action="/trylogin/" method="get">
+        <form id="login-form" action="/api/login" method="get">
           <div class="lbl-uname">Usuario</div>
           <input type="text" name="user" class="overlap"></input>
           <div class="lbl-password">Contraseña</div>
@@ -22,15 +22,14 @@
           </div>
         </form>
         <div class="btn-register">
-          <button class="div-wrapper button" onclick="goToSignup()"><div class="text-wrapper-2">Registrar</div></buttonbutton>
+          <button class="div-wrapper button" onclick="goToSignupUser()"><div class="text-wrapper-2">Registrar</div></buttonbutton>
         </div>
-        <a class="link-forgot" href="https://example.com">Olvidé mi contraseña</a>
       </div>
     </div>
 
     <script>
-      function goToSignup() {
-        window.location.href = '/signupuser/';
+      function goToSignupUser() {
+        window.location.href = '/signup/user/';
       }
 
       const urlParams = new URLSearchParams(window.location.search);

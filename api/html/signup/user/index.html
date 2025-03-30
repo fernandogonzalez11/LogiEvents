@@ -11,47 +11,55 @@
   </head>
   <body>
     <div class="main-container">
-      <form action="/trysignup/" class="form-container">
-        <div class="input-field-group">
-          <label for="nombre">Nombre</label>
-          <input name="name" class="input-wrapper" />
-        </div>
-        <div class="input-field-group">
-          <label for="cedula">Cédula de identidad</label>
-          <input name="cedula" class="input-wrapper" />
-        </div>
-        <div class="input-field-group">
-          <label for="correo">Correo electrónico</label>
-          <input name="email" class="input-wrapper" />
-        </div>
-        <div class="input-field-group">
-          <label for="telefono">Número telefónico</label>
-          <input name="phone" class="input-wrapper" />
-        </div>
-        <div class="input-field-group">
-          <label for="username">Username</label>
-          <input name="username" class="input-wrapper" />
-        </div>
-        <div class="input-field-group">
-          <label for="password">Password</label>
-          <input name="password" type="password" class="input-wrapper" />
-        </div>
-        <div class="input-field-group">
-          <label for="rol">Rol</label>
-          <input name="role" class="input-wrapper" />
-        </div>
-        <button type="submit" class="register-button">Registrar</button>
+      <div class="form-container">
+        <form action="/api/signup/user">
+          <div class="input-field-group">
+            <label for="nombre">Nombre</label>
+            <input name="name" class="input-wrapper" />
+          </div>
+          <div class="input-field-group">
+            <label for="cedula">Cédula de identidad</label>
+            <input name="cedula" class="input-wrapper" />
+          </div>
+          <div class="input-field-group">
+            <label for="correo">Correo electrónico</label>
+            <input name="email" class="input-wrapper" />
+          </div>
+          <div class="input-field-group">
+            <label for="telefono">Número telefónico</label>
+            <input name="phone" class="input-wrapper" />
+          </div>
+          <div class="input-field-group">
+            <label for="username">Username</label>
+            <input name="username" class="input-wrapper" />
+          </div>
+          <div class="input-field-group">
+            <label for="password">Password</label>
+            <input name="password" type="password" class="input-wrapper" />
+          </div>
+          <div class="input-field-group">
+            <label for="rol">Rol</label>
+            <input name="role" class="input-wrapper" />
+          </div>
+          <button type="submit" class="register-button">Registrar</button>
+        </form>
         <div class="admin-user-toggle">
-          <button class="admin-button">Administrador</button>
+          <button class="admin-button" onclick="goToSignupAdmin()">Administrador</button>
           <button class="user-button">Usuario</button>
         </div>
         <div class="log-in-link">Log In</div>
-        <div class="logo-group">
-          <div class="logo-item"></div>
-          <div class="logo-item"></div>
-          <div class="logo-item"></div>
-        </div>
-      </form>
+      </div>
+
+      <div class="logo-group">
+        <div class="logo-item"></div>
+        <div class="logo-item"></div>
+        <div class="logo-item"></div>
+      </div>
     </div>
+    <script>
+      function goToSignupAdmin() {
+        window.location.href = '/signup/admin/';
+      }
+    </script>
   </body>
 </html>
