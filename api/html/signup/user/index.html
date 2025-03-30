@@ -37,10 +37,6 @@
             <label for="password">Password</label>
             <input name="password" type="password" class="input-wrapper" />
           </div>
-          <div class="input-field-group">
-            <label for="rol">Rol</label>
-            <input name="role" class="input-wrapper" />
-          </div>
           <button type="submit" class="register-button">Registrar</button>
         </form>
         <div class="admin-user-toggle">
@@ -59,6 +55,11 @@
     <script>
       function goToSignupAdmin() {
         window.location.href = '/signup/admin/';
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      if (params.has("error")) {
+        alert(params.get("error"));
       }
     </script>
   </body>

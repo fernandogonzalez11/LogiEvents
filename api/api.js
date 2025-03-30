@@ -3,8 +3,12 @@ const { Database } = require("@sqlitecloud/drivers");
 const path = require('path');
 const crypto = require('crypto');
 const session = require('express-session');
+const { User } = require('../models/User');
+const { validatePassword } = require('../controller/validation');
 
 const app = express();
+
+const PASSWORD_ERROR = "Contraseña inválida (al menos 4 letras y 4 números)";
 
 // use session for login
 app.use(session({
@@ -91,22 +95,41 @@ app.get('/api/login/', (req, res) => {
 })
 
 app.get('/api/signup/user/', (req, res) => {
-    console.log(req.query);
-
     const q = req.query;
-    const pw_hash = crypto.createHash('md5').update(q["password"]).digest("hex");
+    const passwordText = q["password"];
+    if (!validatePassword(passwordText))
+        return res.redirect(`/signup/user?error=${encodeURIComponent(PASSWORD_ERROR)}`);
+        
+
+    const pw_hash = crypto.createHash('md5').update(passwordText).digest("hex");
+
+    let user = null;
+    try {
+        user = new User({
+            cedula: q["cedula"],
+            name: q["name"],
+            mail: q["email"],
+            phone: q["phone"],
+            username: q["username"],
+            password: pw_hash,
+            type: "usuario"
+        });
+    } catch (error) {
+        return res.redirect(`/signup/user?error=${encodeURIComponent(error.message)}`);
+    }
+    
 
     db.run(
         'USE DATABASE logievents; INSERT INTO User(cedula, name, mail, phone, username, password, type) ' +
         'VALUES(?, ?, ?, ?, ?, ?, ?)',
         [
-            q["cedula"],
-            q["name"],
-            q["email"],
-            q["phone"],
-            q["username"],
-            pw_hash,
-            "usuario"
+            user.cedula,
+            user.name,
+            user.mail,
+            user.phone,
+            user.username,
+            user.password,
+            user.type
         ],
         function (err) {
             if(err) {
@@ -119,24 +142,42 @@ app.get('/api/signup/user/', (req, res) => {
 })
 
 app.get('/api/signup/admin', (req, res) => {
-    console.log(req.query);
-
     const q = req.query;
+
+    const passwordText = q["password"];
+    if (!validatePassword(passwordText))
+        return res.redirect(`/signup/user?error=${encodeURIComponent(PASSWORD_ERROR)}`);
+
     const pw_hash = crypto.createHash('md5').update(q["password"]).digest("hex");
+
+    let user = null;
+    try {
+        user = new User({
+            cedula: q["cedula"],
+            name: q["name"],
+            mail: q["email"],
+            phone: q["phone"],
+            username: q["username"],
+            password: pw_hash,
+            type: "usuario"
+        });
+    } catch (error) {
+        return res.redirect(`/signup/user?error=${encodeURIComponent(error.message)}`);
+    }
 
     db.run(
         'USE DATABASE logievents; INSERT INTO User(cedula, name, mail, phone, username, password, rol, id_empleado, type) ' +
         'VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
-            q["cedula"],
-            q["name"],
-            q["email"],
-            q["phone"],
-            q["username"],
-            pw_hash,
-            q["role"],
-            q["employee-id"],
-            "administrador"
+            user.cedula,
+            user.name,
+            user.mail,
+            user.phone,
+            user.username,
+            user.password,
+            user.rol,
+            user.id_empleado,
+            user.type
         ],
         function (err) {
             if(err) {
