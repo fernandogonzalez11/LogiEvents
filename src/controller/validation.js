@@ -1,6 +1,7 @@
-const CEDULA_LENGTH = 9;
-const PHONE_LENGTH = 8;
-const USERNAME_MAX_LENGTH = 30;
+const {
+    COUNTRY_CODE, CEDULA_LENGTH, PHONE_LENGTH, USERNAME_MAX_LENGTH,
+    PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH
+} = require('../models/Constants');
 
 /**
  * In plain language:
@@ -14,16 +15,12 @@ const USERNAME_MAX_LENGTH = 30;
  * Source: https://stackoverflow.com/questions/50330109/simple-regex-pattern-for-email
  */
 const EMAIL_REGEX = /^[^@]+@[^@]+\.[^@]+$/;
-/**
- * EMP-001
- */
+// EMP-001
 const EMPLOYEE_ID_REGEX = /EMP-\d{3}/;
-/**
- * 4 letras y 4 números
- */
+// 4 letras y 4 números
 const PASSWORD_REGEX = /^[A-Za-z]{4}\d{4}$/;
-const PASSWORD_MIN_LENGTH = 8;
-const PASSWORD_MAX_LENGTH = 60;
+// +50612345678
+const TWILIO_PHONE_REGEX = new RegExp(`\\+${COUNTRY_CODE}\\d{8}`);
 
 /**
  * 
@@ -50,6 +47,14 @@ function validateEmail(email) {
  */
 function validatePhone(phone) {
     return !isNaN(phone) && phone.length == PHONE_LENGTH; 
+}
+
+/**
+ * 
+ * @param {string} phone 
+ */
+function validateTwilioPhone(phone) {
+    return TWILIO_PHONE_REGEX.test(phone);
 }
 
 /**
@@ -86,5 +91,6 @@ module.exports = {
     validateEmployeeID,
     validatePhone,
     validateUsername,
-    validatePassword
+    validatePassword,
+    validateTwilioPhone
 }

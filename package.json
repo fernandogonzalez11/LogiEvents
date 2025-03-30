@@ -19,6 +19,7 @@
   "dependencies": {
     "@sqlitecloud/drivers": "^1.0.438",
     "express": "^4.21.2",
-    "express-session": "^1.18.1"
+    "express-session": "^1.18.1",
+    "twilio": "^5.5.1"
   }
 }

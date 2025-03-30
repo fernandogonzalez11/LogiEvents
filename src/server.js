@@ -4,7 +4,9 @@ const path = require('path');
 const crypto = require('crypto');
 const session = require('express-session');
 const { User } = require('./models/User');
-const { validatePassword } = require('./controller/validation');
+const { validatePassword, validatePhone } = require('./controller/validation');
+const { sendTwilioMessage } = require('./controller/sendTwilio');
+const Constants = require('./models/Constants');
 
 const app = express();
 
@@ -32,6 +34,20 @@ const db = new Database(process.env.SQLITE_CONNECTION, (err) => {
 function sendHTML(res, folder) {
     res.sendFile(path.join(htmlPath, folder, 'index.html'));
 }
+
+/**
+ * Get a random integer between min (included) and max (excluded)
+ * Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+ * @param {int} min 
+ * @param {int} max 
+ * @returns
+ */
+function getRandomInt(min, max) {
+    const minCeiled = Math.ceil(min);
+    const maxFloored = Math.floor(max);
+    return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
+}
+  
 
 app.get('/', (req, res) => sendHTML(res, "login"));
 app.get('/login/', (req, res) => sendHTML(res, "login"));
@@ -187,6 +203,32 @@ app.get('/api/signup/admin', (req, res) => {
             res.redirect('/')
         }
     )
+})
+
+app.get('/api/send_message', async (req, res) => {
+    const q = req.query;
+    let phoneNumber = q["phone"];
+    const redirectURI = q["from"];
+
+    // TODO: validate if there is existing code
+
+    if (!redirectURI)
+        return res.json({ "error": "No redirect URI" });
+
+    if (!validatePhone(phoneNumber))
+        return res.redirect(`${redirectURI}?error=phone`)
+
+    const code = getRandomInt(100000, 1000000);
+
+    try {
+        phoneNumber = "+" + Constants.COUNTRY_CODE + phoneNumber;
+        await sendTwilioMessage(phoneNumber, code.toString());
+        // TODO: stay on the confirmation dialog
+        // TODO: set 2FA code in database temporarily
+    } catch (error) {
+        console.log(error);
+        res.redirect(`${redirectURI}?error=twilio`)
+    }
 })
 
 const htmlPath = path.join(__dirname, 'view');
