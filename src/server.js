@@ -86,7 +86,7 @@ app.get('/createevent2/', (req, res) => sendHTML(res, "create-event/page2"));
 app.get('/editevent/', (req, res) => sendHTML(res, "edit-event"));
 app.get('/event/', (req, res) => sendHTML(res, "event-detail"));
 app.get('/events/', (req, res) => {
-    if (!req.session.userId) return res.redirect("/login/");
+    if (!req.session.userId) return res.status(403).redirect("/login/");
     return sendHTML(res, "events");
 });
 app.get('/reserve/', (req, res) => sendHTML(res, "reserve-event"));
