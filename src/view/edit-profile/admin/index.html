@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="/edit-profile/admin/style.css">
+    
+    <script defer src="/script.js"></script>
+    <script defer src="/edit-profile/admin/script.js"></script>
+    
+</head>
+<body>
+    <div class="main-container">
+        <div class="form-container">
+            <div class="email-input-container">
+                <div><span>Correo e</span><span>lectrónico</span></div>
+                <input class="input-field" id="input-email" />
+            </div>
+            <div class="phone-input-container">
+                <div>Número telefónico</div>
+                <input class="input-field" id="input-phone" />
+            </div>
+            <div class="role-input-container">
+                <div>Rol</div>
+                <div class="input-field placeholder" id="lbl-role">---</div>
+            </div>
+            <div class="employee-id-container">
+                <div>ID Empleado</div>
+                <div class="input-field placeholder" id="lbl-id-empleado"></div>
+            </div>
+            <div class="id-input-container">
+                <div>Cédula de identidad</div>
+                <div class="input-field placeholder" id="lbl-cedula"></div>
+            </div>
+            <div class="name-label" id="lbl-name">
+                Nombre Completo
+            </div>
+            <div class="username-label" id="lbl-username">
+                @username
+            </div>
+            <div class="admin-label">
+                [Admin]
+            </div>
+        </div>
+        <div class="icon-container">
+            <button class="icon", onclick="goToEvents()">
+                <img alt="Home", src="/edit-profile/admin/../../global_assets/home.svg">
+            </button>
+            
+            <button class="icon">
+                <img alt="User" src="/edit-profile/admin/../../global_assets/user.svg">
+            </button>
+            <button class="icon", onclick="goToLogin()">
+                <img alt="Log out" src="/edit-profile/admin/../../global_assets/logout.svg">
+            </button>
+        </div>
+    </div>
+</body>
+</html>

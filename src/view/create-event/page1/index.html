@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create event</title>
+    <link rel="stylesheet" href="/create-event/page1/style.css">
+    <script defer src="../../script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <div class="create-event-title">Crear evento</div>
+            <div class="date-time-group">
+                <div class="date-label">Fecha</div>
+                <div class="time-label">Hora</div>
+                <input class="date-input" />
+                <input class="time-input" />
+            </div>
+            <div class="name-group">
+                <label for="name">Nombre</label>
+                <input class="input-field" />
+            </div>
+            <div class="description-group">
+                <label for="description">Descripción</label>
+                <input class="input-field description-field">
+                </input>
+            </div>
+            <div class="location-group">
+                <label for="location">Ubicación</label>
+                <input class="input-field" />
+            </div>
+            <button class="next-button", onclick="goToCreateEvent2()">Siguiente</button>
+            <button class="cancel-button", onclick="goToAdminPanel()">Cancel</button>
+        </div>
+        <div class="icons">
+            <div class="icon">
+                <img alt="Home" src="/create-event/page1/../../global_assets/logout.svg">
+            </div>
+            <div class="icon">
+                <img alt="User" src="/create-event/page1/../../global_assets/user.svg">
+            </div>
+            <div class="icon">
+                <img alt="Log out" src="/create-event/page1/../../global_assets/home.svg">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

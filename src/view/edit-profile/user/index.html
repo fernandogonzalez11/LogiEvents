@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/edit-profile/user/style.css">
+    <script defer src="/script.js"></script>
+    <script defer src="/edit-profile/user/script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input class="input-field" id="input-email" />
+            </div>
+            <div class="form-group">
+                <label for="phone">Número telefónico</label>
+                <input class="input-field" id="input-phone" />
+            </div>
+            <div class="form-group">
+                <label for="id">Cédula de identidad</label>
+                <div class="input-field placeholder" id="lbl-cedula">---</div>
+            </div>
+        </div>
+        <div class="icons">
+            <button class="icon", onclick="goToEvents()">
+                <img alt="Home" src="../../global_assets/logout.svg">
+            </button>
+            <button class="icon">
+                <img alt="User" src="/edit-profile/user/../../global_assets/user.svg">
+            </button>
+            <button class="icon", onclick="goToLogin()">
+                <img alt="Log out" src="/edit-profile/user/../../global_assets/home.svg">
+            </button>
+        </div>
+        <div class="name-title" id="lbl-name">Nombre Completo</div>
+        <div class="username" id="lbl-username">@username</div>
+        <div class="user-type">[User]</div>
+    </div>
+</body>
+</html>

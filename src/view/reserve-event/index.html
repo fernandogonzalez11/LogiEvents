@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservación de evento</title>
+  <link rel="stylesheet" href="/reserve-event/style.css">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+  </style>
+  <script defer src="../script.js"></script>
+</head>
+
+<body>
+  <div id="main-container">
+    <div id="form-container">
+      <div class="form-group">
+        <div class="form-label">Correo electrónico</div>
+        <input class="form-input" />
+      </div>
+      <div class="form-group">
+        <div class="form-label">Nombre completo</div>
+        <input class="form-input" />
+      </div>
+      <div class="form-group">
+        <div class="form-label">Número telefónico</div>
+        <input class="form-input" />
+      </div>
+      <div id="spaces-box">
+        <div class="form-label">Espacios por reservar</div>
+        <input id="spaces-selection"></input>
+      </div>
+      <div id="event-title">Reservación de evento</div>
+      <div id="event-name">Evento 1</div>
+      <button id="reserve-button" >
+        <div id="reserve-text">Reservar</div>
+      </button>
+      <button id="cancel-button", onclick="goToEvents()">
+        <div id="cancel-text">Cancelar</div>
+      </button>
+    </div>
+    <div id="icons-container">
+      <div class="icon" data-size="48">
+        <img alt="Log out" src="/reserve-event/../global_assets/logout.svg">
+      </div>
+      <div class="icon" data-size="48">
+        <img alt="User" src="/reserve-event/../global_assets/user.svg">
+      </div>
+      <div class="icon" data-size="48">
+        <img alt="Home" src="/reserve-event/../global_assets/home.svg">
+      </div>
+      
+    </div>
+  </div>
+</body>
+
+</html>
