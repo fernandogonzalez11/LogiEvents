@@ -162,6 +162,7 @@ label {
     font-family: Inter;
     font-weight: 400;
     word-wrap: break-word;
+    text-align: center;
 }
 
 .username {
@@ -175,6 +176,7 @@ label {
     font-family: Inter;
     font-weight: 400;
     word-wrap: break-word;
+    text-align: center;
 }
 
 .user-type {
@@ -190,4 +192,5 @@ label {
     font-weight: 700;
     line-height: 25px;
     word-wrap: break-word;
+    text-align: center;
 }

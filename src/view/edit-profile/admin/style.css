@@ -94,7 +94,7 @@ input {
     width: 516.74px;
     height: 130.14px;
     left: 482.27px;
-    top: 353.41px;
+    top: 358.51px;
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -188,6 +188,7 @@ input {
     font-family: Inter;
     font-weight: 400;
     word-wrap: break-word;
+    text-align: center;
 }
 
 .username-label {
@@ -201,6 +202,7 @@ input {
     font-family: Inter;
     font-weight: 400;
     word-wrap: break-word;
+    text-align: center;
 }
 
 .admin-label {
@@ -215,6 +217,7 @@ input {
     font-weight: 700;
     line-height: 25px;
     word-wrap: break-word;
+    text-align: center;
 }
 
 .icon-container {
