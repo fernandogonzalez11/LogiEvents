@@ -13,16 +13,22 @@ const app = express();
 
 const PASSWORD_ERROR = "Contraseña inválida (al menos 4 letras y 4 números)";
 
-// use session for login
-app.use(session({
+const sess = {
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: { 
-        secure: true,  // Set to true if using HTTPS
         maxAge: 1000 * 60 * Constants.LOGIN_EXPIRATION_MINUTES 
     }
-}));
+}
+
+if (app.get('env') === 'production') {
+    app.set('trust proxy', 1) // trust first proxy
+    sess.cookie.secure = true // serve secure cookies
+}
+
+// use session for login
+app.use(session(sess));
 app.use((req, res, next) => {
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
     next();
@@ -66,6 +72,7 @@ function getRandomInt(min, max) {
  * @param {Request} req 
  */
 async function getCurrentUser(req, res) {
+    console.log(req.session);
     const userId = req.session.userId;
     rows = await db.query(db.Queries.GET_USER, [userId]);
 
