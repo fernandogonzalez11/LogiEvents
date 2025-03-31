@@ -76,7 +76,7 @@ app.get('/api/login/', async (req, res) => {
             Queries.LOGIN,
             [q["user"], pw_hash]
         );
-        
+
         if (rows.length == 1) {
             console.log("login successful!");
             req.session.userId = rows[0].id;
@@ -206,14 +206,21 @@ app.get('/api/send_message', async (req, res) => {
     }
 });
 
-app.get('/profile', (req, res) => {
-    db.get(db.Queries.GET_USER, [req.session.userId], (err, row) => {
-        if (err) return console.log(err);
-        const type = row["type"];
-        if (type == Constants.USER_TYPES.user) sendHTML("edit-profile/user");
-        else if (type == Constants.USER_TYPES.admin) sendHTML("edit-profile/admin");
+app.get('/profile', async (req, res) => {
+    try {
+        const userId = req.session.userId;
+        console.log(userId);
+        rows = await db.query(db.Queries.GET_USER, [userId]);
+
+        if (rows.length != 1) return console.log("[ERROR] 0 or >1 users fetched for ID " + userId);
+        
+        const type = rows[0].type;
+        if (type == Constants.USER_TYPES.user) sendHTML(res, "edit-profile/user");
+        else if (type == Constants.USER_TYPES.admin) sendHTML(res, "edit-profile/admin");
         else return console.log("[ERROR] Invalid user type: " + type);
-    });
+    } catch (err) {
+        return console.log(err);
+    }
 });
 
 const htmlPath = path.join(__dirname, 'view');
