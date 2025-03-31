@@ -262,6 +262,7 @@ app.get('/profile', async (req, res) => {
 
 app.get('/api/current_user', async (req, res) => {
     try {
+        console.log(req.session);
         const user = await getCurrentUser(req, res);
         if (!user) return;
 
