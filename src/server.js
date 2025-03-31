@@ -1,5 +1,4 @@
 const express = require('express');
-const { Database } = require("@sqlitecloud/drivers");
 const path = require('path');
 const crypto = require('crypto');
 const session = require('express-session');
@@ -7,6 +6,8 @@ const { User } = require('./models/User');
 const { validatePassword, validatePhone } = require('./controller/validation');
 const { sendTwilioMessage } = require('./controller/sendTwilio');
 const Constants = require('./models/Constants');
+const { Queries } = require('./controller/dbQueries');
+const db = require('./controller/dbQueries');
 
 const app = express();
 
@@ -17,18 +18,11 @@ app.use(session({
     secret: '7c99a61d6f20728111dc01e56ef4faf1', // 'reques' in MD5, lol
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false, maxAge: 1000 * 60 * 1  } // Set to true if using HTTPS
+    cookie: { secure: false, maxAge: 1000 * 60 * Constants.LOGIN_EXPIRATION_MINUTES  } // Set to true if using HTTPS
 }));
 app.use((req, res, next) => {
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
     next();
-});
-
-const db = new Database(process.env.SQLITE_CONNECTION, (err) => {
-	if(err) {
-		return console.log(err.message);
-	}
-	console.log("Connected to database!");
 });
 
 function sendHTML(res, folder) {
@@ -55,21 +49,10 @@ app.get('/admin/', (req, res) => sendHTML(res, "admin-panel"));
 app.get('/createevent1/', (req, res) => sendHTML(res, "create-event/page1"));
 app.get('/createevent2/', (req, res) => sendHTML(res, "create-event/page2"));
 app.get('/editevent/', (req, res) => sendHTML(res, "edit-event"));
-app.get('/profileadmin/', (req, res) => sendHTML(res, "edit-profile/admin"));
-app.get('/profileuser/', (req, res) => sendHTML(res, "edit-profile/user"));
 app.get('/event/', (req, res) => sendHTML(res, "event-detail"));
 app.get('/events/', (req, res) => {
-    console.log("test");
     if (!req.session.userId) return res.redirect("/login/");
-    console.log(`my id is ${req.session.userId}`);
     return sendHTML(res, "events");
-});
-app.get('/events2/', (req, res) => {
-    console.log("test");
-    // if (!req.session.userId) return res.redirect("/login/");
-    console.log(`my id is ${req.session.userId}`);
-    // return sendHTML(res, "events");
-    return res.send(`Welcome to events page, User ID: ${req.session.userId}`);
 });
 app.get('/reserve/', (req, res) => sendHTML(res, "reserve-event"));
 app.get('/signup/admin/', (req, res) => sendHTML(res, "signup/admin"));
@@ -84,33 +67,30 @@ app.get('/logout/', (req, res) => {
 });
 
 
-app.get('/api/login/', (req, res) => {
-    console.log("Before login:", req.session.userId);
-    console.log(req.query);
-
+app.get('/api/login/', async (req, res) => {
     const q = req.query;
     const pw_hash = crypto.createHash('md5').update(q["password"]).digest("hex");
-
-    db.get(
-        "USE DATABASE logievents; SELECT id FROM User WHERE username = ? AND password = ?",
-        [q["user"], pw_hash],
-        (err, row) => {
-            if (err) {
-                console.error(err.message);
-                return res.redirect("/login?error=server");
-            }
-            if (row) {
-                console.log("login successful!");
-                req.session.userId = row.id;
-                res.redirect("/events/");
-            } else {
-                res.redirect("/login?error=invalid")
-            }
+    
+    try {
+        rows = await db.query(
+            Queries.LOGIN,
+            [q["user"], pw_hash]
+        );
+        
+        if (rows.length == 1) {
+            console.log("login successful!");
+            req.session.userId = rows[0].id;
+            res.redirect("/events/");
+        } else {
+            res.redirect("/login?error=invalid")
         }
-    )
-})
+    } catch (err) {
+        console.error(err.message);
+        return res.redirect("/login?error=server");
+    }
+});
 
-app.get('/api/signup/user/', (req, res) => {
+app.get('/api/signup/user/', async (req, res) => {
     const q = req.query;
     const passwordText = q["password"];
     if (!validatePassword(passwordText))
@@ -133,31 +113,28 @@ app.get('/api/signup/user/', (req, res) => {
     } catch (error) {
         return res.redirect(`/signup/user?error=${encodeURIComponent(error.message)}`);
     }
-    
 
-    db.run(
-        'USE DATABASE logievents; INSERT INTO User(cedula, name, mail, phone, username, password, type) ' +
-        'VALUES(?, ?, ?, ?, ?, ?, ?)',
-        [
-            user.cedula,
-            user.name,
-            user.mail,
-            user.phone,
-            user.username,
-            user.password,
-            user.type
-        ],
-        function (err) {
-            if(err) {
-                return console.log(err.message); 
-            }
-            console.log(`Row was added to the table: ${this.lastID}`);
-            res.redirect('/')
-        }
-    )
-})
+    try {
+        await db.query(
+            Queries.SIGNUP_USER,
+            [
+                user.cedula,
+                user.name,
+                user.mail,
+                user.phone,
+                user.username,
+                user.password,
+                user.type
+            ]
+        );
+        console.log(`Row was added to the table: ${this.lastID}`);
+        res.redirect('/');
+    } catch (error) {
+        return console.log(error);
+    }    
+});
 
-app.get('/api/signup/admin', (req, res) => {
+app.get('/api/signup/admin', async (req, res) => {
     const q = req.query;
 
     const passwordText = q["password"];
@@ -181,29 +158,27 @@ app.get('/api/signup/admin', (req, res) => {
         return res.redirect(`/signup/user?error=${encodeURIComponent(error.message)}`);
     }
 
-    db.run(
-        'USE DATABASE logievents; INSERT INTO User(cedula, name, mail, phone, username, password, rol, id_empleado, type) ' +
-        'VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)',
-        [
-            user.cedula,
-            user.name,
-            user.mail,
-            user.phone,
-            user.username,
-            user.password,
-            user.rol,
-            user.id_empleado,
-            user.type
-        ],
-        function (err) {
-            if(err) {
-                return console.log(err.message); 
-            }
-            console.log(`Row was added to the table: ${this.lastID}`);
-            res.redirect('/')
-        }
-    )
-})
+    try {
+        const result = db.query(
+            Queries.SIGNUP_ADMIN,
+            [
+                user.cedula,
+                user.name,
+                user.mail,
+                user.phone,
+                user.username,
+                user.password,
+                user.rol,
+                user.id_empleado,
+                user.type
+            ]
+        );
+        console.log(`Row was added to the table: ${result.lastID}`);
+        res.redirect('/');
+    } catch (error) {
+        return console.log(error);
+    } 
+});
 
 app.get('/api/send_message', async (req, res) => {
     const q = req.query;
@@ -229,7 +204,17 @@ app.get('/api/send_message', async (req, res) => {
         console.log(error);
         res.redirect(`${redirectURI}?error=twilio`)
     }
-})
+});
+
+app.get('/profile', (req, res) => {
+    db.get(db.Queries.GET_USER, [req.session.userId], (err, row) => {
+        if (err) return console.log(err);
+        const type = row["type"];
+        if (type == Constants.USER_TYPES.user) sendHTML("edit-profile/user");
+        else if (type == Constants.USER_TYPES.admin) sendHTML("edit-profile/admin");
+        else return console.log("[ERROR] Invalid user type: " + type);
+    });
+});
 
 const htmlPath = path.join(__dirname, 'view');
 // Set the "html" folder as the location for templates/static files

@@ -11,9 +11,7 @@ function goToEditEvent() {
     window.location.href='/edit-event/';
 }
 function goToEditProfile() {
-    //CHECK ROL IN DB
-    window.location.href='/edit-profile/admin/';
-    //else: window.location.href='/edit-profile/user/'
+    window.location.href='/profile/';
 }
 
 function goToEvents() {
