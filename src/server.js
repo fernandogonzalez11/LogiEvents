@@ -15,10 +15,13 @@ const PASSWORD_ERROR = "Contraseña inválida (al menos 4 letras y 4 números)";
 
 // use session for login
 app.use(session({
-    secret: '7c99a61d6f20728111dc01e56ef4faf1', // 'reques' in MD5, lol
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false, maxAge: 1000 * 60 * Constants.LOGIN_EXPIRATION_MINUTES  } // Set to true if using HTTPS
+    cookie: { 
+        secure: true,  // Set to true if using HTTPS
+        maxAge: 1000 * 60 * Constants.LOGIN_EXPIRATION_MINUTES 
+    }
 }));
 app.use((req, res, next) => {
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
