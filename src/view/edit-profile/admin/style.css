@@ -78,6 +78,10 @@ input {
     justify-content: flex-start;
     align-items: center;
     display: inline-flex;
+    line-height: 25px;
+    height: 25px;
+    font-family: Inter;
+    font-size: 25px;
 }
 
 .input-text {

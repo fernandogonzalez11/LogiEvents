@@ -25,8 +25,23 @@ app.use((req, res, next) => {
     next();
 });
 
+/**
+ * Serve an HTML file statically
+ * @param {Response} res 
+ * @param {string} folder 
+ */
 function sendHTML(res, folder) {
     res.sendFile(path.join(htmlPath, folder, 'index.html'));
+}
+
+/**
+ * Handle an error server side by fallbacking to logout
+ * @param {Error} err
+ * @param {Response} res 
+ */
+function handleError(err, res) {
+    console.log(err);
+    res.status(500).redirect('/logout?error=server');
 }
 
 /**
@@ -43,6 +58,23 @@ function getRandomInt(min, max) {
 }
   
 
+/**
+ * Get current user information from the session cookie
+ * @param {Request} req 
+ */
+async function getCurrentUser(req, res) {
+    const userId = req.session.userId;
+    rows = await db.query(db.Queries.GET_USER, [userId]);
+
+    if (rows.length != 1) {
+        handleError(new Error("0 or >1 users fetched for ID " + userId), res);
+        return null;
+    }
+        
+    return rows[0];
+}
+
+app.get('/favicon.ico', (req, res) => res.sendFile(path.join(htmlPath, 'favicon.ico')));
 app.get('/', (req, res) => sendHTML(res, "login"));
 app.get('/login/', (req, res) => sendHTML(res, "login"));
 app.get('/admin/', (req, res) => sendHTML(res, "admin-panel"));
@@ -78,15 +110,13 @@ app.get('/api/login/', async (req, res) => {
         );
 
         if (rows.length == 1) {
-            console.log("login successful!");
             req.session.userId = rows[0].id;
             res.redirect("/events/");
         } else {
             res.redirect("/login?error=invalid")
         }
     } catch (err) {
-        console.error(err.message);
-        return res.redirect("/login?error=server");
+        return handleError(err, res);
     }
 });
 
@@ -129,8 +159,8 @@ app.get('/api/signup/user/', async (req, res) => {
         );
         console.log(`Row was added to the table: ${this.lastID}`);
         res.redirect('/');
-    } catch (error) {
-        return console.log(error);
+    } catch (err) {
+        return handleError(err, res);
     }    
 });
 
@@ -175,8 +205,8 @@ app.get('/api/signup/admin', async (req, res) => {
         );
         console.log(`Row was added to the table: ${result.lastID}`);
         res.redirect('/');
-    } catch (error) {
-        return console.log(error);
+    } catch (err) {
+        return handleError(err, res);
     } 
 });
 
@@ -208,18 +238,26 @@ app.get('/api/send_message', async (req, res) => {
 
 app.get('/profile', async (req, res) => {
     try {
-        const userId = req.session.userId;
-        console.log(userId);
-        rows = await db.query(db.Queries.GET_USER, [userId]);
+        const user = await getCurrentUser(req, res);
+        if (!user) return;
 
-        if (rows.length != 1) return console.log("[ERROR] 0 or >1 users fetched for ID " + userId);
-        
-        const type = rows[0].type;
+        const type = user.type;
         if (type == Constants.USER_TYPES.user) sendHTML(res, "edit-profile/user");
         else if (type == Constants.USER_TYPES.admin) sendHTML(res, "edit-profile/admin");
-        else return console.log("[ERROR] Invalid user type: " + type);
+        else return handleError(new Error("Invalid user type: " + type), res);
     } catch (err) {
         return console.log(err);
+    }
+});
+
+app.get('/api/current_user', async (req, res) => {
+    try {
+        const user = await getCurrentUser(req, res);
+        if (!user) return;
+
+        return res.json(user);
+    } catch (err) {
+        return handleError(err, res);
     }
 });
 

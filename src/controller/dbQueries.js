@@ -7,7 +7,7 @@ const Queries = {
                  'VALUES(?, ?, ?, ?, ?, ?, ?);',
     SIGNUP_ADMIN: 'INSERT INTO User(cedula, name, mail, phone, username, password, rol, id_empleado, type) ' +
                   'VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);',
-    GET_USER: 'SELECT id, cedula, name, mail, phone, username, password, type FROM User ' +
+    GET_USER: 'SELECT id, cedula, name, mail, phone, username, password, type, rol, id_empleado FROM User ' +
               'WHERE id = ?;',
 }
 
@@ -36,8 +36,6 @@ function preprocess(sql) {
  */
 async function query(sql, values) {
     sql = preprocess(sql);
-    console.log(sql);
-    console.log(values);
     return await db.sql(sql, ...values);
 }
 
