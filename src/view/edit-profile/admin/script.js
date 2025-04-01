@@ -12,7 +12,7 @@
         .then(data => {
             console.log(data);
             lblName.textContent = data["name"];
-            lblUser.textContent = data["username"];
+            lblUser.textContent = `@${data["username"]}`;
             lblCedula.textContent = data["cedula"];
             lblRole.textContent = data["rol"];
             lblIdEmpleado.textContent = data["id_empleado"];

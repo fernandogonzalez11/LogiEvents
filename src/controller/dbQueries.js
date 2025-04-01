@@ -9,6 +9,7 @@ const Queries = {
                   'VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);',
     GET_USER: 'SELECT id, cedula, name, mail, phone, username, password, type, rol, id_empleado FROM User ' +
               'WHERE id = ?;',
+    UPDATE_USER: 'UPDATE User SET mail = ?, phone = ? WHERE id = ?',
 }
 
 const db = new Database(process.env.SQLITE_CONNECTION, (err) => {

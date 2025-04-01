@@ -23,3 +23,6 @@ function goToLogin() {
 function goToReserveEvent() {
     window.location.href='/reserve-event/';
 }
+function goToLogout() {
+    window.location.href='/logout/';
+}

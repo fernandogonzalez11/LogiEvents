@@ -131,8 +131,8 @@ app.get('/api/login/', async (req, res) => {
     const pw_hash = crypto.createHash('md5').update(q["password"]).digest("hex");
 
     try {
-        if (req.session.userId)
-            delete req.session.userId;
+        // if (req.session.userId)
+        //     delete req.session.userId;
 
         rows = await db.query(
             Queries.LOGIN,
@@ -269,7 +269,7 @@ app.get('/api/send_message', async (req, res) => {
 app.get('/profile', async (req, res) => {
     try {
         const user = await getCurrentUser(req, res);
-        if (!user) return;
+        if (!user) return handleError("User not found", res);
 
         const type = user.type;
         if (type == Constants.USER_TYPES.user) sendHTML(res, "edit-profile/user");
@@ -294,15 +294,18 @@ app.get('/api/current_user', async (req, res) => {
 app.post('/api/update_user', async (req, res) => {
     const email = req.body.email;
     const phone = req.body.phone;
+    const id = req.session.userId;
+
+    if (!id) return handleError(new Error("User ID is missing in update user request"), res);
 
     if (!validateEmail(email))
         return res.status(400).json({ "error": "email" });
     else if (!validatePhone(phone)) 
         return res.status(400).json({ "error": "phone" });
 
-    db.query(Queries.UPDATE_USER, [email, phone, ])
+    await db.query(Queries.UPDATE_USER, [email, phone, id]);
 
-    return res.status(200);
+    return res.status(200).json({ "success": true });
 });
 
 const htmlPath = path.join(__dirname, 'view');
