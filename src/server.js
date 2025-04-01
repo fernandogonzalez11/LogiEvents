@@ -1,15 +1,19 @@
 const express = require('express');
 const path = require('path');
+require('dotenv').config();
 const crypto = require('crypto');
 const session = require('express-session');
 const { User } = require('./models/User');
-const { validatePassword, validatePhone } = require('./controller/validation');
+const { validatePassword, validatePhone, validateEmail } = require('./controller/validation');
 const { sendTwilioMessage } = require('./controller/sendTwilio');
 const Constants = require('./models/Constants');
 const { Queries } = require('./controller/dbQueries');
 const db = require('./controller/dbQueries');
 const Redis = require('redis');
 const { RedisStore } = require('connect-redis');
+const cors = require('cors');
+
+const PASSWORD_ERROR = "Contraseña inválida (al menos 4 letras y 4 números)";
 
 const app = express();
 const redisClient = Redis.createClient({
@@ -17,9 +21,9 @@ const redisClient = Redis.createClient({
 });
 redisClient.connect().catch(console.error);
 
-const PASSWORD_ERROR = "Contraseña inválida (al menos 4 letras y 4 números)";
-
+// session object
 const sess = {
+    // store to redis so that vercel can use sessions
     store: new RedisStore({ client: redisClient }),
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -29,6 +33,7 @@ const sess = {
     }
 }
 
+// if deployment is in vercel, set secure parameters
 if (app.get('env') === 'production') {
     app.set('trust proxy', 1) // trust first proxy
     sess.cookie.secure = true // serve secure cookies
@@ -40,6 +45,10 @@ app.use((req, res, next) => {
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
     next();
 });
+// enable middleware to parse body of Content-type: application/json
+app.use(express.json());
+// allow post requests from frontend with CORS
+app.use(cors());
 
 /**
  * Serve an HTML file statically
@@ -56,7 +65,7 @@ function sendHTML(res, folder) {
  * @param {Response} res 
  */
 function handleError(err, res) {
-    console.log(err);
+    console.error(err);
     res.status(500).redirect('/logout?error=server');
 }
 
@@ -79,7 +88,6 @@ function getRandomInt(min, max) {
  * @param {Request} req 
  */
 async function getCurrentUser(req, res) {
-    console.log(req.session);
     const userId = req.session.userId;
     rows = await db.query(db.Queries.GET_USER, [userId]);
 
@@ -111,7 +119,9 @@ app.get('/logout/', (req, res) => {
         if (err) {
             return res.status(500).json({ message: "Error logging out" });
         }
-        res.redirect('/login/'); // Redirect to login page after logout
+        const redirectURI = '/login';
+        if (req.query["error"]) redirectURI += `"?error=${req.query["error"]}`
+        res.redirect(redirectURI); // Redirect to login page after logout
     });
 });
 
@@ -119,8 +129,11 @@ app.get('/logout/', (req, res) => {
 app.get('/api/login/', async (req, res) => {
     const q = req.query;
     const pw_hash = crypto.createHash('md5').update(q["password"]).digest("hex");
-    
+
     try {
+        if (req.session.userId)
+            delete req.session.userId;
+
         rows = await db.query(
             Queries.LOGIN,
             [q["user"], pw_hash]
@@ -162,7 +175,7 @@ app.get('/api/signup/user/', async (req, res) => {
     }
 
     try {
-        await db.query(
+        result = await db.query(
             Queries.SIGNUP_USER,
             [
                 user.cedula,
@@ -174,7 +187,7 @@ app.get('/api/signup/user/', async (req, res) => {
                 user.type
             ]
         );
-        console.log(`Row was added to the table: ${this.lastID}`);
+        console.log(`Row was added to the table: ${result.lastID}`);
         res.redirect('/');
     } catch (err) {
         return handleError(err, res);
@@ -248,7 +261,7 @@ app.get('/api/send_message', async (req, res) => {
         // TODO: stay on the confirmation dialog
         // TODO: set 2FA code in database temporarily
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.redirect(`${redirectURI}?error=twilio`)
     }
 });
@@ -263,13 +276,12 @@ app.get('/profile', async (req, res) => {
         else if (type == Constants.USER_TYPES.admin) sendHTML(res, "edit-profile/admin");
         else return handleError(new Error("Invalid user type: " + type), res);
     } catch (err) {
-        return console.log(err);
+        return console.error(err);
     }
 });
 
 app.get('/api/current_user', async (req, res) => {
     try {
-        console.log(req.session);
         const user = await getCurrentUser(req, res);
         if (!user) return;
 
@@ -277,6 +289,20 @@ app.get('/api/current_user', async (req, res) => {
     } catch (err) {
         return handleError(err, res);
     }
+});
+
+app.post('/api/update_user', async (req, res) => {
+    const email = req.body.email;
+    const phone = req.body.phone;
+
+    if (!validateEmail(email))
+        return res.status(400).json({ "error": "email" });
+    else if (!validatePhone(phone)) 
+        return res.status(400).json({ "error": "phone" });
+
+    db.query(Queries.UPDATE_USER, [email, phone, ])
+
+    return res.status(200);
 });
 
 const htmlPath = path.join(__dirname, 'view');
