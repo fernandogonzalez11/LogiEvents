@@ -14,8 +14,8 @@
             <div class="date-time-group">
                 <div class="date-label">Fecha</div>
                 <div class="time-label">Hora</div>
-                <input class="date-input" />
-                <input class="time-input" />
+                <input class="date-input" type="date"/>
+                <input class="time-input" type="time"/>
             </div>
             <div class="name-group">
                 <label for="name">Nombre</label>
@@ -30,7 +30,7 @@
                 <label for="location">Ubicación</label>
                 <input class="input-field" />
             </div>
-            <button class="next-button", onclick="goToCreateEvent2()">Siguiente</button>
+            <button class="next-button", onclick="saveEventData()">Siguiente</button>
             <button class="cancel-button", onclick="goToAdminPanel()">Cancel</button>
         </div>
         <div class="icons">
@@ -45,5 +45,24 @@
             </div>
         </div>
     </div>
+    <script>
+        function saveEventData() {
+            const eventData = {
+                date: document.querySelector('.date-input').value,
+                time: document.querySelector('.time-input').value,
+                name: document.querySelector('.name-group .input-field').value,
+                description: document.querySelector('.description-group .input-field').value,
+                location: document.querySelector('.location-group .input-field').value
+            };
+
+            if (eventData.name === "" || !eventData.time  === "" || eventData.date  === "" || eventData.date  === "" || eventData.location === "") {
+                alert('Por favor, complete todos los campos.');
+                return;
+            }
+
+            localStorage.setItem('eventData', JSON.stringify(eventData));
+            window.location.href = '/createevent2/';
+        }
+    </script>
 </body>
 </html>

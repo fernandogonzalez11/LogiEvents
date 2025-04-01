@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create event</title>
     <link rel="stylesheet" href="/create-event/page2/style.css" />
-    <style>
-        @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
-    </style>
     <script defer src="../../script.js"></script>
 </head>
 <body>
@@ -14,50 +14,53 @@
             <div class="category-section">
                 <div class="category-label">Categoría</div>
                 <div class="date-box">
-                    <div class="date-text">2024-02-21</div>
+                    <div class="date-text" id="event-date">2024-02-21</div> <!-- Agregar un id a la fecha -->
                 </div>
                 <div class="category-box">
-                    <div class="category-text">Concierto</div>
-                    <div class="category-icon"></div>
+                    <div class="category-text">
+                        <input type="text" id="category" placeholder="Ej. Concierto" /> <!-- Agregar un id -->
+                    </div>
                 </div>
             </div>
 
             <!-- Capacity Section -->
             <div class="capacity-section">
                 <div class="capacity-label">Capacidad</div>
-                <input class="capacity-input" />
+                <input class="capacity-input" id="capacity" id="price" type="number"  min="0" max="1000000000" />
             </div>
 
             <!-- Status Section -->
             <div class="status-section">
                 <div class="status-label">Estado</div>
-                <input class="status-box" />
+                <select class="status-box" id="status">
+                    <option value="Activo">Activo</option>
+                    <option value="Agotado">Agotado</option>
+                    <option value="Próximamente">Proximamente</option>
+                </select>
             </div>
 
             <!-- Price Section -->
             <div class="price-section">
                 <div class="price-label">Precio</div>
-                <input class="price-input" />
+                <input class="price-input" id="price" type="number" min="0" max="1000000000" step=".01" placeholder="0.00" pattern="^\d+(?:\.\d{1,2})?$" /> 
             </div>
 
             <!-- Image Section -->
-            <button class="upload-file">
-                <div class="upload-text">Cargar archivo...</div>
-            </button>
+            <label class="upload-file">
+                <div class="upload-text">Imagen del Evento: </div>
+            </label>
+            
             <div class="image-section">
-                <div class="image-label">Imagen</div>
-                <div class="image-path">/home/Pictures/banner.png</div>
+                <input type="file" id="image-file" />
             </div>
 
             <!-- Create Event Title -->
             <div class="create-event-title">Crear evento</div>
 
             <!-- Create Button -->
-            <div class="create-button">
-                <div class="create-text">Crear</div>
-            </div>
+            <button class="create-button" onclick="createEventNEW()">Crear</button>
 
-            <button class="cancel-button", onclick="goToAdminPanel()">Cancel</button>
+            <button class="cancel-button" onclick="goToAdminPanel()">Cancelar</button>
 
             <!-- Icons Section -->
             <div class="icons">
@@ -74,5 +77,67 @@
 
         </div>
     </div>
+
+    <script>
+        function createEventNEW() {
+            // Obtener los datos de la página 2
+            let category = document.getElementById('category').value;
+            let capacity = parseInt(document.getElementById('capacity').value);
+            let status = document.getElementById('status').value;
+            let price = parseFloat(document.getElementById('price').value);
+            let imagefile = document.getElementById('image-file').value;
+
+            // Validación: asegurarse de que no haya campos vacíos
+            if (category === "" || capacity === "" || status === "" || price === "" || imagefile === "") {
+                alert('Por favor, complete todos los campos.');
+                return;
+            }
+
+            let eventInfo = JSON.parse(localStorage.getItem('eventData'));
+            
+            if (!eventInfo) {
+                alert('Los datos del evento no están completos.');
+                return;
+            }
+
+            // Construir el objeto de evento
+            let eventDataInfo = {
+                name: eventInfo.name,
+                descripcion: eventInfo.description,
+                date: eventInfo.date,
+                time: eventInfo.time,
+                location: eventInfo.location,
+                capacity: capacity,
+                price: price,
+                status: status,
+                category: category,
+                imagefile: imagefile,
+                cupo: capacity
+            };
+
+            // Llamada a la API para crear el evento
+            alert(JSON.stringify(eventDataInfo)); 
+
+            fetch('/api/createAevent', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(eventDataInfo)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Evento creado exitosamente');
+                    window.location.href = '/admin/';
+                } else {
+                    console.log("Error response from server:", data);
+                    alert('[ERROR] : Error al crear el evento (' + data.message + ')');
+                }
+            })
+            .catch(error => {
+                alert('Hubo un problema al crear el evento: ' + error);
+            });
+            
+        }
+    </script>
 </body>
 </html>

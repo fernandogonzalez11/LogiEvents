@@ -16,6 +16,9 @@ const cors = require('cors');
 const PASSWORD_ERROR = "Contraseña inválida (al menos 4 letras y 4 números)";
 
 const app = express();
+let organizadorId = 1;
+app.use(express.json());
+
 const redisClient = Redis.createClient({
     url: process.env.REDIS_URL,
 });
@@ -89,6 +92,7 @@ function getRandomInt(min, max) {
  */
 async function getCurrentUser(req, res) {
     const userId = req.session.userId;
+    organizadorId = userId;
     rows = await db.query(db.Queries.GET_USER, [userId]);
 
     if (rows.length != 1) {
@@ -306,6 +310,59 @@ app.post('/api/update_user', async (req, res) => {
     await db.query(Queries.UPDATE_USER, [email, phone, id]);
 
     return res.status(200).json({ "success": true });
+});
+
+function isFloat(num) {
+    return Number.isFinite(num) && !Number.isInteger(num);
+}
+
+app.post('/api/createAevent', async (req, res) => {
+
+    console.log("--------[CREAT NEW EVENT]--------");
+    console.log('Organizador ID : ' + organizadorId);
+    
+    const { name, description, date, time, location, capacity, price, status, category, imagefile, cupo} = req.body;
+    
+    if (Number.isInteger(capacity) === false || isFloat(price) === false) {
+        return res.json({ success: false, message: 'Verifique que precio y capacidad tengan el formato requerido ' });
+    }
+    
+    console.log("DATA NEW EVENT....");
+    console.log(req.body);
+
+
+    try {
+
+        row = await db.query(
+            Queries.GET_EVENT_BY_NAME,
+            [name]
+        );
+
+        console.log("Events with equal names :" + row.length);
+        if (row.length >= 1) return res.json({ success: false, message: 'El evento ya existe' });
+    
+        row = await db.query(
+            Queries.ADD_NEW_EVENT,
+            [
+                name, 
+                organizadorId, 
+                description, 
+                date, 
+                time, 
+                location, 
+                capacity, 
+                price, 
+                status, 
+                category, 
+                imagefile, 
+                cupo
+            ]
+        );
+        res.json({ success: true });
+
+    } catch (err) {
+        return res.json({ success: false, message: 'Error en el servidor' });
+    }
 });
 
 const htmlPath = path.join(__dirname, 'view');
