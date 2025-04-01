@@ -18,8 +18,10 @@
   "homepage": "https://github.com/fernandogonzalez11/LogiEvents#readme",
   "dependencies": {
     "@sqlitecloud/drivers": "^1.0.438",
+    "connect-redis": "^8.0.2",
     "express": "^4.21.2",
     "express-session": "^1.18.1",
+    "redis": "^4.7.0",
     "twilio": "^5.5.1"
   }
 }

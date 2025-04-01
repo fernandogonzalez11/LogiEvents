@@ -8,12 +8,19 @@ const { sendTwilioMessage } = require('./controller/sendTwilio');
 const Constants = require('./models/Constants');
 const { Queries } = require('./controller/dbQueries');
 const db = require('./controller/dbQueries');
+const Redis = require('redis');
+const { RedisStore } = require('connect-redis');
 
 const app = express();
+const redisClient = Redis.createClient({
+    url: process.env.REDIS_URL,
+});
+redisClient.connect().catch(console.error);
 
 const PASSWORD_ERROR = "Contraseña inválida (al menos 4 letras y 4 números)";
 
 const sess = {
+    store: new RedisStore({ client: redisClient }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
