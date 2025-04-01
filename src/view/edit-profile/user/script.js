@@ -14,7 +14,7 @@
             inputEmail.value = data["mail"];
             inputPhone.value = data["phone"];
         }).catch((err) => {
-            console.log(err);
+            console.error(err);
             window.location.href='/logout?error=server';
         })
 })();
@@ -24,13 +24,15 @@ async function saveData(redirectType) {
     const inputPhone = document.getElementById("input-phone");
 
     try {
-        const response = await fetch('/api/update_user', {
+        let response = await fetch('/api/update_user', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: inputEmail.value, phone: inputPhone.value })
         });
 
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        response = await response.json();
+
+        if (response.error) alert(response.error);
         
         if (redirectType == 1) goToEvents();
         else if (redirectType == 3) goToLogout();

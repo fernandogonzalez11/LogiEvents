@@ -131,8 +131,8 @@ app.get('/api/login/', async (req, res) => {
     const pw_hash = crypto.createHash('md5').update(q["password"]).digest("hex");
 
     try {
-        // if (req.session.userId)
-        //     delete req.session.userId;
+        if (req.session.userId)
+            delete req.session.userId;
 
         rows = await db.query(
             Queries.LOGIN,
@@ -299,9 +299,9 @@ app.post('/api/update_user', async (req, res) => {
     if (!id) return handleError(new Error("User ID is missing in update user request"), res);
 
     if (!validateEmail(email))
-        return res.status(400).json({ "error": "email" });
+        return res.status(400).json({ "error": "Formato de email incorrecto" });
     else if (!validatePhone(phone)) 
-        return res.status(400).json({ "error": "phone" });
+        return res.status(400).json({ "error": "Formato de teléfono incorrecto" });
 
     await db.query(Queries.UPDATE_USER, [email, phone, id]);
 
