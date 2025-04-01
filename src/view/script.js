@@ -26,3 +26,6 @@ function goToReserveEvent() {
 function goToStatistics() {
     window.location.href='/statistics/';
 }
+function goToLogout() {
+    window.location.href='/logout/';
+}

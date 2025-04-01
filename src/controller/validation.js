@@ -36,7 +36,6 @@ function validateCedula(cedula) {
  * @param {string} email 
  */
 function validateEmail(email) {
-    console.log(EMAIL_REGEX.test(email));
     return EMAIL_REGEX.test(email);
 }
 
