@@ -215,6 +215,38 @@
   background-color: #494848;
 }
 
+.admin-dashboard .statsbutton {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  width: 179px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 11.78px;
+  padding: 17.67px;
+  position: absolute;
+  top: 0;
+  left: 837px;
+  background-color: #2c2c2c;
+  border-radius: 8.53px;
+  overflow: hidden;
+  border: 1.47px solid;
+  border-color: #2c2c2c;
+
+  font-family: "Inter-Regular", Helvetica;
+  font-weight: 400;
+  color: #f5f5f5;
+  font-size: 23.6px;
+  letter-spacing: 0;
+  line-height: 23.6px;
+  white-space: nowrap;
+}
+
+.admin-dashboard .statsbutton:hover {
+  background-color: #494848;
+}
+
 .admin-dashboard .edit-and-delete {
   position: absolute;
   width: 76px;

@@ -1,0 +1,219 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+}
+
+.main-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #b4d5e7;
+    overflow: hidden;
+}
+
+.header {
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #7ab1cd;
+}
+
+.title {
+    position: absolute;
+    left: 25px;
+    top: 19px;
+    color: black;
+    font-size: 50px;
+    font-weight: 400;
+}
+
+.right-panel {
+    width: 45.16%;
+    height: 69.72%;
+    position: absolute;
+    right: 167px;
+    top: 16.25%;
+    background: #d9d9d9;
+}
+
+.button-volver {
+    width: 143px;
+    height: 48px;
+    padding: 12px;
+    position: absolute;
+    right: 167px;
+    bottom: 67px;
+    background: #b3b3b3;
+    border-radius: 8.53px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-text {
+    color: #1e1e1e;
+    background: none;
+    border: none;
+    font-size: 23.56px;
+    font-weight: 400;
+    line-height: 23.56px;
+}
+
+/* Ranking Container Styles */
+.ranking-container {
+    width: 32.34%;
+    height: 79.44%;
+    padding: 36px 10px;
+    position: absolute;
+    left: 2.97%;
+    top: 16.25%;
+    background: #e9eef1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.ranking-title {
+    width: 100%;
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    line-height: 32px;
+    margin-bottom: 10px;
+}
+
+.ranking-subtitle {
+    width: 100%;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22.4px;
+    margin-bottom: 20px;
+}
+
+.events-table {
+    width: 80%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.events-table th {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22.4px;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.events-table td {
+    padding: 12px 0;
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+
+.column-capacity {
+    width: 25%;
+}
+
+.column-name {
+    width: 50%;
+}
+
+.column-reservations {
+    width: 25%;
+}
+
+.event-name {
+    color: #4f7ea5;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22.4px;
+}
+
+.event-capacity, .event-reservations {
+    font-size: 24px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    line-height: 32px;
+}
+
+.event-row:last-child td {
+    border-bottom: none;
+}
+.chart-container {
+    position: absolute;
+    width: 40%;
+    right: 202px;
+    top: 26.67%;
+}
+
+.chart-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.chart-label {
+    width: 89px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22.4px;
+}
+
+.chart-bars-container {
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    position: relative;
+}
+
+.chart-bars {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-grow: 1;
+}
+
+.chart-bar {
+    width: 89px;
+    background: #2fa849; /* Default color */
+    transition: height 0.5s ease;
+    position: relative;
+}
+
+.chart-values {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.chart-value {
+    width: 89px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.chart-axis {
+    width: 100%;
+    height: 5px;
+    background: black;
+    margin-top: 100px;
+}
