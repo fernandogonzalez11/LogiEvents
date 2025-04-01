@@ -23,6 +23,9 @@ function goToLogin() {
 function goToReserveEvent() {
     window.location.href='/reserve-event/';
 }
+function goToStatistics() {
+    window.location.href='/statistics/';
+}
 function goToLogout() {
     window.location.href='/logout/';
 }
