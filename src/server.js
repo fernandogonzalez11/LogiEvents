@@ -179,7 +179,10 @@ app.get('/api/signup/user/', async (req, res) => {
     }
 
     try {
-        result = await db.query(
+        let dupUser = await db.query(Queries.GET_USER_BY_USERNAME, [user.username]);
+        if (dupUser.length) return res.redirect(`/signup/user?error=${encodeURIComponent(`¡Ya existe un usuario \"${user.username}\"!`)}`)
+
+        let result = await db.query(
             Queries.SIGNUP_USER,
             [
                 user.cedula,

@@ -9,6 +9,7 @@ const Queries = {
                   'VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);',
     GET_USER: 'SELECT id, cedula, name, mail, phone, username, password, type, rol, id_empleado FROM User ' +
               'WHERE id = ?;',
+    GET_USER_BY_USERNAME: 'SELECT id FROM User WHERE username = ?',
     UPDATE_USER: 'UPDATE User SET mail = ?, phone = ? WHERE id = ?',
     GET_EVENT_BY_NAME: 'SELECT id FROM Event WHERE name = ?',
     ADD_NEW_EVENT: 'INSERT INTO Event (name, organizador_id, descripcion, fecha, hora, ubicacion, capacidad, precio, estado, categoria, imageFile, cupo) ' + 
