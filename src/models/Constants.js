@@ -11,4 +11,5 @@ module.exports = {
         "admin": "administrador"
     },
     LOGIN_EXPIRATION_MINUTES: 30,
+    VERIFICATION_EXPIRATION_MINUTES: 10,
 };

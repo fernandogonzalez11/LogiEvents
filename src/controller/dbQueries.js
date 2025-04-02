@@ -13,7 +13,11 @@ const Queries = {
     UPDATE_USER: 'UPDATE User SET mail = ?, phone = ? WHERE id = ?',
     GET_EVENT_BY_NAME: 'SELECT id FROM Event WHERE name = ?',
     ADD_NEW_EVENT: 'INSERT INTO Event (name, organizador_id, descripcion, fecha, hora, ubicacion, capacidad, precio, estado, categoria, imageFile, cupo) ' + 
-                'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+                'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+    DELETE_EVENT: 'DELETE FROM Event WHERE id = ?',
+    ADD_VERIFICATION: 'INSERT INTO Verification(user_id, event_id, code, word) ' + 
+                      'VALUES(?, ?, ?, ?)',
+    DELETE_VERIFICATION: 'DELETE FROM Verification WHERE id = ?',
 }
 
 const db = new Database(process.env.SQLITE_CONNECTION, (err) => {

@@ -12,6 +12,7 @@ const db = require('./controller/dbQueries');
 const Redis = require('redis');
 const { RedisStore } = require('connect-redis');
 const cors = require('cors');
+const randomWords = require('random-word-slugs');
 
 const PASSWORD_ERROR = "Contraseña inválida (al menos 4 letras y 4 números)";
 
@@ -121,10 +122,11 @@ app.get('/signup/user/', (req, res) => sendHTML(res, "signup/user"));
 app.get('/logout/', (req, res) => {
     req.session.destroy((err) => {
         if (err) {
+            console.error(err);
             return res.status(500).json({ message: "Error logging out" });
         }
-        const redirectURI = '/login';
-        if (req.query["error"]) redirectURI += `"?error=${req.query["error"]}`
+        let redirectURI = '/login';
+        if (req.query["error"]) redirectURI += `?error=${req.query["error"]}`
         res.redirect(redirectURI); // Redirect to login page after logout
     });
 });
@@ -367,6 +369,41 @@ app.post('/api/createAevent', async (req, res) => {
 
     } catch (err) {
         return res.json({ success: false, message: 'Error en el servidor' });
+    }
+});
+
+app.get('/event/delete', async (req, res) => {
+    try {
+        const user = await getCurrentUser(req, res);
+        if (!user) return;
+        if (user.type != 'administrador') return res.status(403).json({ "error": "Usuario actual no es administrador" });
+
+        const q = req.query;
+        const id = q["id"];
+        const q_code = q["code"]; // could be empty
+        const q_word = q["word"]; // could be empty
+
+        if (!q_code && !q_word) {
+            const code = getRandomInt(100000, 1000000);
+            const word = randomWords.generateSlug(1);
+
+            const result = await db.query(Queries.ADD_VERIFICATION, [user.id, id, code, word]);
+            console.log(`new verification ${result.lastID}`);
+            setTimeout(() => {
+                db.query(Queries.DELETE_VERIFICATION, [result.lastID]);
+            }, Constants.VERIFICATION_EXPIRATION_MINUTES * 60 * 1000);
+
+            return res.status(200).json({ "success": true, "showEmailDialog": true, "id": result.lastID });
+        }
+        
+
+
+
+        const result = await db.query(Queries.DELETE_EVENT, [id]);
+        console.log(result);
+        return res.status(200);
+    } catch (error) {
+        handleError(error, res);
     }
 });
 
