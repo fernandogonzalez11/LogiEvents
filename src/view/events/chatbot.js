@@ -1,7 +1,7 @@
 const botResponses = {
-    option1: "This is the detailed answer for Option 1. The solution involves...",
-    option2: "For Option 2, you'll need to consider these factors...",
-    option3: "Option 3 requires special handling. Here's why...",
+    option1: "Para cambiar la información de tu usuario, simplemente accede al icono del perfil en esta misma página y cambia los campos que desees con información válida.",
+    option2: "Esto es una función reservada para administradores. Ingresa al panel de administrador y dirigete al botón de \"Crear Evento\", desde ahí puedes rellenar la información que aplica para el evento que desees agragar.",
+    option3: "Para reservar espacios en un evento, haz click sobre el nombre de un evento en esta misma página, posteriormente ingresa a \"Reservar Entrada\" y llena el formulario con la información de la reserva que desees realizar.",
     default: "I'm not sure how to answer that question. Please try another option."
   };
 
