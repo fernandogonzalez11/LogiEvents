@@ -18,6 +18,7 @@ const Queries = {
     ADD_VERIFICATION: 'INSERT INTO Verification(user_id, event_id, code, word) ' + 
                       'VALUES(?, ?, ?, ?)',
     DELETE_VERIFICATION: 'DELETE FROM Verification WHERE id = ?',
+    GET_VERIFICATION: 'SELECT id FROM Verification WHERE id = ?',
 }
 
 const db = new Database(process.env.SQLITE_CONNECTION, (err) => {

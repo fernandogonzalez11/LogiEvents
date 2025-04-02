@@ -383,6 +383,7 @@ app.get('/event/delete', async (req, res) => {
         const q_code = q["code"]; // could be empty
         const q_word = q["word"]; // could be empty
 
+        // first step: no verification done yet
         if (!q_code && !q_word) {
             const code = getRandomInt(100000, 1000000);
             const word = randomWords.generateSlug(1);
@@ -394,13 +395,16 @@ app.get('/event/delete', async (req, res) => {
             }, Constants.VERIFICATION_EXPIRATION_MINUTES * 60 * 1000);
 
             return res.status(200).json({ "success": true, "showEmailDialog": true, "id": result.lastID });
+        // second step: email verification done
+        } else if (q_code && !q_word) {
+            
+        } else if (q_code && q_word) {
+            const result = await db.query(Queries.DELETE_EVENT, [id]);
+            console.log(result);
         }
+
+
         
-
-
-
-        const result = await db.query(Queries.DELETE_EVENT, [id]);
-        console.log(result);
         return res.status(200);
     } catch (error) {
         handleError(error, res);

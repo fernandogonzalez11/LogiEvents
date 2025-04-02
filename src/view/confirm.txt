@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+    </style>
+</head>
+
+<body>
+    <div
+        style="width: 583px; height: 448px; position: relative; background: var(--light-pluey, #D3E8F3); overflow: hidden">
+        <div
+            style="left: 23px; top: 24px; position: absolute; justify-content: center; display: flex; flex-direction: column; color: black; font-size: 30px; font-family: Inter; font-weight: 400; word-wrap: break-word">
+            Confirmación de borrado</div>
+        <div data-has-description="false" data-has-error="false" data-has-label="true" data-state="Default"
+            data-value-type="Default"
+            style="left: 23px; top: 83px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: inline-flex">
+            <div
+                style="align-self: stretch; color: var(--Text-Default-Default, #1E1E1E); font-size: 27.20px; font-family: Inter; font-weight: 400; line-height: 38.08px; word-wrap: break-word">
+                Número de teléfono</div>
+            <input
+                style="align-self: stretch; min-width: 408px; padding-left: 27.20px; padding-right: 27.20px; padding-top: 20.40px; padding-bottom: 20.40px; background: var(--Background-Default-Default, white); overflow: hidden; border-radius: 11.75px; outline: 1.70px var(--Border-Default-Default, #D9D9D9) solid; outline-offset: -0.85px; justify-content: flex-start; align-items: center; display: inline-flex">
+            <div
+                style="flex: 1 1 0; color: var(--Text-Default-Default, #1E1E1E); font-size: 27.20px; font-family: Inter; font-weight: 400; line-height: 27.20px; word-wrap: break-word">
+            </div>
+            </input>
+        </div>
+        <div data-has-description="false" data-has-error="false" data-has-label="true" data-state="Default"
+            data-value-type="Default"
+            style="left: 23px; top: 226px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: inline-flex">
+            <div
+                style="align-self: stretch; color: var(--Text-Default-Default, #1E1E1E); font-size: 27.20px; font-family: Inter; font-weight: 400; line-height: 38.08px; word-wrap: break-word">
+                Palabra recibida</div>
+            <input
+                style="align-self: stretch; min-width: 408px; padding-left: 27.20px; padding-right: 27.20px; padding-top: 20.40px; padding-bottom: 20.40px; background: var(--Background-Default-Default, white); overflow: hidden; border-radius: 11.75px; outline: 1.70px var(--Border-Default-Default, #D9D9D9) solid; outline-offset: -0.85px; justify-content: flex-start; align-items: center; display: inline-flex">
+            <div
+                style="flex: 1 1 0; color: var(--Text-Default-Default, #1E1E1E); font-size: 27.20px; font-family: Inter; font-weight: 400; line-height: 27.20px; word-wrap: break-word">
+            </div>
+            </input>
+        </div>
+        <div
+            style="width: 116px; height: 54px; left: 448px; top: 143px; position: absolute; background: #D9D9D9; border-radius: 5px">
+        </div>
+        <div data-size="24"
+            style="width: 24px; height: 24px; left: 530px; top: 158px; position: absolute; overflow: hidden">
+            <div
+                style="width: 20px; height: 20px; left: 2px; top: 2px; position: absolute; outline: 2.50px var(--Icon-Default-Default, #1E1E1E) solid; outline-offset: -1.25px">
+            </div>
+        </div>
+        <div
+            style="width: 64.62px; height: 22px; left: 454px; top: 160px; position: absolute; color: black; font-size: 22px; font-family: Inter; font-weight: 400; line-height: 22px; word-wrap: break-word">
+            Enviar</div>
+        <button
+            style="padding: 10px; left: 426px; top: 382px; position: absolute; background: var(--grauey, #B3B3B3); border-radius: 10px; justify-content: center; align-items: center; gap: 10px; display: inline-flex">
+            <div
+                style="color: black; font-size: 26.59px; font-family: Inter; font-weight: 400; line-height: 37.23px; word-wrap: break-word">
+                Siguiente</div>
+        </button>
+        <button
+            style="padding: 10px; left: 272px; top: 382px; position: absolute; background: var(--grauey, #B3B3B3); border-radius: 10px; justify-content: center; align-items: center; gap: 10px; display: inline-flex">
+            <div
+                style="color: black; font-size: 26.59px; font-family: Inter; font-weight: 400; line-height: 37.23px; word-wrap: break-word">
+                Cancelar</div>
+        </button>
+    </div>
+</body>
+
+</html>
