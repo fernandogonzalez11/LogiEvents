@@ -216,7 +216,9 @@ app.get('/api/signup/admin', async (req, res) => {
             phone: q["phone"],
             username: q["username"],
             password: pw_hash,
-            type: "usuario"
+            rol: q["role"],
+            id_empleado: q["employee-id"],
+            type: "administrador",
         });
     } catch (error) {
         return res.redirect(`/signup/user?error=${encodeURIComponent(error.message)}`);
