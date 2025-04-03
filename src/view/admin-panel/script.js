@@ -69,6 +69,7 @@ function deleteEvent(id) {
     .then((res) => res.json())
     .then((data) => {
       if (data["error"]) {
+        
         alert(data["error"]);
         return;
       }

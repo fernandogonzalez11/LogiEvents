@@ -8,6 +8,7 @@
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
     <div class="main-container">
@@ -40,7 +41,9 @@
           <button type="submit" class="register-button">Registrar</button>
         </form>
         <div class="admin-user-toggle">
-          <button class="admin-button" onclick="goToSignupAdmin()">Administrador</button>
+          <button class="admin-button" onclick="goToSignupAdmin()">
+            Administrador
+          </button>
           <button class="user-button">Usuario</button>
         </div>
         <div class="log-in-link">Log In</div>
@@ -54,7 +57,7 @@
     </div>
     <script>
       function goToSignupAdmin() {
-        window.location.href = '/signup/admin/';
+        window.location.href = "/signup/admin/";
       }
 
       const params = new URLSearchParams(window.location.search);

@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="/login/globals.css" />
     <link rel="stylesheet" href="/login/style.css" />
     <script defer src="../script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
     <div class="log-in">
@@ -34,9 +35,9 @@
 
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.get("error") === "invalid") {
-          alert("¡Usuario o contraseña incorrectos!");
+          Swal.fire({ icon: "error", text: "¡Usuario o contraseña incorrectos!" });
       } else if (urlParams.get("error") === "server") {
-          alert("Error de servidor, por favor intente de nuevo.");
+          Swal.fire({ icon: "error", text: "Error de servidor, por favor intente de nuevo." });
       }
     </script>
   </body>
