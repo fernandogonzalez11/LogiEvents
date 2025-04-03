@@ -78,11 +78,42 @@ function finalDeleteEvent() {
                 alert("Evento borrado exitosamente");
                 return;
             }
-        });
+        })
+        .catch(err => alert(err));
 }
 
 function cancel() {
     document.getElementById("email-verification").style.display = "none";
     document.getElementById("sms-verification").style.display = "none";
     document.getElementById("last-confirm").style.display = "none";
+}
+
+function sendEmail() {
+    const email = document.getElementById("input-email").value;
+    fetch(`/api/send_email?id=${currentVerificationID}&email=${email}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data["error"]) {
+                alert(data["error"]);
+                return;
+            }
+
+            alert("Código enviado, por favor revise su correo");
+        })
+        .catch(err => alert(err));
+}
+
+function sendMessage() {
+    const phone = document.getElementById("input-phone").value;
+    fetch(`/api/send_message?id=${currentVerificationID}&phone=${phone}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data["error"]) {
+                alert(data["error"]);
+                return;
+            }
+
+            alert("Código enviado, por favor revise su teléfono");
+        })
+        .catch(err => alert(err));
 }

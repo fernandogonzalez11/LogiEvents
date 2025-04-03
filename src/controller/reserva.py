@@ -9,7 +9,7 @@ from email.header import Header
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 EMAIL_FROM = "logievents.manager@gmail.com"
-EMAIL_PASSWORD = "lhzrzsjkjsiuwoke"  
+EMAIL_PASSWORD = "c"  
 
 def generar_codigo_6_digitos():
     return str(random.randint(100000, 999999))

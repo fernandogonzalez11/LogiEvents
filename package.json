@@ -23,6 +23,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-session": "^1.18.1",
+    "nodemailer": "^6.10.0",
     "random-word-slugs": "^0.1.7",
     "redis": "^4.7.0",
     "twilio": "^5.5.1"

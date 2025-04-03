@@ -6,6 +6,7 @@ const session = require('express-session');
 const { User } = require('./models/User');
 const { validatePassword, validatePhone, validateEmail } = require('./controller/validation');
 const { sendTwilioMessage } = require('./controller/sendTwilio');
+const { enviarCorreoConfirmacion } = require('./controller/sendEmail');
 const Constants = require('./models/Constants');
 const { Queries } = require('./controller/dbQueries');
 const db = require('./controller/dbQueries');
@@ -271,32 +272,6 @@ app.get('/api/signup/admin', async (req, res) => {
     } 
 });
 
-app.get('/api/send_message', async (req, res) => {
-    const q = req.query;
-    let phoneNumber = q["phone"];
-    const redirectURI = q["from"];
-
-    // TODO: validate if there is existing code
-
-    if (!redirectURI)
-        return res.json({ "error": "No redirect URI" });
-
-    if (!validatePhone(phoneNumber))
-        return res.redirect(`${redirectURI}?error=phone`)
-
-    const code = getRandomInt(100000, 1000000);
-
-    try {
-        phoneNumber = "+" + Constants.COUNTRY_CODE + phoneNumber;
-        await sendTwilioMessage(phoneNumber, code.toString());
-        // TODO: stay on the confirmation dialog
-        // TODO: set 2FA code in database temporarily
-    } catch (error) {
-        console.error(error);
-        res.redirect(`${redirectURI}?error=twilio`)
-    }
-});
-
 app.get('/profile', async (req, res) => {
     try {
         const user = await getCurrentUser(req, res);
@@ -430,6 +405,53 @@ app.get('/api/event/image/:eventId', async (req, res) => {
     } catch (err) {
         console.error('Error fetching image:', err);
         res.status(500).send('Error al recuperar la imagen');
+    }
+});
+
+app.get('/api/send_message', async (req, res) => {
+    const q = req.query;
+    const id = q["id"];
+    let phoneNumber = q["phone"];
+
+    if (!validatePhone(phoneNumber))
+        return res.status(400).json({ "error": "Teléfono inválido" });
+
+    let row = await db.query(Queries.GET_VERIFICATION, [id]);
+    if (!row.length) return res.status(500).json({ "error": "Verificación no encontrada o expirada" });
+    row = row[0];
+    const r_code = row["word"];
+
+    try {
+        phoneNumber = "+" + Constants.COUNTRY_CODE + phoneNumber;
+        const result = await sendTwilioMessage(phoneNumber, r_code);
+
+        return res.status(200).json({ success: true, body: result });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ "error": "Error del servidor al enviar mensaje" });
+    }
+});
+
+app.get('/api/send_email', async (req, res) => {
+    const q = req.query;
+    const id = q["id"];
+    let email = q["email"];
+
+    if (!validateEmail(email))
+        return res.status(400).json({ "error": "Correo electrónico inválido" });
+
+    let row = await db.query(Queries.GET_VERIFICATION, [id]);
+    if (!row.length) return res.status(500).json({ "error": "Verificación no encontrada o expirada" });
+    row = row[0];
+    const r_code = row["code"];
+
+    try {
+        const result = await enviarCorreoConfirmacion(email, r_code);
+
+        return res.status(200).json({ success: result });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ "error": "Error del servidor al enviar correo" });
     }
 });
 
