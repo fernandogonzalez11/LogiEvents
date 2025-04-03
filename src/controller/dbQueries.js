@@ -25,6 +25,8 @@ const Queries = {
     GET_EVENTS_FOR_ADMIN : 'SELECT id, name, organizador_id, fecha, hora, ubicacion ' + 
                             'FROM Event ORDER BY fecha DESC',
     GET_EVENTS_SORTED_BY_RESERVES: 'SELECT name, capacidad, cupo, estado FROM Event ORDER BY (capacidad - cupo) DESC',
+    GET_EVENTS_SORTED_BY_DATE: 'SELECT * FROM Event ORDER BY fecha DESC',
+    GET_EVENT_BY_ID: 'SELECT * FROM Event WHERE id = ?'
 }
 
 const db = new Database(process.env.SQLITE_CONNECTION, (err) => {

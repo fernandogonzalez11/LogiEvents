@@ -318,7 +318,7 @@ app.post('/api/update_user', async (req, res) => {
 });
 
 function isFloat(num) {
-    return Number.isFinite(num) && !Number.isInteger(num);
+    return Number.isFinite(num) || Number.isInteger(num);
 }
 
 app.get('/api/getEvents', async (req, res) => {
@@ -340,7 +340,7 @@ app.post('/api/createAevent', async (req, res) => {
         if (user.type != 'administrador') return res.status(403).json({ "error": "Usuario actual no es administrador" });
         
         // Extraer datos del evento
-        const {name, description, date, time, location, 
+        let {name, description, date, time, location, 
             capacity, price, status, category, imageData, imageType, 
             cupo} = req.body;
         
@@ -398,7 +398,9 @@ app.get('/api/event/image/:eventId', async (req, res) => {
         if (!row || row.length === 0) {
             return res.status(404).send('Imagen no encontrada');
         }
-        console.log(imageData, imageType);
+
+        const imageData = row[0].image_data;
+        const imageType = row[0].image_type;
 
         res.set('Content-Type', imageType);
         res.send(Buffer.from(imageData, 'base64'));
@@ -447,6 +449,18 @@ app.get('/event/delete', async (req, res) => {
 app.get('/api/getEventsByReserves', async (req, res) => {
     try {
         rows = await db.query(db.Queries.GET_EVENTS_SORTED_BY_RESERVES,[]);
+        if (!rows) return;
+
+        return res.json(rows);
+    } catch (err) {
+        console.log("Error al obtener eventos!")
+        return handleError(err, res);
+    }
+});
+
+app.get('/api/getEventsToDisplay', async (req, res) => {
+    try {
+        rows = await db.query(db.Queries.GET_EVENTS_SORTED_BY_DATE,[]);
         if (!rows) return;
 
         return res.json(rows);

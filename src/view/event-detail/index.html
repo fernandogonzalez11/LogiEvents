@@ -2,45 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evento 1</title>
     <link rel="stylesheet" href="/event-detail/style.css">
-    <style>
-        @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
-    </style>
     <script defer src="../script.js"></script>
+    <script defer src="getEventInfo.js"></script>
 </head>
 <body>
     <div class="main-container">
-        <div class="event-details-container">
+        <button class="back-button" onclick="goToEvents()">Volver</button>
+        <button class="reserve-button" onclick="goToReserveEvent()">Reservar Entrada</button>
+        
+        <div class="event-title" id="event-title">Cargando...</div>
+        
+        <img id="event-image" src="" alt="Event Image" class="event-image">
+        
+        <div class="detail-grid">
+            <div class="event-name-label detail-label">Nombre de Evento:</div>
+            <div class="event-name" id="event-name"></div>
             
+            <div class="event-date-label detail-label">Fecha del Evento:</div>
+            <div class="event-date" id="event-date"></div>
+            
+            <div class="organizer-label detail-label">Organizador:</div>
+            <div class="organizer" id="organizer"></div>
+            
+            <div class="available-seats-label detail-label">Cupos Disponibles:</div>
+            <div class="available-seats" id="available-seats"></div>
+            
+            <div class="category-label detail-label">Categoría:</div>
+            <div class="category" id="category"></div>
+            
+            <div class="status-label detail-label">Estado:</div>
+            <div class="status" id="status"></div>
+            
+            <div class="time-label detail-label">Hora:</div>
+            <div class="time" id="time"></div>
         </div>
-        <div class="header"></div>
-        <div class="event-title">Evento 1</div>
-        <button class="back-button", onclick="goToEvents()">Atrás</button>
-        <button class="reserve-button", onclick="goToReserveEvent()">Reservar Entrada</button>
-        <div class="event-name-label">Nombre de Evento:</div>
-        <div class="event-name">Evento 1</div>
-        <div class="event-date-label">Fecha del Evento:</div>
-        <div class="event-date">08/08/2030</div>
-        <div class="organizer-label">Organizador:</div>
-        <div class="organizer">Jaime Hernández</div>
-        <div class="available-seats-label">Cupos Disponibles</div>
-        <div class="available-seats">24 / 80</div>
-        <div class="category-label">Categoría</div>
-        <div class="category">Concierto</div>
-        <div class="status-label">Estado</div>
-        <div class="status">Activo</div>
-        <div class="time-label">Hora</div>
-        <div class="time">14:30</div>
-        <div class="description-label">Descripción</div>
-        <div class="description">
-            Será un evento al cual podrás ir, estar ahí y ver a otras personas que
-            también estarán ahí. Habrán espacios para estar además de asientos para
-            todos los asistentes, lo cual permite estar pero sentado. También habrá
-            música en vivo.
-        </div>
-        <img src="https://placehold.co/431x157" alt="Event Image" class="event-image">
+        
+        <div class="description-label detail-label">Descripción:</div>
+        <div class="description" id="description"></div>
     </div>
+
+    <script>
+        
+        // Navigation functions
+        function goToEvents() {
+            window.location.href = '/events';
+        }
+        
+        function goToReserveEvent() {
+            window.location.href = `/reserve?id=${eventId}`;
+        }
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', displayEvent);
+    </script>
 </body>
 </html>
