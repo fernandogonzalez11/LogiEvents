@@ -1,174 +1,115 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/admin-panel/globals.css" />
+    <link rel="stylesheet" href="/admin-panel/styleguide.css" />
+    <link rel="stylesheet" href="/admin-panel/style.css" />
+    <script defer src="../script.js"></script>
+    <script defer src="/admin-panel/script.js"></script>
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <link rel="stylesheet" href="/admin-panel/globals.css" />
-  <link rel="stylesheet" href="/admin-panel/styleguide.css" />
-  <link rel="stylesheet" href="/admin-panel/style.css" />
-  <script defer src="../script.js"></script>
-  <script defer src="/admin-panel/script.js"></script>
-</head>
-
-<body>
-  <div class="admin-dashboard">
-    <div class="div">
-      <div class="overlap-group">
-        <div class="overlap">
-          <div class="text-wrapper">Panel admin</div>
-          <div class="text-wrapper">Panel admin</div>
-          <div class="text-wrapper">Panel admin</div>
+  <body>
+    <div class="admin-dashboard">
+      <div class="div">
+        <div class="overlap-group">
+          <div class="overlap">
+            <div class="text-wrapper">Panel admin</div>
+            <div class="text-wrapper">Panel admin</div>
+            <div class="text-wrapper">Panel admin</div>
+          </div>
+          <img class="user" src="/admin-panel/../global_assets/user.svg" />
         </div>
-        <img class="user" src="/admin-panel/../global_assets/user.svg" />
-      </div>
-      <div class="overlap-2">
-        <div class="text-wrapper-2">Administrar eventos</div>
-        <div class="group">
-          <button class="statsbutton" , onclick="goToStatistics()">Estadísticas</button>
-          <button class="button" , onclick="goToCreateEvent()">Crear</button>
-          <div id="events-list" class="events-list">
-            <!-- Events will be loaded here -->
+        <div class="overlap-2">
+          <div class="text-wrapper-2">Administrar eventos</div>
+          <div class="group">
+            <button class="statsbutton" , onclick="goToStatistics()">
+              Estadísticas
+            </button>
+            <button class="button" , onclick="goToCreateEvent()">Crear</button>
+            <div id="events-list" class="events-list">
+              <!-- Events will be loaded here -->
+            </div>
           </div>
         </div>
+        <button class="button-3" , onclick="goToEvents()">Volver</button>
       </div>
-      <button class="button-3" , onclick="goToEvents()">Volver</button>
     </div>
-  </div>
 
-  <div id="sms-verification" class="dialog-container" style="display: none;">
-    <h1>Confirmación de borrado</h1>
+    <div id="sms-verification" class="dialog-container" style="display: none">
+      <h1>Confirmación de borrado</h1>
 
-    <div class="input-group">
-      <div class="input-row">
-        <h2>Número de teléfono</h2>
-        <div class="input-wrapper">
-          <input type="text" id="input-phone">
-          <button class="btn enviar-btn" onclick="sendMessage()">Enviar</button>
+      <div class="input-group">
+        <div class="input-row">
+          <h2>Número de teléfono</h2>
+          <div class="input-wrapper">
+            <input type="text" id="input-phone" />
+            <button class="btn enviar-btn" onclick="sendMessage()">
+              Enviar
+            </button>
+          </div>
+        </div>
+
+        <div class="input-row">
+          <h2>Palabra recibida</h2>
+          <input type="text" id="sms-code" />
         </div>
       </div>
 
-      <div class="input-row">
-        <h2>Palabra recibida</h2>
-        <input type="text" id="sms-code">
+      <div class="button-group">
+        <button class="btn cancelar-btn" onclick="cancel()">Cancelar</button>
+        <button class="btn siguiente-btn" onclick="verifySMSCode()">
+          Siguiente
+        </button>
+      </div>
+    </div>
+    <div id="email-verification" class="dialog-container" style="display: none">
+      <h1>Confirmación de borrado</h1>
+
+      <div class="input-group">
+        <div class="input-row">
+          <h2>Correo electrónico</h2>
+          <div class="input-wrapper">
+            <input type="text" id="input-email" />
+            <button class="btn enviar-btn" onclick="sendEmail()">Enviar</button>
+          </div>
+        </div>
+
+        <div class="input-row">
+          <h2>Código recibido</h2>
+          <input type="text" id="email-code" />
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button class="btn cancelar-btn" onclick="cancel()">Cancelar</button>
+        <button class="btn siguiente-btn" onclick="verifyEmailCode()">
+          Siguiente
+        </button>
       </div>
     </div>
 
-    <div class="button-group">
-      <button class="btn cancelar-btn" onclick="cancel()">Cancelar</button>
-      <button class="btn siguiente-btn" onclick="verifySMSCode()">Siguiente</button>
-    </div>
-  </div>
-</body>
+    <div id="last-confirm" class="dialog-container" style="display: none">
+      <h1>Confirmación de borrado</h1>
 
-<div id="email-verification" class="dialog-container" style="display: none;">
-  <h1>Confirmación de borrado</h1>
+      <span>
+        ¡Esta es una operación irreversible!<br /><br />
+        Todos los datos asociados se perderán.<br /><br /><br />
+        ¿Está seguro que desea borrar este evento?
+      </span>
 
-  <div class="input-group">
-    <div class="input-row">
-      <h2>Correo electrónico</h2>
-      <div class="input-wrapper">
-        <input type="text" id="input-email">
-        <button class="btn enviar-btn" onclick="sendEmail()">Enviar</button>
+      <div class="button-group">
+        <button class="btn cancelar-btn" onclick="cancel()">Cancelar</button>
+        <button class="btn confirmar-btn" onclick="finalDeleteEvent()">
+          Confirmar
+        </button>
       </div>
     </div>
-
-    <div class="input-row">
-      <h2>Código recibido</h2>
-      <input type="text" id="email-code">
-    </div>
-  </div>
-
-  <div class="button-group">
-    <button class="btn cancelar-btn" onclick="cancel()">Cancelar</button>
-    <button class="btn siguiente-btn" onclick="verifyEmailCode()">Siguiente</button>
-  </div>
-</div>
-
-<div id="last-confirm" class="dialog-container" style="display: none;">
-  <h1>Confirmación de borrado</h1>
-
-  <span>
-    ¡Esta es una operación irreversible!<br><br>
-    Todos los datos asociados se perderán.<br><br><br>
-    ¿Está seguro que desea borrar este evento?
-  </span>
-
-  <div class="button-group">
-    <button class="btn cancelar-btn" onclick="cancel()">Cancelar</button>
-    <button class="btn confirmar-btn" onclick="finalDeleteEvent()">Confirmar</button>
-  </div>
-</div>
-  <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      // Function to setup accordion behavior
-      function setupAccordions() {
-          const acc = document.getElementsByClassName("accordion");
-          
-          for (let i = 0; i < acc.length; i++) {
-              acc[i].addEventListener("click", function() {
-                  this.classList.toggle("active");
-                  const panel = this.nextElementSibling;
-                  if (panel.style.maxHeight) {
-                      panel.style.maxHeight = null;
-                  } else {
-                      panel.style.maxHeight = panel.scrollHeight + "px";
-                  } 
-              });
-          }
-      }
-
-      async function fetchEvents() {
-          try {
-              const response = await fetch('/api/getEvents');
-              if (!response.ok) throw new Error('Error fetching events');
-              return await response.json();
-          } catch (error) {
-              console.error('Error:', error);
-              return [];
-          }
-      }
-
-      function renderEvents(events) {
-          const eventsList = document.getElementById('events-list');
-          eventsList.innerHTML = '';
-          console.log(events.length);
-          events.forEach((event, index) => {
-              const eventElement = document.createElement('div');
-              eventElement.className = 'event-item';
-              
-              eventElement.innerHTML = `
-              <div class="edit-and-delete">
-                <button id="edit" class="edit-btn" onclick="goToEditEvent()">
-                  <img class="edit" src="/admin-panel/img/edit.svg" />
-                </button>
-
-                <button id="trash" class="trash-btn" onclick="deleteEvent(${event.id})">
-                  <img class="trash" src="/admin-panel/img/trash.svg" /> 
-                </button>
-              </div>
-
-              <button class="accordion">${event.name}</button>
-
-              <div class="panel">
-                  <p>Organizador: ${event.organizador_id || 'No especificado'}</p>
-                  <p>Fecha: ${event.fecha || 'No especificada'}</p>
-                  <p>Ubicación: ${event.ubicacion || 'No especificada'}</p>
-              </div>`;
-              
-              eventsList.appendChild(eventElement);
-          });
-
-          // Setup accordions AFTER creating the elements
-          setupAccordions();
-      }
-
-      async function init() {
-          const events = await fetchEvents();
-          renderEvents(events);
-      }
-
-      init();
-    });
-  </script>
-</body>
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        const events = await fetchEvents();
+        renderEvents(events);
+      });
+    </script>
+  </body>
 </html>
