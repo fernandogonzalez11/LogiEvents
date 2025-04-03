@@ -6,6 +6,7 @@ const session = require('express-session');
 const { User } = require('./models/User');
 const { validatePassword, validatePhone, validateEmail } = require('./controller/validation');
 const { sendTwilioMessage } = require('./controller/sendTwilio');
+const { enviarCorreoConfirmacion } = require('./controller/sendEmail');
 const Constants = require('./models/Constants');
 const { Queries } = require('./controller/dbQueries');
 const db = require('./controller/dbQueries');
@@ -101,6 +102,28 @@ async function getCurrentUser(req, res) {
         
     return rows[0];
 }
+
+/**
+ * Create the verification codes in the Verification SQL table
+ * @param {int} userID 
+ * @param {int} id 
+ */
+async function createVerificationCodes(userID, id) {
+    try {
+        // first step: no verification done yet
+        const code = getRandomInt(100000, 1000000);
+        const word = randomWords.generateSlug(1);
+
+        const result = await db.query(Queries.ADD_VERIFICATION, [userID, id, code, word]);
+        setTimeout(() => {
+            db.query(Queries.DELETE_VERIFICATION, [result.lastID]);
+        }, Constants.VERIFICATION_EXPIRATION_MINUTES * 60 * 1000);
+
+        return result.lastID;
+    } catch (error) {
+        handleError(error, res);
+    }
+};
 
 app.get('/favicon.ico', (req, res) => res.sendFile(path.join(htmlPath, 'favicon.ico')));
 app.get('/', (req, res) => sendHTML(res, "login"));
@@ -228,7 +251,7 @@ app.get('/api/signup/admin', async (req, res) => {
     }
 
     try {
-        const result = db.query(
+        const result = await db.query(
             Queries.SIGNUP_ADMIN,
             [
                 user.cedula,
@@ -247,32 +270,6 @@ app.get('/api/signup/admin', async (req, res) => {
     } catch (err) {
         return handleError(err, res);
     } 
-});
-
-app.get('/api/send_message', async (req, res) => {
-    const q = req.query;
-    let phoneNumber = q["phone"];
-    const redirectURI = q["from"];
-
-    // TODO: validate if there is existing code
-
-    if (!redirectURI)
-        return res.json({ "error": "No redirect URI" });
-
-    if (!validatePhone(phoneNumber))
-        return res.redirect(`${redirectURI}?error=phone`)
-
-    const code = getRandomInt(100000, 1000000);
-
-    try {
-        phoneNumber = "+" + Constants.COUNTRY_CODE + phoneNumber;
-        await sendTwilioMessage(phoneNumber, code.toString());
-        // TODO: stay on the confirmation dialog
-        // TODO: set 2FA code in database temporarily
-    } catch (error) {
-        console.error(error);
-        res.redirect(`${redirectURI}?error=twilio`)
-    }
 });
 
 app.get('/profile', async (req, res) => {
@@ -411,39 +408,145 @@ app.get('/api/event/image/:eventId', async (req, res) => {
     }
 });
 
-app.get('/event/delete', async (req, res) => {
+app.get('/api/send_message', async (req, res) => {
+    const q = req.query;
+    const id = q["id"];
+    let phoneNumber = q["phone"];
+
+    if (!validatePhone(phoneNumber))
+        return res.status(400).json({ "error": "Teléfono inválido" });
+
+    let row = await db.query(Queries.GET_VERIFICATION, [id]);
+    if (!row.length) return res.status(500).json({ "error": "Verificación no encontrada o expirada" });
+    row = row[0];
+    const r_code = row["word"];
+
+    try {
+        phoneNumber = "+" + Constants.COUNTRY_CODE + phoneNumber;
+        const result = await sendTwilioMessage(phoneNumber, r_code);
+
+        return res.status(200).json({ success: true, body: result });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ "error": "Error del servidor al enviar mensaje" });
+    }
+});
+
+app.get('/api/send_email', async (req, res) => {
+    const q = req.query;
+    const id = q["id"];
+    let email = q["email"];
+
+    if (!validateEmail(email))
+        return res.status(400).json({ "error": "Correo electrónico inválido" });
+
+    let row = await db.query(Queries.GET_VERIFICATION, [id]);
+    if (!row.length) return res.status(500).json({ "error": "Verificación no encontrada o expirada" });
+    row = row[0];
+    const r_code = row["code"];
+
+    try {
+        const result = await enviarCorreoConfirmacion(email, r_code);
+
+        return res.status(200).json({ success: result });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ "error": "Error del servidor al enviar correo" });
+    }
+});
+
+app.get('/api/check_sms_code', async (req, res) => {
     try {
         const user = await getCurrentUser(req, res);
         if (!user) return;
         if (user.type != 'administrador') return res.status(403).json({ "error": "Usuario actual no es administrador" });
 
         const q = req.query;
+        // verification row ID
         const id = q["id"];
-        const q_code = q["code"]; // could be empty
-        const q_word = q["word"]; // could be empty
+        const q_code = q["code"];
 
-        // first step: no verification done yet
-        if (!q_code && !q_word) {
-            const code = getRandomInt(100000, 1000000);
-            const word = randomWords.generateSlug(1);
+        let row = await db.query(Queries.GET_VERIFICATION, [id]);
+        if (!row.length) return res.status(500).json({ "error": "Verificación no encontrada o expirada" });
+        row = row[0];
+        const r_code = row["word"];
 
-            const result = await db.query(Queries.ADD_VERIFICATION, [user.id, id, code, word]);
-            console.log(`new verification ${result.lastID}`);
-            setTimeout(() => {
-                db.query(Queries.DELETE_VERIFICATION, [result.lastID]);
-            }, Constants.VERIFICATION_EXPIRATION_MINUTES * 60 * 1000);
+        return res.status(200).json({ "correct": q_code == r_code });
+    } catch (error) {
+        res.status(500).json({ "error": "Problema de servidor al revisar el código de SMS" })
+    }
+});
 
-            return res.status(200).json({ "success": true, "showEmailDialog": true, "id": result.lastID });
-        // second step: email verification done
-        } else if (q_code && !q_word) {
-        } else if (q_code && q_word) {
-            const result = await db.query(Queries.DELETE_EVENT, [id]);
-            console.log(result);
-        }
-        return res.status(200);
+app.get('/api/check_email_code', async (req, res) => {
+    try {
+        const user = await getCurrentUser(req, res);
+        if (!user) return;
+        if (user.type != 'administrador') return res.status(403).json({ "error": "Usuario actual no es administrador" });
+
+        const q = req.query;
+        // verification row ID
+        const id = q["id"];
+        const q_code = q["code"];
+
+        let row = await db.query(Queries.GET_VERIFICATION, [id]);
+        if (!row.length) return res.status(500).json({ "error": "Verificación no encontrada o expirada" });
+        row = row[0];
+        const r_code = row["code"];
+
+        console.log(q_code, r_code);
+
+        return res.status(200).json({ "correct": q_code == r_code });
+    } catch (error) {
+        res.status(500).json({ "error": "Problema de servidor al revisar el código de correo" })
+    }
+});
+
+app.get('/api/event/delete', async (req, res) => {
+    try {
+        const user = await getCurrentUser(req, res);
+        if (!user) return;
+        if (user.type != 'administrador') return res.status(403).json({ "error": "Usuario actual no es administrador" });
+
+        const q = req.query;
+        // verification ID
+        const id = q["id"];
+
+        let verification = await db.query(Queries.GET_VERIFICATION, [id]);
+        if (!verification.length) return res.status(404).json({ "error": "Verificación no existe o expiró" });
+        verification = verification[0];
+
+        // get the event from here
+        const eventID = verification["event_id"];
+        console.log("Deleting event " + eventID.toString());
+        const result = await db.query(Queries.DELETE_EVENT, [eventID]);
+        console.log(result);
+        
+        return res.status(200).json({ "success": true });
     } catch (error) {
         handleError(error, res);
     }
+});
+
+// the API route called when pressing the trash icon
+app.get('/event/delete', async (req, res) => {
+    const user = await getCurrentUser(req, res);
+    if (!user) return;
+    if (user.type != 'administrador') throw new Error("Usuario no es administrador");
+
+    const q = req.query;
+    // verification ID
+    const id = q["id"];
+
+    console.log(id);
+
+    let event = await db.query(Queries.GET_EVENT_AND_CAPACITY, [id]);
+    if (!event.length) return res.status(404).json({ "error": "Evento no existe" });
+    event = event[0];
+
+    const resultID = await createVerificationCodes(user.id, id);
+
+    if (event["cupo"] == 0) return res.status(200).json({ "verify_sms": true, "id": resultID });
+    else return res.status(200).json({ "verify_sms": false, "id": resultID });
 });
 
 app.get('/api/getEventsByReserves', async (req, res) => {
