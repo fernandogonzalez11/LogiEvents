@@ -10,6 +10,7 @@
     @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
   </style>
   <script defer src="../script.js"></script>
+  <script defer src="script.js"></script>
 </head>
 
 <body>
@@ -34,7 +35,7 @@
       <div id="event-title">Reservación de evento</div>
       <div id="event-name">Evento 1</div>
       <button id="reserve-button" >
-        <div id="reserve-text">Reservar</div>
+        <div id="reserve-text" onclick="reserveEvent()">Reservar</div>
       </button>
       <button id="cancel-button", onclick="goToEvents()">
         <div id="cancel-text">Cancelar</div>
@@ -51,6 +52,33 @@
         <img alt="Home" src="/reserve-event/../global_assets/home.svg">
       </div>
       
+    </div>
+  </div>
+  <div id="sms-verification" class="dialog-container" style="display: none">
+    <h1>Confirmación de reserva</h1>
+
+    <div class="input-group">
+      <div class="input-row">
+        <h2>Número de teléfono</h2>
+        <div class="input-wrapper">
+          <input type="text" id="input-phone" />
+          <button class="btn enviar-btn" onclick="sendMessage()">
+            Enviar
+          </button>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <h2>Palabra recibida</h2>
+        <input type="text" id="sms-code" />
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button class="btn cancelar-btn" onclick="cancel()">Cancelar</button>
+      <button class="btn confirmar-btn" onclick="finalReserveEvent()">
+        Confirmar
+      </button>
     </div>
   </div>
 </body>

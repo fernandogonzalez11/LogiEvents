@@ -406,7 +406,7 @@ app.get('/api/event/image/:eventId', async (req, res) => {
         console.error('Error fetching image:', err);
         res.status(500).send('Error al recuperar la imagen');
     }
-});
+}); 
 
 app.get('/api/send_message', async (req, res) => {
     const q = req.query;
@@ -537,8 +537,6 @@ app.get('/event/delete', async (req, res) => {
     // verification ID
     const id = q["id"];
 
-    console.log(id);
-
     let event = await db.query(Queries.GET_EVENT_AND_CAPACITY, [id]);
     if (!event.length) return res.status(404).json({ "error": "Evento no existe" });
     event = event[0];
@@ -572,6 +570,17 @@ app.get('/api/getEventsToDisplay', async (req, res) => {
         return handleError(err, res);
     }
 });
+
+// receives event ID
+app.get('/event/reserve', async (req, res) => {
+    // returns verification row ID
+    return res.status(200).json({ "id": 1 });
+});
+
+// receives verification row ID
+app.get('/api/event/reserve', async (req, res) => {
+    return res.status(200).json({ "success": true })
+}); 
 
 const htmlPath = path.join(__dirname, 'view');
 // Set the "html" folder as the location for templates/static files
