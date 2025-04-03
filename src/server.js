@@ -450,6 +450,18 @@ app.get('/event/delete', async (req, res) => {
     }
 });
 
+app.get('/api/getEventsByReserves', async (req, res) => {
+    try {
+        rows = await db.query(db.Queries.GET_EVENTS_SORTED_BY_RESERVES,[]);
+        if (!rows) return;
+
+        return res.json(rows);
+    } catch (err) {
+        console.log("Error al obtener eventos!")
+        return handleError(err, res);
+    }
+});
+
 const htmlPath = path.join(__dirname, 'view');
 // Set the "html" folder as the location for templates/static files
 app.use(express.static(htmlPath));

@@ -1,3 +1,11 @@
+
+window.onload = async () =>{
+    events = await getEventsOrdered();
+    setEventsTable(events);
+    initializeChart();
+    updateChart(countEventsByState(events));
+
+}
 // Chart configuration
 const chartConfig = {
     categories: [
@@ -5,10 +13,49 @@ const chartConfig = {
         { label: "Agotados", color: "#9d5451" },
         { label: "Próximos", color: "#68b7cd" }
     ],
-    values: [3, 5, 8],
+    values: [0, 0, 0],
     maxHeight: 300
 };
 
+async function getEventsOrdered() {
+    
+    fetch('/api/getEventsByReserves')
+        .then(response => response.text()) // Parse as text instead of .json()
+        .then(html => {
+        console.log(html); 
+    })
+    .catch(error => console.error('Error:', error));
+
+    const response = await fetch('/api/getEventsByReserves');
+    const events = await response.json();
+
+    return events;
+}
+
+function setEventsTable(events){
+    const table = document.getElementById("stats-table");
+    table.innerHTML = "";
+    events.forEach(event => {
+        let row = table.insertRow();
+        row.insertCell(0).innerText = event.name;
+        row.insertCell(1).innerText = event.capacidad;
+        row.insertCell(2).innerText = Number(event.capacidad)-Number(event.cupo);
+        row.insertCell(3).innerText = event.estado;
+    });
+
+}
+
+function countEventsByState(events){
+    var activos=0;
+    var agotados=0;
+    var proximos=0;
+    events.forEach(event => {
+        if (event.estado=="Activo") activos++; 
+        if (event.estado=="Agotado") agotados++; 
+        if (event.estado=="Próximamente") proximos++; 
+    })
+    return [activos,agotados,proximos]
+}
 // More robust element finding with error recovery
 function getChartElements() {
     const elements = {
@@ -77,6 +124,4 @@ function initializeChart() {
     }
 }
 
-// Start everything
-initializeChart();
-updateChart([1,2,10]);
+

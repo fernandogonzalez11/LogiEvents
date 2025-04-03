@@ -22,6 +22,7 @@ const Queries = {
                       'VALUES(?, ?, ?, ?)',
     DELETE_VERIFICATION: 'DELETE FROM Verification WHERE id = ?',
     GET_VERIFICATION: 'SELECT id FROM Verification WHERE id = ?',
+    GET_EVENTS_SORTED_BY_RESERVES: 'SELECT name, capacidad, cupo, estado FROM Event ORDER BY (capacidad - cupo) DESC',
 }
 
 const db = new Database(process.env.SQLITE_CONNECTION, (err) => {
