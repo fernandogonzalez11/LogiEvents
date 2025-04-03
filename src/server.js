@@ -228,7 +228,7 @@ app.get('/api/signup/admin', async (req, res) => {
     }
 
     try {
-        const result = db.query(
+        const result = await db.query(
             Queries.SIGNUP_ADMIN,
             [
                 user.cedula,
@@ -411,43 +411,106 @@ app.get('/api/event/image/:eventId', async (req, res) => {
     }
 });
 
-app.get('/event/delete', async (req, res) => {
+async function createVerificationCodes(userID, id) {
+    try {
+        // first step: no verification done yet
+        const code = getRandomInt(100000, 1000000);
+        const word = randomWords.generateSlug(1);
+
+        const result = await db.query(Queries.ADD_VERIFICATION, [userID, id, code, word]);
+        setTimeout(() => {
+            db.query(Queries.DELETE_VERIFICATION, [result.lastID]);
+        }, Constants.VERIFICATION_EXPIRATION_MINUTES * 60 * 1000);
+    } catch (error) {
+        handleError(error, res);
+    }
+};
+
+app.get('/api/check_sms_code', async (req, res) => {
     try {
         const user = await getCurrentUser(req, res);
         if (!user) return;
         if (user.type != 'administrador') return res.status(403).json({ "error": "Usuario actual no es administrador" });
 
         const q = req.query;
+        // verification row ID
         const id = q["id"];
-        const q_code = q["code"]; // could be empty
-        const q_word = q["word"]; // could be empty
+        const q_code = q["code"];
 
-        // first step: no verification done yet
-        if (!q_code && !q_word) {
-            const code = getRandomInt(100000, 1000000);
-            const word = randomWords.generateSlug(1);
+        const row = await db.query(Queries.GET_VERIFICATION, [id]);
+        const r_code = row["code"];
 
-            const result = await db.query(Queries.ADD_VERIFICATION, [user.id, id, code, word]);
-            console.log(`new verification ${result.lastID}`);
-            setTimeout(() => {
-                db.query(Queries.DELETE_VERIFICATION, [result.lastID]);
-            }, Constants.VERIFICATION_EXPIRATION_MINUTES * 60 * 1000);
+        return res.status(200).json({ "correct": q_code == r_code });
+    } catch (error) {
+        handleError(error, res);
+    }
+});
 
-            return res.status(200).json({ "success": true, "showEmailDialog": true, "id": result.lastID });
-        // second step: email verification done
-        } else if (q_code && !q_word) {
-            
-        } else if (q_code && q_word) {
-            const result = await db.query(Queries.DELETE_EVENT, [id]);
-            console.log(result);
-        }
+app.get('/api/check_email_word', async (req, res) => {
+    try {
+        const user = await getCurrentUser(req, res);
+        if (!user) return;
+        if (user.type != 'administrador') return res.status(403).json({ "error": "Usuario actual no es administrador" });
 
+        const q = req.query;
+        // verification row ID
+        const id = q["id"];
+        const q_word = q["word"];
 
+        const row = await db.query(Queries.GET_VERIFICATION, [id]);
+        const r_word = row["word"];
+
+        return res.status(200).json({ "correct": q_word == r_word });
+    } catch (error) {
+        handleError(error, res);
+    }
+});
+
+app.get('/api/event/delete', async (req, res) => {
+    try {
+        const user = await getCurrentUser(req, res);
+        if (!user) return;
+        if (user.type != 'administrador') return res.status(403).json({ "error": "Usuario actual no es administrador" });
+
+        const q = req.query;
+        // verification ID
+        const id = q["id"];
+
+        let verification = await db.query(Queries.GET_VERIFICATION, [id]);
+        if (!verification.length) return res.status(404).json({ "error": "Verificación no existe o expiró" });
+        verification = verification[0];
+
+        // get the event from here
+        const eventID = verification["event_id"];
+        const result = await db.query(Queries.DELETE_EVENT, [eventID]);
+        console.log(result);
         
         return res.status(200);
     } catch (error) {
         handleError(error, res);
     }
+});
+
+// the API route called when pressing the trash icon
+app.get('/event/delete', async (req, res) => {
+    const user = await getCurrentUser(req, res);
+    if (!user) return;
+    if (user.type != 'administrador') throw new Error("Usuario no es administrador");
+
+    const q = req.query;
+    // verification ID
+    const id = q["id"];
+
+    console.log(id);
+
+    let event = await db.query(Queries.GET_EVENT_AND_CAPACITY, [id]);
+    if (!event.length) return res.status(404).json({ "error": "Evento no existe" });
+    event = event[0];
+
+    createVerificationCodes(user.id, id);
+
+    if (event["cupo"] == 0) return res.status(200).json({ "verify_sms": true });
+    else return res.status(200).json({ "verify_sms": false });
 });
 
 const htmlPath = path.join(__dirname, 'view');
