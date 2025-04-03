@@ -13,6 +13,7 @@
 body {
     margin: 0; /* Reset default margin */
     background-color: var(--almost-pluey);
+    font-family: Inter;
 }
 
 .container {

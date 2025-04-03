@@ -57,7 +57,7 @@
             };
 
             if (eventData.name === "" || !eventData.time  === "" || eventData.date  === "" || eventData.date  === "" || eventData.location === "") {
-                alert('Por favor, complete todos los campos.');
+                Swal.fire({ icon: "error", text: 'Por favor, complete todos los campos.' });
                 return;
             }
 

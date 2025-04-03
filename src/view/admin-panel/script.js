@@ -70,7 +70,7 @@ function deleteEvent(id) {
     .then((data) => {
       if (data["error"]) {
         
-        alert(data["error"]);
+        Swal.fire({ icon: "error", text: data["error"] });
         return;
       }
 
@@ -82,7 +82,7 @@ function deleteEvent(id) {
       currentVerificationID = data["id"];
       console.log(currentVerificationID);
     })
-    .catch((err) => alert(err));
+    .catch((err) => Swal.fire({ icon: "error", text: err }));
 }
 
 function verifyEmailCode() {
@@ -94,17 +94,17 @@ function verifyEmailCode() {
       document.getElementById("email-verification").style.display = "none";
 
       if (data["error"]) {
-        alert(data["error"]);
+        Swal.fire({ icon: "error", text: data["error"] });
         return;
       }
 
       if (data["correct"]) {
         document.getElementById("last-confirm").style.display = "block";
       } else {
-        alert("Código de verificación por correo incorrecto");
+        Swal.fire({ icon: "error", text: "Código de verificación por correo incorrecto" });
       }
     })
-    .catch((err) => alert(err));
+    .catch((err) => Swal.fire({ icon: "error", text: err }));
 }
 
 function verifySMSCode() {
@@ -116,17 +116,17 @@ function verifySMSCode() {
       document.getElementById("sms-verification").style.display = "none";
 
       if (data["error"]) {
-        alert(data["error"]);
+        Swal.fire({ icon: "error", text: data["error"] });
         return;
       }
 
       if (data["correct"]) {
         document.getElementById("email-verification").style.display = "block";
       } else {
-        alert("Código de verificación por SMS incorrecto");
+        Swal.fire({ icon: "error", text: "Código de verificación por SMS incorrecto" });
       }
     })
-    .catch((err) => alert(err));
+    .catch((err) => Swal.fire({ icon: "error", text: err }));
 }
 
 function finalDeleteEvent() {
@@ -136,15 +136,15 @@ function finalDeleteEvent() {
       document.getElementById("last-confirm").style.display = "none";
 
       if (data["error"]) {
-        alert(data["error"]);
+        Swal.fire({ icon: "error", text: data["error"] });
         return;
       } else if (data["success"]) {
-        alert("Evento borrado exitosamente");
+        Swal.fire({ icon: "success", text: "Evento borrado exitosamente" });
         window.location.reload();
         return;
       }
     })
-    .catch((err) => alert(err));
+    .catch((err) => Swal.fire({ icon: "error", text: err }));
 }
 
 function cancel() {
@@ -159,13 +159,13 @@ function sendEmail() {
     .then((res) => res.json())
     .then((data) => {
       if (data["error"]) {
-        alert(data["error"]);
+        Swal.fire({ icon: "error", text: data["error"] });
         return;
       }
 
-      alert("Código enviado, por favor revise su correo");
+      Swal.fire({ icon: "info", text: "Código enviado, por favor revise su correo" });
     })
-    .catch((err) => alert(err));
+    .catch((err) => Swal.fire({ icon: "error", text: err }));
 }
 
 function sendMessage() {
@@ -174,11 +174,11 @@ function sendMessage() {
     .then((res) => res.json())
     .then((data) => {
       if (data["error"]) {
-        alert(data["error"]);
+        Swal.fire({ icon: "error", text: data["error"] });
         return;
       }
 
-      alert("Código enviado, por favor revise su teléfono");
+      Swal.fire({ icon: "info", text: "Código enviado, por favor revise su teléfono" });
     })
-    .catch((err) => alert(err));
+    .catch((err) => Swal.fire({ icon: "error", text: err }));
 }

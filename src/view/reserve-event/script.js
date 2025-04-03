@@ -7,7 +7,7 @@ function reserveEvent() {
     .then((res) => res.json())
     .then((data) => {
       if (data["error"]) {
-        alert(data["error"]);
+        Swal.fire({ icon: "error", text: data["error"] });
         return;
       }
 
@@ -15,7 +15,7 @@ function reserveEvent() {
       currentVerificationID = data["id"];
       console.log(currentVerificationID);
     })
-    .catch((err) => alert(err));
+    .catch((err) => Swal.fire({ icon: "error", text: err }));
 }
 
 function verifySMSCode() {
@@ -27,15 +27,15 @@ function verifySMSCode() {
       document.getElementById("sms-verification").style.display = "none";
 
       if (data["error"]) {
-        alert(data["error"]);
+        Swal.fire({ icon: "error", text: data["error"] });
         return false;
       }
 
-      if (!data["correct"]) alert("Código de verificación por SMS incorrecto");
+      if (!data["correct"]) Swal.fire({ icon: "error", text: "Código de verificación por SMS incorrecto" });
 
       return data["correct"];
     })
-    .catch((err) => alert(err));
+    .catch((err) => Swal.fire({ icon: "error", text: err }));
 }
 
 function sendMessage() {
@@ -44,13 +44,13 @@ function sendMessage() {
     .then((res) => res.json())
     .then((data) => {
       if (data["error"]) {
-        alert(data["error"]);
+        Swal.fire({ icon: "error", text: data["error"] });
         return;
       }
 
-      alert("Código enviado, por favor revise su teléfono");
+      Swal.fire({ icon: "info", text: "Código enviado, por favor revise su teléfono" });
     })
-    .catch((err) => alert(err));
+    .catch((err) => Swal.fire({ icon: "error", text: err }));
 }
 
 function cancel() {
@@ -63,10 +63,10 @@ function finalReserveEvent() {
       .then((res) => res.json())
       .then((data) => {
         if (data["error"]) {
-          alert(data["error"]);
+          Swal.fire({ icon: "error", text: data["error"] });
           return;
         } else if (data["success"]) {
-          alert("Evento reservado exitosamente");
+          Swal.fire({ icon: "success", text: "Evento reservado exitosamente" });
           window.location.reload();
           return;
         }

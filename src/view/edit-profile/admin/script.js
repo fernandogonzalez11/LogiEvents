@@ -36,7 +36,7 @@ async function saveData(redirectType) {
 
         response = await response.json();
 
-        if (response.error) alert(response.error);
+        if (response.error) Swal.fire({ icon: "error", text: response.error });
         
         if (redirectType == 1) goToEvents();
         else if (redirectType == 3) goToLogout();

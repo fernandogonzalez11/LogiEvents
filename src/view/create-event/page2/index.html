@@ -90,13 +90,13 @@
 
             // Validation
             if (category === "" || isNaN(capacity) || status === "" || isNaN(price) || !imageFile) {
-                alert('Por favor, complete todos los campos correctamente.');
+                Swal.fire({ icon: "error", text: 'Por favor, complete todos los campos correctamente.' });
                 return;
             }
 
             let eventInfo = JSON.parse(localStorage.getItem('eventData'));
             if (!eventInfo) {
-                alert('Los datos del evento no están completos.');
+                Swal.fire({ icon: "error", text: 'Los datos del evento no están completos.' });
                 return;
             }
 
@@ -130,15 +130,15 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        alert('Evento creado exitosamente');
+                        Swal.fire({ icon: "success", text: 'Evento creado exitosamente' });
                         window.location.href = '/admin/';
                     } else {
                         console.log("Error response from server:", data);
-                        alert('[ERROR] : Error al crear el evento (' + data.message + ')');
+                        Swal.fire({ icon: "error", text: 'Error al crear el evento (' + data.message + ')' });
                     }
                 })
                 .catch(error => {
-                    alert('Hubo un problema al crear el evento: ' + error);
+                    Swal.fire({ icon: "error", text: 'Hubo un problema al crear el evento: ' + error });
                 });
             };
             

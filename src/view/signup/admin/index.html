@@ -70,7 +70,7 @@
 
       const params = new URLSearchParams(window.location.search);
       if (params.has("error")) {
-        alert(params.get("error"));
+        Swal.fire({ icon: "error", text: params.get("error") });
       }
     </script>
   </body>
