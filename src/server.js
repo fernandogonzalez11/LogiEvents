@@ -17,7 +17,6 @@ const randomWords = require('random-word-slugs');
 const PASSWORD_ERROR = "Contraseña inválida (al menos 4 letras y 4 números)";
 
 const app = express();
-let organizadorId = 1;
 app.use(express.json());
 
 const redisClient = Redis.createClient({
@@ -93,7 +92,6 @@ function getRandomInt(min, max) {
  */
 async function getCurrentUser(req, res) {
     const userId = req.session.userId;
-    organizadorId = userId;
     rows = await db.query(db.Queries.GET_USER, [userId]);
 
     if (rows.length != 1) {
@@ -324,51 +322,92 @@ function isFloat(num) {
 }
 
 app.post('/api/createAevent', async (req, res) => {
-
-    console.log("--------[CREAT NEW EVENT]--------");
-    console.log('Organizador ID : ' + organizadorId);
-    
-    const { name, description, date, time, location, capacity, price, status, category, imagefile, cupo} = req.body;
-    
-    if (Number.isInteger(capacity) === false || isFloat(price) === false) {
-        return res.json({ success: false, message: 'Verifique que precio y capacidad tengan el formato requerido ' });
-    }
-    
-    console.log("DATA NEW EVENT....");
-    console.log(req.body);
-
-
     try {
+        // Obtener el ID del empleado/organizador
+        const user = await getCurrentUser(req, res);
+        if (!user) return;
+        if (user.type != 'administrador') return res.status(403).json({ "error": "Usuario actual no es administrador" });
+        
+        // Extraer datos del evento
+        const {name, description, date, time, location, 
+            capacity, price, status, category, imageData, imageType, 
+            cupo} = req.body;
+        
+        // Validaciones...
+        if (!imageData || !imageType) {
+            return res.json({ success: false, message: 'La imagen es requerida' });
+        }
 
-        row = await db.query(
-            Queries.GET_EVENT_BY_NAME,
-            [name]
-        );
+        if (Number.isInteger(capacity) === false || isFloat(price) === false) {
+            return res.json({ success: false, message: 'Verifique que precio y capacidad tengan el formato requerido ' });
+        }
+        // Verificar si el evento ya existe
+        const existingEvents = await db.query(Queries.GET_EVENT_BY_NAME, [name]);
+        if (existingEvents.length > 0) {
+            return res.json({ success: false, message: 'El evento ya existe' });
+        }
 
-        console.log("Events with equal names :" + row.length);
-        if (row.length >= 1) return res.json({ success: false, message: 'El evento ya existe' });
-    
-        row = await db.query(
-            Queries.ADD_NEW_EVENT,
-            [
-                name, 
-                organizadorId, 
-                description, 
-                date, 
-                time, 
-                location, 
-                capacity, 
-                price, 
-                status, 
-                category, 
-                imagefile, 
-                cupo
-            ]
-        );
+        console.log([
+            name, 
+            user.id_empleado,
+            description,
+            date,
+            time,
+            location,
+            capacity,
+            price,
+            status,
+            category,
+            imageData,
+            imageType,
+            capacity
+        ])
+        
+        const imageBuffer = Buffer.from(imageData, 'base64');
+        // Crear el evento
+        await db.query(Queries.ADD_NEW_EVENT, [
+            name, 
+            user.id_empleado,
+            description,
+            date,
+            time,
+            location,
+            capacity,
+            price,
+            status,
+            category,
+            imageBuffer,
+            imageType,
+            capacity
+        ]);
+        
         res.json({ success: true });
+        
+    } catch (err) {
+        console.error('Error al crear evento:', err);
+        res.json({ success: false, message: 'Error del servidor' });
+    }
+});
+
+app.get('/api/event/image/:eventId', async (req, res) => {
+    try {
+        const { eventId } = req.params;
+        const row = await db.query(
+            Queries.GET_IMAGE_BY_EVENT_ID,
+            [eventId]
+        );
+
+        if (!row || row.length === 0) {
+            return res.status(404).send('Imagen no encontrada');
+        }
+        console.log(imageData, imageType);
+
+        res.set('Content-Type', imageType);
+        res.send(Buffer.from(imageData, 'base64'));
 
     } catch (err) {
-        return res.json({ success: false, message: 'Error en el servidor' });
+        console.error('Error fetching image:', err);
+        res.status(500).send('Error al recuperar la imagen');
     }
 });
 

@@ -16,13 +16,20 @@ CREATE TABLE User (
 CREATE TABLE Event (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
+    organizador_id TEXT NOT NULL,
     descripcion TEXT,
     fecha TEXT NOT NULL,  -- formato DD/MM/AAAA
     hora TEXT NOT NULL,   -- formato HH:MM
     ubicacion TEXT NOT NULL,
     capacidad INTEGER NOT NULL,
     precio REAL NOT NULL,
-    estado TEXT NOT NULL CHECK (estado IN ('Agotado', 'Activo', 'Próximamente'))
+    estado TEXT NOT NULL,
+    categoria TEXT NOT NULL,
+    image_data BLOB NOT NULL,
+    image_type TEXT NOT NULL,
+    cupo INTEGER NOT NULL,
+    CONSTRAINT Verification_estado CHECK(estado IN ('Agotado', 'Activo', 'Próximamente')),
+    CONSTRAINT Verification_event_id_User_id_fk FOREIGN KEY (organizador_id) REFERENCES User(id_empleado)
 );
 
 -- Reservation

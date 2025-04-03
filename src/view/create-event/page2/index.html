@@ -51,7 +51,7 @@
             </label>
             
             <div class="image-section">
-                <input type="file" id="image-file" />
+                <input type="file" id="image-file" accept="image/*" />
             </div>
 
             <!-- Create Event Title -->
@@ -71,7 +71,7 @@
                     <img alt="User" src="/create-event/page2/../../global_assets/user.svg">
                 </div>
                 <div class="icon-3">
-                    <img alt="Log out" src="/create-event/page2/../../global_assets/logout.svg">
+                    <img alt="Log out" src="/create-event/page1/../../global_assets/home.svg">
                 </div>
             </div>
 
@@ -80,63 +80,69 @@
 
     <script>
         function createEventNEW() {
-            // Obtener los datos de la página 2
+            // Get other form values
             let category = document.getElementById('category').value;
             let capacity = parseInt(document.getElementById('capacity').value);
             let status = document.getElementById('status').value;
             let price = parseFloat(document.getElementById('price').value);
-            let imagefile = document.getElementById('image-file').value;
+            let imageFile = document.getElementById('image-file').files[0];
 
-            // Validación: asegurarse de que no haya campos vacíos
-            if (category === "" || capacity === "" || status === "" || price === "" || imagefile === "") {
-                alert('Por favor, complete todos los campos.');
+            // Validation
+            if (category === "" || isNaN(capacity) || status === "" || isNaN(price) || !imageFile) {
+                alert('Por favor, complete todos los campos correctamente.');
                 return;
             }
 
             let eventInfo = JSON.parse(localStorage.getItem('eventData'));
-            
             if (!eventInfo) {
                 alert('Los datos del evento no están completos.');
                 return;
             }
 
-            // Construir el objeto de evento
-            let eventDataInfo = {
-                name: eventInfo.name,
-                descripcion: eventInfo.description,
-                date: eventInfo.date,
-                time: eventInfo.time,
-                location: eventInfo.location,
-                capacity: capacity,
-                price: price,
-                status: status,
-                category: category,
-                imagefile: imagefile,
-                cupo: capacity
+            // Read the image file as base64
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imageData = e.target.result.split(',')[1]; // Remove the data URL prefix
+
+                // Build the event object with base64 image data
+                let eventDataInfo = {
+                    name: eventInfo.name,
+                    description: eventInfo.description,
+                    date: eventInfo.date,
+                    time: eventInfo.time,
+                    location: eventInfo.location,
+                    capacity: capacity,
+                    price: price,
+                    status: status,
+                    category: category,
+                    imageData: imageData, // This is the base64 encoded image
+                    imageType: imageFile.type, // Store the MIME type for reconstruction
+                    cupo: capacity
+                };
+
+                // Send to server
+                fetch('/api/createAevent', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(eventDataInfo)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Evento creado exitosamente');
+                        window.location.href = '/admin/';
+                    } else {
+                        console.log("Error response from server:", data);
+                        alert('[ERROR] : Error al crear el evento (' + data.message + ')');
+                    }
+                })
+                .catch(error => {
+                    alert('Hubo un problema al crear el evento: ' + error);
+                });
             };
-
-            // Llamada a la API para crear el evento
-            alert(JSON.stringify(eventDataInfo)); 
-
-            fetch('/api/createAevent', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(eventDataInfo)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Evento creado exitosamente');
-                    window.location.href = '/admin/';
-                } else {
-                    console.log("Error response from server:", data);
-                    alert('[ERROR] : Error al crear el evento (' + data.message + ')');
-                }
-            })
-            .catch(error => {
-                alert('Hubo un problema al crear el evento: ' + error);
-            });
             
+            // Read the file as data URL (base64)
+            reader.readAsDataURL(imageFile);
         }
     </script>
 </body>

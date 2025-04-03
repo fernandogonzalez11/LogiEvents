@@ -12,8 +12,11 @@ const Queries = {
     GET_USER_BY_USERNAME: 'SELECT id FROM User WHERE username = ?',
     UPDATE_USER: 'UPDATE User SET mail = ?, phone = ? WHERE id = ?',
     GET_EVENT_BY_NAME: 'SELECT id FROM Event WHERE name = ?',
-    ADD_NEW_EVENT: 'INSERT INTO Event (name, organizador_id, descripcion, fecha, hora, ubicacion, capacidad, precio, estado, categoria, imageFile, cupo) ' + 
-                'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+    ADD_NEW_EVENT: 'INSERT INTO Event ' +
+    '(name, organizador_id, descripcion, fecha, hora, ubicacion,' +
+    ' capacidad, precio, estado, categoria, image_data, image_type, cupo)' +
+    'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+    GET_IMAGE_BY_EVENT_ID: 'SELECT image_data, image_type FROM Event WHERE id = ?',
     DELETE_EVENT: 'DELETE FROM Event WHERE id = ?',
     ADD_VERIFICATION: 'INSERT INTO Verification(user_id, event_id, code, word) ' + 
                       'VALUES(?, ?, ?, ?)',
