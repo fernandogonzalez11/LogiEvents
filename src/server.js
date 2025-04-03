@@ -574,7 +574,31 @@ app.get('/api/getEventsToDisplay', async (req, res) => {
 // receives event ID
 app.get('/event/reserve', async (req, res) => {
     // returns verification row ID
-    return res.status(200).json({ "id": 1 });
+
+    const q = req.query;
+    // verification ID
+    const id = q["id"];
+    let amount = q["amount"];
+    const email = q["email"];
+    const phone = q["phone"];
+    try {
+        amount = parseInt(amount)
+    } catch (error) {
+        return res.status(400).json({ "error": "Cantidad de reservas no numérica" })
+    }
+
+    let event = await db.query(Queries.GET_EVENT_AND_CAPACITY, [id]);
+    if (!event.length) return res.status(404).json({ "error": "Evento no existe" });
+    event = event[0];
+
+    if (event.cupo < amount) return res.status(400).json({ "error": "Exceso de reservas" });
+    if (!validateEmail(email))return res.status(400).json({ "error": "Email inválido (formato: usuario@pagina.com)" });
+    if (!validatePhone(phone)) return res.status(400).json({ "error": "Número de teléfono inválido (formato: 12345678)" });
+    
+
+    const resultID = await createVerificationCodes(user.id, id);
+
+    return res.status(200).json({ "id": resultID });
 });
 
 // receives verification row ID

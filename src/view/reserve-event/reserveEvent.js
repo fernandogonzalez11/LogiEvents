@@ -1,15 +1,20 @@
 let currentVerificationID = -1;
-// const eventID = sessionStorage.getItem("currentEvent").id;
-const eventID = 1;
+const eventData = sessionStorage.getItem("currentEvent");
+const event = JSON.parse(eventData);
 
 function reserveEvent() {
-  fetch(`/event/reserve?id=${eventID}`)
+  amountOfReservations = document.getElementById("spaces-selection").value;
+  email = document.getElementById("email").value;
+  phone = document.getElementById("phone").value;
+  fetch(`/event/reserve?id=${eventID}&amount=${amountOfReservations}&correo=${email}&phone=${phone}`)
     .then((res) => res.json())
     .then((data) => {
-      if (data["error"]) {
+      if (data["error"]) {s
         Swal.fire({ icon: "error", text: data["error"] });
         return;
       }
+
+      sendMessage(phone);
 
       document.getElementById("sms-verification").style.display = "block";
       currentVerificationID = data["id"];
@@ -38,8 +43,7 @@ function verifySMSCode() {
     .catch((err) => Swal.fire({ icon: "error", text: err }));
 }
 
-function sendMessage() {
-  const phone = document.getElementById("input-phone").value;
+function sendMessage(phone) {
   fetch(`/api/send_message?id=${currentVerificationID}&phone=${phone}`)
     .then((res) => res.json())
     .then((data) => {

@@ -20,7 +20,7 @@ async function enviarCorreoConfirmacion(destinatario, codigo) {
         <html>
           <body>
             <p>¡Hola!</p>
-            <p>Este es tu código para confirmar tu reserva:</p>
+            <p>Este es tu código para confirmar el borrado de evento:</p>
             <p><strong>${codigo}</strong></p>
             <p>Por favor ingrésalo en la plataforma para completar el proceso.</p>
             <p>Atentamente,<br>Equipo LogiEvents Manager</p>
