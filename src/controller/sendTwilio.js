@@ -15,7 +15,7 @@ async function sendTwilioMessage(destinationNumber, code) {
   if (!validateTwilioPhone(destinationNumber))
     throw new Error(`Teléfono en mal formato: debe ser +${COUNTRY_CODE}12345678`);
 
-  const text = `LogiEvents: su código de verificación es ${code}`;
+  const text = `LogiEvents: su palabra de confirmado es: ${code}`;
 
   const message = await client.messages.create({
     body: text,
