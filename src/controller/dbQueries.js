@@ -22,6 +22,8 @@ const Queries = {
                       'VALUES(?, ?, ?, ?)',
     DELETE_VERIFICATION: 'DELETE FROM Verification WHERE id = ?',
     GET_VERIFICATION: 'SELECT id FROM Verification WHERE id = ?',
+    GET_EVENTS_FOR_ADMIN : 'SELECT id, name, organizador_id, fecha, hora, ubicacion ' + 
+                            'FROM Event ORDER BY fecha DESC',
     GET_EVENTS_SORTED_BY_RESERVES: 'SELECT name, capacidad, cupo, estado FROM Event ORDER BY (capacidad - cupo) DESC',
 }
 

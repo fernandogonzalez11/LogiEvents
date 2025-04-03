@@ -82,17 +82,18 @@
   left: 2px;
 }
 
-.admin-dashboard .accordion {
+ .admin-dashboard .events-list {
   display: flex;
   flex-direction: column;
   width: 1110px;
   height: 414px;
+  font-family: "Inter-Regular", Helvetica;
   align-items: flex-start;
   gap: 16px;
   position: absolute;
   top: 68px;
   left: 0;
-}
+} 
 
 .admin-dashboard .accordion-item {
   flex-direction: column;
@@ -249,62 +250,51 @@
   background-color: #494848;
 }
 
-.admin-dashboard .edit-and-delete {
-  position: absolute;
-  width: 76px;
-  height: 32px;
-  top: 78px;
-  left: 1143px;
+.admin-dashboard .accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 1040px;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
 }
 
-.admin-dashboard .trash {
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  top: 0;
-  left: 44px;
+.admin-dashboard .active, .accordion:hover {
+  background-color: #ccc;
 }
 
-.admin-dashboard .edit {
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  top: 0;
+.admin-dashboard .panel {
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  width: 1040px;
+  gap: 32px;
+  top: 130px;
   left: 0;
 }
 
-.admin-dashboard .edit-and-delete-2 {
-  top: 150px;
+.admin-dashboard .edit-and-delete {
   position: absolute;
-  width: 76px;
-  height: 32px;
-  left: 1143px;
+  padding: 100px;
+  left: 1100px;
 }
 
-.admin-dashboard .edit-and-delete-3 {
-  top: 270px;
+.admin-dashboard .trash-btn {
   position: absolute;
-  width: 76px;
-  height: 32px;
-  left: 1143px;
+  top: 0px;
+  left: 44px;
 }
 
-.admin-dashboard .edit-and-delete-4 {
-  top: 342px;
+.admin-dashboard .edit-btn {
   position: absolute;
-  width: 76px;
-  height: 32px;
-  left: 1143px;
+  top: 0px;
+  left: 0px;
 }
-
-.admin-dashboard .edit-and-delete-5 {
-  top: 412px;
-  position: absolute;
-  width: 76px;
-  height: 32px;
-  left: 1143px;
-}
-
 .admin-dashboard .button-3 {
   all: unset;
   box-sizing: border-box;
@@ -386,6 +376,11 @@ input {
   justify-content: flex-end;
   gap: 10px;
   margin-top: 1rem;
+
+  gap: 16px;
+  position: absolute;
+  top: 68px;
+  left: 0;
 }
 
 .btn {

@@ -321,6 +321,17 @@ function isFloat(num) {
     return Number.isFinite(num) && !Number.isInteger(num);
 }
 
+app.get('/api/getEvents', async (req, res) => {
+    try {
+        const eventsList = await db.query(Queries.GET_EVENTS_FOR_ADMIN, []);
+        res.json(eventsList);
+    } catch (err) {
+        console.error('Error fetching events:', err);
+        res.status(500).json({ error: 'Error al obtener eventos' });
+    }
+});
+
+
 app.post('/api/createAevent', async (req, res) => {
     try {
         // Obtener el ID del empleado/organizador
@@ -346,24 +357,11 @@ app.post('/api/createAevent', async (req, res) => {
         if (existingEvents.length > 0) {
             return res.json({ success: false, message: 'El evento ya existe' });
         }
+       
+        if (status === "Agotado") {
+            cupo = 0;
+        }
 
-        console.log([
-            name, 
-            user.id_empleado,
-            description,
-            date,
-            time,
-            location,
-            capacity,
-            price,
-            status,
-            category,
-            imageData,
-            imageType,
-            capacity
-        ])
-        
-        const imageBuffer = Buffer.from(imageData, 'base64');
         // Crear el evento
         await db.query(Queries.ADD_NEW_EVENT, [
             name, 
@@ -376,9 +374,9 @@ app.post('/api/createAevent', async (req, res) => {
             price,
             status,
             category,
-            imageBuffer,
+            imageData,
             imageType,
-            capacity
+            cupo
         ]);
         
         res.json({ success: true });
@@ -436,14 +434,10 @@ app.get('/event/delete', async (req, res) => {
             return res.status(200).json({ "success": true, "showEmailDialog": true, "id": result.lastID });
         // second step: email verification done
         } else if (q_code && !q_word) {
-            
         } else if (q_code && q_word) {
             const result = await db.query(Queries.DELETE_EVENT, [id]);
             console.log(result);
         }
-
-
-        
         return res.status(200);
     } catch (error) {
         handleError(error, res);
