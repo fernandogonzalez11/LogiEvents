@@ -102,6 +102,28 @@ async function getCurrentUser(req, res) {
     return rows[0];
 }
 
+/**
+ * Create the verification codes in the Verification SQL table
+ * @param {int} userID 
+ * @param {int} id 
+ */
+async function createVerificationCodes(userID, id) {
+    try {
+        // first step: no verification done yet
+        const code = getRandomInt(100000, 1000000);
+        const word = randomWords.generateSlug(1);
+
+        const result = await db.query(Queries.ADD_VERIFICATION, [userID, id, code, word]);
+        setTimeout(() => {
+            db.query(Queries.DELETE_VERIFICATION, [result.lastID]);
+        }, Constants.VERIFICATION_EXPIRATION_MINUTES * 60 * 1000);
+
+        return result.lastID;
+    } catch (error) {
+        handleError(error, res);
+    }
+};
+
 app.get('/favicon.ico', (req, res) => res.sendFile(path.join(htmlPath, 'favicon.ico')));
 app.get('/', (req, res) => sendHTML(res, "login"));
 app.get('/login/', (req, res) => sendHTML(res, "login"));
@@ -411,21 +433,6 @@ app.get('/api/event/image/:eventId', async (req, res) => {
     }
 });
 
-async function createVerificationCodes(userID, id) {
-    try {
-        // first step: no verification done yet
-        const code = getRandomInt(100000, 1000000);
-        const word = randomWords.generateSlug(1);
-
-        const result = await db.query(Queries.ADD_VERIFICATION, [userID, id, code, word]);
-        setTimeout(() => {
-            db.query(Queries.DELETE_VERIFICATION, [result.lastID]);
-        }, Constants.VERIFICATION_EXPIRATION_MINUTES * 60 * 1000);
-    } catch (error) {
-        handleError(error, res);
-    }
-};
-
 app.get('/api/check_sms_code', async (req, res) => {
     try {
         const user = await getCurrentUser(req, res);
@@ -437,16 +444,18 @@ app.get('/api/check_sms_code', async (req, res) => {
         const id = q["id"];
         const q_code = q["code"];
 
-        const row = await db.query(Queries.GET_VERIFICATION, [id]);
-        const r_code = row["code"];
+        let row = await db.query(Queries.GET_VERIFICATION, [id]);
+        if (!row.length) return res.status(500).json({ "error": "Verificación no encontrada o expirada" });
+        row = row[0];
+        const r_code = row["word"];
 
         return res.status(200).json({ "correct": q_code == r_code });
     } catch (error) {
-        handleError(error, res);
+        res.status(500).json({ "error": "Problema de servidor al revisar el código de SMS" })
     }
 });
 
-app.get('/api/check_email_word', async (req, res) => {
+app.get('/api/check_email_code', async (req, res) => {
     try {
         const user = await getCurrentUser(req, res);
         if (!user) return;
@@ -455,14 +464,18 @@ app.get('/api/check_email_word', async (req, res) => {
         const q = req.query;
         // verification row ID
         const id = q["id"];
-        const q_word = q["word"];
+        const q_code = q["code"];
 
-        const row = await db.query(Queries.GET_VERIFICATION, [id]);
-        const r_word = row["word"];
+        let row = await db.query(Queries.GET_VERIFICATION, [id]);
+        if (!row.length) return res.status(500).json({ "error": "Verificación no encontrada o expirada" });
+        row = row[0];
+        const r_code = row["code"];
 
-        return res.status(200).json({ "correct": q_word == r_word });
+        console.log(q_code, r_code);
+
+        return res.status(200).json({ "correct": q_code == r_code });
     } catch (error) {
-        handleError(error, res);
+        res.status(500).json({ "error": "Problema de servidor al revisar el código de correo" })
     }
 });
 
@@ -482,10 +495,11 @@ app.get('/api/event/delete', async (req, res) => {
 
         // get the event from here
         const eventID = verification["event_id"];
+        console.log("Deleting event " + eventID.toString());
         const result = await db.query(Queries.DELETE_EVENT, [eventID]);
         console.log(result);
         
-        return res.status(200);
+        return res.status(200).json({ "success": true });
     } catch (error) {
         handleError(error, res);
     }
@@ -507,10 +521,10 @@ app.get('/event/delete', async (req, res) => {
     if (!event.length) return res.status(404).json({ "error": "Evento no existe" });
     event = event[0];
 
-    createVerificationCodes(user.id, id);
+    const resultID = await createVerificationCodes(user.id, id);
 
-    if (event["cupo"] == 0) return res.status(200).json({ "verify_sms": true });
-    else return res.status(200).json({ "verify_sms": false });
+    if (event["cupo"] == 0) return res.status(200).json({ "verify_sms": true, "id": resultID });
+    else return res.status(200).json({ "verify_sms": false, "id": resultID });
 });
 
 const htmlPath = path.join(__dirname, 'view');

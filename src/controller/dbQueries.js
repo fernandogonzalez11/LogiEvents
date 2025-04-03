@@ -21,7 +21,7 @@ const Queries = {
     ADD_VERIFICATION: 'INSERT INTO Verification(user_id, event_id, code, word) ' + 
                       'VALUES(?, ?, ?, ?)',
     DELETE_VERIFICATION: 'DELETE FROM Verification WHERE id = ?',
-    GET_VERIFICATION: 'SELECT id, code, word FROM Verification WHERE id = ?',
+    GET_VERIFICATION: 'SELECT id, code, word, event_id FROM Verification WHERE id = ?',
     GET_EVENT_AND_CAPACITY: 'SELECT id, capacidad, cupo FROM Event WHERE id = ?',
 }
 

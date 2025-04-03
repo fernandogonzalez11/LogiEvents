@@ -36,7 +36,7 @@ CREATE TABLE Event (
 CREATE TABLE Reservation (
     event_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
-    FOREIGN KEY (event_id) REFERENCES Event(id),
+    FOREIGN KEY (event_id) REFERENCES Event(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES User(id)
 );
 
@@ -48,5 +48,5 @@ CREATE TABLE Verification (
     code INTEGER,
     word TEXT,
     FOREIGN KEY (user_id) REFERENCES User(id),
-    FOREIGN KEY (event_id) REFERENCES Event(id)
+    FOREIGN KEY (event_id) REFERENCES Event(id) ON DELETE CASCADE
 );

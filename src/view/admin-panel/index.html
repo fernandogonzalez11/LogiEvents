@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/admin-panel/styleguide.css" />
   <link rel="stylesheet" href="/admin-panel/style.css" />
   <script defer src="../script.js"></script>
+  <script defer src="/admin-panel/script.js"></script>
 </head>
 
 <body>
@@ -62,7 +63,7 @@
           <button class="button" , onclick="goToCreateEvent()">Crear</button>
         </div>
         <div class="edit-and-delete">
-          <img class="trash" src="/admin-panel/img/trash.svg" /> <img class="edit" src="/admin-panel/img/edit.svg" />
+          <img class="trash" src="/admin-panel/img/trash.svg" onclick="deleteEvent(1)"/> <img class="edit" src="/admin-panel/img/edit.svg" />
         </div>
         <div class="edit-and-delete-2">
           <img class="trash" src="/admin-panel/img/trash.svg" /> <img class="edit" src="/admin-panel/img/edit.svg" />
@@ -81,7 +82,7 @@
     </div>
   </div>
 
-  <div class="dialog-container" style="display: none;">
+  <div id="sms-verification" class="dialog-container" style="display: none;">
     <h1>Confirmación de borrado</h1>
 
     <div class="input-group">
@@ -95,18 +96,18 @@
 
       <div class="input-row">
         <h2>Palabra recibida</h2>
-        <input type="text">
+        <input type="text" id="sms-code">
       </div>
     </div>
 
     <div class="button-group">
-      <button class="btn cancelar-btn">Cancelar</button>
-      <button class="btn siguiente-btn">Siguiente</button>
+      <button class="btn cancelar-btn" onclick="cancel()">Cancelar</button>
+      <button class="btn siguiente-btn" onclick="verifySMSCode()">Siguiente</button>
     </div>
   </div>
 </body>
 
-<div class="dialog-container" style="display: none;">
+<div id="email-verification" class="dialog-container" style="display: none;">
   <h1>Confirmación de borrado</h1>
 
   <div class="input-group">
@@ -120,17 +121,17 @@
 
     <div class="input-row">
       <h2>Código recibido</h2>
-      <input type="text">
+      <input type="text" id="email-code">
     </div>
   </div>
 
   <div class="button-group">
-    <button class="btn cancelar-btn">Cancelar</button>
-    <button class="btn siguiente-btn">Siguiente</button>
+    <button class="btn cancelar-btn" onclick="cancel()">Cancelar</button>
+    <button class="btn siguiente-btn" onclick="verifyEmailCode()">Siguiente</button>
   </div>
 </div>
 
-<div class="dialog-container" style="display: none;">
+<div id="last-confirm" class="dialog-container" style="display: none;">
   <h1>Confirmación de borrado</h1>
 
   <span>
@@ -140,8 +141,8 @@
   </span>
 
   <div class="button-group">
-    <button class="btn cancelar-btn">Cancelar</button>
-    <button class="btn confirmar-btn">Confirmar</button>
+    <button class="btn cancelar-btn" onclick="cancel()">Cancelar</button>
+    <button class="btn confirmar-btn" onclick="finalDeleteEvent()">Confirmar</button>
   </div>
 </div>
 </body>
