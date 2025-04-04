@@ -26,7 +26,7 @@ function reserveEvent() {
     .catch((err) => Swal.fire({ icon: "error", text: err }));
 }
 
-function verifySMSCode() {
+async function verifySMSCode() {
   const code = document.getElementById("sms-code").value;
   return fetch(`/api/check_sms_code?id=${currentVerificationID}&code=${code}`)
     .then((res) => res.json())
@@ -51,16 +51,17 @@ function verifySMSCode() {
     });
 }
 
-function sendMessage(phone) {
-  fetch(`/api/send_message?id=${currentVerificationID}&phone=${phone}`)
+async function sendMessage(phone) {
+  return fetch(`/api/send_message?id=${currentVerificationID}&phone=${phone}`)
     .then((res) => res.json())
-    .then((data) => {
+    .then(async (data) => {
       if (data["error"]) {
         Swal.fire({ icon: "error", text: data["error"] });
         return false;
       }
 
-      Swal.fire({ icon: "info", text: "Código enviado, por favor revise su teléfono" });
+      await Swal.fire({ icon: "info", text: "Código enviado, por favor revise su teléfono" });
+      return true;
     })
     .catch((err) => Swal.fire({ icon: "error", text: err }));
 }
@@ -68,20 +69,21 @@ function sendMessage(phone) {
 async function sendEventEmail(email, amount) {
   return fetch(`/api/send_event_email?email=${email}&event_id=${eventJSON.id}&amount=${amount}`)
     .then((res) => res.json())
-    .then((data) => {
+    .then(async (data) => {
       if (data["error"]) {
         Swal.fire({ icon: "error", text: data["error"] });
         return false;
       }
 
-      Swal.fire({
+      await Swal.fire({
         icon: "success",
+        title: "Evento reservado exitosamente",
         text: `Detalles del evento enviados a ${email}`
       });
       return true;
     })
     .catch((err) => {
-      Swal.fire({ icon: "error", text: "Error de conexión" });
+      Swal.fire({ icon: "error", text: "Error del servidor al enviar correo de información de la reserva" });
       return false;
     });
 }
@@ -103,13 +105,10 @@ async function finalReserveEvent() {
           Swal.fire({ icon: "error", text: data["error"] });
           return;
         } else if (data["success"]) {
-          sendEventEmail(email, amountOfReservations);
-          Swal.fire({
-            icon: "success",
-            text: "Evento reservado exitosamente",
-          }).then(() => {
-            goToEvents();
-          });
+          sendEventEmail(email, amountOfReservations)
+            .then(res => {
+              goToEvents();
+            });
         }
       });
   };

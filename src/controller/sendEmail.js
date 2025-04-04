@@ -126,6 +126,4 @@ ${evento.descripcion ? `Descripción: ${evento.descripcion}\n` : ''}
   }
 }
 
-
-module.exports = { enviarCorreoEvento}
-module.exports = { enviarCorreoConfirmacion }
+module.exports = { enviarCorreoEvento, enviarCorreoConfirmacion }
