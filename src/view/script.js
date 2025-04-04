@@ -28,4 +28,4 @@ function goToStatistics() {
 }
 function goToLogout() {
     window.location.href='/logout';
-}v
+}
