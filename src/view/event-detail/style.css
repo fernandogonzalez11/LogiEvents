@@ -107,13 +107,13 @@ body, html {
     word-wrap: break-word;
 }
 
-.event-name-label { top: 353px; }
-.event-date-label { top: 395px; }
-.organizer-label { top: 438px; }
-.available-seats-label { top: 478px; }
-.category-label { top: 522px; }
-.status-label { top: 567px; }
-.time-label { top: 611px; }
+.event-name-label, .event-name { top: 350px; }
+.event-date-label, .event-date { top: 390px; }
+.organizer-label, .organizer { top: 430px; }
+.available-seats-label, .available-seats { top: 470px; }
+.category-label, .category { top: 510px; }
+.status-label, .status { top: 550px; }
+.time-label, .time { top: 590px; }
 
 .event-name,
 .event-date,
@@ -132,14 +132,6 @@ body, html {
     line-height: 24px;
     word-wrap: break-word;
 }
-
-.event-name { top: 353px; }
-.event-date { top: 395px; }
-.organizer { top: 438px; }
-.available-seats { top: 478px; }
-.category { top: 522px; }
-.status { top: 567px; }
-.time { top: 611px; }
 
 .description-label {
     width: 269px;
