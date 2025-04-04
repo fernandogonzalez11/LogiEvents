@@ -23,7 +23,7 @@ body {
 .home-page .frame {
   display: flex;
   flex-direction: column;
-  width: 414px;
+  width: 450px;
   height: 572px;
   align-items: center;
   justify-content: center;
@@ -254,7 +254,7 @@ body {
 .home-page .frame-3 {
   display: flex;
   flex-direction: column;
-  width: 414px;
+  width: 450px;
   height: 572px;
   align-items: center;
   justify-content: center;
@@ -321,7 +321,7 @@ body {
   padding: 12px;
   position: absolute;
   top: 650px;
-  right: 10%;
+  right: 5%;
   background-color: #1e1e1e;
   border-radius: 32px;
   overflow: hidden;
@@ -350,7 +350,7 @@ body {
   padding: 12px;
   position: absolute;
   top: 580px;
-  right: 10%;
+  right: 5%;
   background-color: #1e1e1e;
   border-radius: 32px;
   overflow: hidden;
@@ -370,7 +370,7 @@ body {
   padding: 17.67px;
   position: absolute;
   top: 119px;
-  right: 10%;
+  right: 5%;
   background-color: #2c2c2c;
   border-radius: 8.53px;
   overflow: hidden;
