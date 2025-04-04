@@ -1,14 +1,14 @@
 function goToAdminPanel() {
-    window.location.href='/admin';
+    window.location.href='/admin-panel';
 }
 function goToCreateEvent() {
-    window.location.href='/createevent1';
+    window.location.href='/create-event/page1';
 }
 function goToCreateEvent2() {
-    window.location.href='/createevent2';
+    window.location.href='/create-event/page2';
 }
 function goToEditEvent() {
-    window.location.href='/event/edit';
+    window.location.href='/edit-event';
 }
 function goToEditProfile() {
     window.location.href='/profile';
@@ -21,11 +21,11 @@ function goToLogin() {
     window.location.href='/login';
 }
 function goToReserveEvent() {
-    window.location.href='/reserve';
+    window.location.href='/reserve-event';
 }
 function goToStatistics() {
     window.location.href='/statistics';
 }
 function goToLogout() {
     window.location.href='/logout';
-}
+}v
