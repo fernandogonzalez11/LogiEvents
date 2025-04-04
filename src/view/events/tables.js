@@ -1,6 +1,7 @@
 window.onload = async () =>{
     events = await getEventsOrdered();
     setEventsTable(events);
+    await checkForRole();
 }
 
 async function getEventsOrdered() {
@@ -52,4 +53,15 @@ function setEventsTable(events) {
         
         statusCell.appendChild(icon);
     });
+}
+
+async function checkForRole(){
+    const response = await fetch("/api/current_user")
+    const user = await response.json();
+    console.log(user);
+    console.log(user.type!="administrador");
+    if(user.type == "administrador") {
+        const adminButton = document.getElementById("adminbutton");
+        adminButton.style.display="flex";
+    }
 }
