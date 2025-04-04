@@ -48,8 +48,11 @@ input {
     word-wrap: break-word;
 }
 
-.date-box, .category-box {
-    width: 225.56px;
+.category-box {
+    width: 490.41px;
+    left: -0.13px;
+    top: 44px;
+    padding-left: 26.59px;
     height: 67px;
     background: white;
     border-radius: 6.65px;
@@ -61,12 +64,6 @@ input {
 .date-box {
     left: 0px;
     top: 50.3px;
-}
-
-.category-box {
-    width: 517px;
-    left: -0.13px;
-    top: 50px;
 }
 
 .date-text, .category-text {

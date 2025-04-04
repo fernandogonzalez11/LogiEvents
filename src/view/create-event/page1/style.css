@@ -199,6 +199,7 @@ body {
     outline: 1.58px var(--Border-Default-Default) solid;
     outline-offset: -0.79px;
     align-items: flex-start;
+    resize: none;
 }
 
 .dropdown-icon {

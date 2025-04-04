@@ -29,7 +29,7 @@
                 <select class="status-box" id="status">
                     <option value="Activo">Activo</option>
                     <option value="Agotado">Agotado</option>
-                    <option value="Próximamente">Proximamente</option>
+                    <option value="Próximamente">Próximamente</option>
                 </select>
             </div>
 
@@ -41,7 +41,7 @@
 
             <!-- Image Section -->
             <label class="upload-file">
-                <div class="upload-text">Imagen del Evento: </div>
+                <div class="upload-text">Imagen del evento: </div>
             </label>
             
             <div class="image-section">
@@ -58,14 +58,14 @@
 
             <!-- Icons Section -->
             <div class="icons">
-                <div class="icon-1">
-                    <img alt="Home" src="/create-event/page2/../../global_assets/logout.svg">
+                <div class="icon-1" onclick="goToEvents()">
+                    <img alt="Home" src="/create-event/page2/../../global_assets/home.svg">
                 </div>
-                <div class="icon-2">
+                <div class="icon-2" onclick="goToEditProfile()">
                     <img alt="User" src="/create-event/page2/../../global_assets/user.svg">
                 </div>
-                <div class="icon-3">
-                    <img alt="Log out" src="/create-event/page1/../../global_assets/home.svg">
+                <div class="icon-3" onclick="goToLogout()">
+                    <img alt="Log out" src="/create-event/page1/../../global_assets/logout.svg">
                 </div>
             </div>
 
@@ -89,7 +89,7 @@
             if (isNaN(str) || isNaN(parseFloat(str)) || str.split('.').length >= 3) {
                 return {
                     isValid: false,
-                    message: `${config.fieldName} debe ser un número válido (no use comas [,] y que sea un numero)`,
+                    message: `${config.fieldName} debe ser un número válido (no use comas [,] y que sea un número)`,
                     cleanValue: null
                 };
             }

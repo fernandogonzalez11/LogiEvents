@@ -299,7 +299,7 @@ function isValidNumber(input, options = {}) {
     if (isNaN(str) || isNaN(parseFloat(str)) || str.split('.').length >= 3) {
         return {
             isValid: false,
-            message: `${config.fieldName} debe ser un número válido (no use comas [,] y que sea un numero)`,
+            message: `${config.fieldName} debe ser un número válido (no use comas [,] y que sea un número)`,
             cleanValue: null
         };
     }

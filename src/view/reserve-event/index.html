@@ -1,79 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservación de evento</title>
+    <link rel="stylesheet" href="/reserve-event/style.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+    </style>
+    <script defer src="../script.js"></script>
+    <script defer src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Reservar evento</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reservación de evento</title>
-  <link rel="stylesheet" href="/reserve-event/style.css">
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
-  </style>
-  <script defer src="../script.js"></script>
-  <script defer src="script.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <title>Reservar evento</title>
-</head>
-
-<body>
-  <div id="main-container">
-    <div id="form-container">
-      <div class="form-group">
-        <div class="form-label">Correo electrónico</div>
-        <input class="form-input" id="email" />
+  <body>
+    <div id="main-container">
+      <div id="form-container">
+        <div class="form-group">
+          <div class="form-label">Correo electrónico</div>
+          <input class="form-input" id="email" />
+        </div>
+        <div class="form-group">
+          <div class="form-label">Nombre completo</div>
+          <input class="form-input" />
+        </div>
+        <div class="form-group">
+          <div class="form-label">Número telefónico</div>
+          <input class="form-input" id="phone" />
+        </div>
+        <div id="spaces-box">
+          <div class="form-label">Espacios por reservar</div>
+          <input id="spaces-selection" />
+        </div>
+        <div id="event-title">Reservación de evento</div>
+        <div id="event-name">Evento 1</div>
+        <button id="reserve-button">
+          <div id="reserve-text" onclick="reserveEvent()">Reservar</div>
+        </button>
+        <button id="cancel-button" , onclick="goToEvents()">
+          <div id="cancel-text">Cancelar</div>
+        </button>
       </div>
-      <div class="form-group">
-        <div class="form-label">Nombre completo</div>
-        <input class="form-input" />
-      </div>
-      <div class="form-group">
-        <div class="form-label">Número telefónico</div>
-        <input class="form-input" id="phone" />
-      </div>
-      <div id="spaces-box">
-        <div class="form-label">Espacios por reservar</div>
-        <input id="spaces-selection"></input>
-      </div>
-      <div id="event-title">Reservación de evento</div>
-      <div id="event-name">Evento 1</div>
-      <button id="reserve-button" >
-        <div id="reserve-text" onclick="reserveEvent()">Reservar</div>
-      </button>
-      <button id="cancel-button", onclick="goToEvents()">
-        <div id="cancel-text">Cancelar</div>
-      </button>
-    </div>
       <div id="icons-container">
-        <button class="icon" onclick="goToEvents()">
-            <img alt="Home", src="/edit-profile/admin/../../global_assets/home.svg">
-        </button>
-        
-        <button class="icon" onclick="goToEditProfile()">
-            <img alt="User" src="/edit-profile/admin/../../global_assets/user.svg">
-        </button>
         <button class="icon" onclick="goToLogout()">
-            <img alt="Log out" src="/edit-profile/admin/../../global_assets/logout.svg">
+          <img
+            alt="Log out"
+            src="/edit-profile/admin/../../global_assets/logout.svg" />
         </button>
-    </div>
-  </div>
-  <div id="sms-verification" class="dialog-container" style="display: none">
-    <h1>Confirmación de reserva</h1>
-
-    <div class="input-group">
-
-      <div class="input-row">
-        <h2>Palabra recibida</h2>
-        <input type="text" id="sms-code" />
+        <button class="icon" onclick="goToEditProfile()">
+          <img
+            alt="User"
+            src="/edit-profile/admin/../../global_assets/user.svg" />
+        </button>
+        <button class="icon" onclick="goToEvents()">
+          <img
+            alt="Home"
+            src="/edit-profile/admin/../../global_assets/home.svg" />
+        </button>
       </div>
     </div>
+    <div id="sms-verification" class="dialog-container" style="display: none">
+      <h1>Confirmación de reserva</h1>
 
-    <div class="button-group">
-      <button class="btn cancelar-btn" onclick="cancel()">Cancelar</button>
-      <button class="btn confirmar-btn" onclick="finalReserveEvent()">
-        Confirmar
-      </button>
+      <div class="input-group">
+        <div class="input-row">
+          <h2>Palabra recibida</h2>
+          <input type="text" id="sms-code" />
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button class="btn cancelar-btn" onclick="cancel()">Cancelar</button>
+        <button class="btn confirmar-btn" onclick="finalReserveEvent()">
+          Confirmar
+        </button>
+      </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>

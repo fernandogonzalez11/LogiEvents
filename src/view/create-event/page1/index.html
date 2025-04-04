@@ -24,8 +24,7 @@
             </div>
             <div class="description-group">
                 <label for="description">Descripción</label>
-                <input class="input-field description-field">
-                </input>
+                <textarea class="input-field description-field"></textarea>
             </div>
             <div class="location-group">
                 <label for="location">Ubicación</label>
@@ -35,14 +34,14 @@
             <button class="cancel-button", onclick="goToAdminPanel()">Cancel</button>
         </div>
         <div class="icons">
-            <div class="icon">
-                <img alt="Home" src="/create-event/page1/../../global_assets/logout.svg">
+            <div class="icon" onclick="goToLogout()">
+                <img alt="Log out" src="/create-event/page1/../../global_assets/logout.svg">
             </div>
-            <div class="icon">
+            <div class="icon" onclick="goToEditProfile()">
                 <img alt="User" src="/create-event/page1/../../global_assets/user.svg">
             </div>
-            <div class="icon">
-                <img alt="Log out" src="/create-event/page1/../../global_assets/home.svg">
+            <div class="icon" onclick="goToEvents()">
+                <img alt="Home" src="/create-event/page1/../../global_assets/home.svg">
             </div>
         </div>
     </div>

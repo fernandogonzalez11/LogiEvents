@@ -70,7 +70,7 @@ body, html {
 
 /* Ranking Container Styles */
 .ranking-container {
-    width: 32.34%;
+    width: 37%;
     height: 79.44%;
     padding: 36px 10px;
     position: absolute;
@@ -105,7 +105,7 @@ body, html {
 }
 
 .events-table {
-    width: 80%;
+    width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
 }
