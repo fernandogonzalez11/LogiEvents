@@ -382,16 +382,10 @@ app.post('/api/createAevent', upload.single('image'), async (req, res) => {
             cupo 
         } = req.body;
 
-        console.log("Datos procesados:", {
-            name, description, date, time, location,
-            capacity, price, status, category, cupo,
-            imageSize: imageData.length
-        });
-        
         //----------------------------------
         const existingEvents = await db.query(Queries.GET_EVENT_BY_NAME, [name]);
         if (existingEvents.length > 0) {
-            return res.status(500).json({ success: false, message: 'El evento ya existe' });
+            return res.json({ success: false, message: 'El evento ya existe' });
         }
        
         if (status === "Agotado") {
