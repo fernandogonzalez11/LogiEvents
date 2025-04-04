@@ -65,8 +65,8 @@ function sendMessage(phone) {
     .catch((err) => Swal.fire({ icon: "error", text: err }));
 }
 
-async function sendEventEmail(email) {
-  return fetch(`/api/send_event_email?email=${email}&event_id=${eventJSON.id}`)
+async function sendEventEmail(email, amount) {
+  return fetch(`/api/send_event_email?email=${email}&event_id=${eventJSON.id}&amount=${amount}`)
     .then((res) => res.json())
     .then((data) => {
       if (data["error"]) {
@@ -94,6 +94,7 @@ function cancel() {
 async function finalReserveEvent() {
   const correct = await verifySMSCode();
   email = document.getElementById("email").value;
+  amountOfReservations = document.getElementById("spaces-selection").value;
   if (correct) {
     fetch(`/api/event/reserve?id=${currentVerificationID}`)
       .then((res) => res.json())
@@ -102,7 +103,7 @@ async function finalReserveEvent() {
           Swal.fire({ icon: "error", text: data["error"] });
           return;
         } else if (data["success"]) {
-          sendEventEmail(email);
+          sendEventEmail(email, amountOfReservations);
           Swal.fire({
             icon: "success",
             text: "Evento reservado exitosamente",

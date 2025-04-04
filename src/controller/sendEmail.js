@@ -38,8 +38,10 @@ async function enviarCorreoConfirmacion(destinatario, codigo) {
   }
 }
 
+
+
 // Correo con información de evento
-async function enviarCorreoEvento(destinatario, evento) {
+async function enviarCorreoEvento(destinatario, evento, amount) {
   try {
     const mensaje = {
       from: "LogiEvents Manager <logievents.manager@gmail.com>",
@@ -56,6 +58,7 @@ async function enviarCorreoEvento(destinatario, evento) {
               .details th { background-color: #f2f2f2; text-align: left; padding: 8px; }
               .details td { padding: 8px; border-bottom: 1px solid #ddd; }
               .footer { margin-top: 20px; font-size: 0.9em; color: #777; }
+              .highlight { background-color: #f8f9fa; font-weight: bold; }
             </style>
           </head>
           <body>
@@ -76,6 +79,10 @@ async function enviarCorreoEvento(destinatario, evento) {
                 <tr>
                   <th>Categoría:</th>
                   <td>${evento.categoria || 'No especificada'}</td>
+                </tr>
+                <tr class="highlight">
+                  <th>Reservaciones:</th>
+                  <td>${amount}</td>
                 </tr>
                 ${evento.ubicacion ? `
                 <tr>
@@ -100,10 +107,11 @@ async function enviarCorreoEvento(destinatario, evento) {
         </html>
       `,
       text: `Detalles del evento:
-Nombre: ${evento.nombre}
+Nombre: ${evento.name}
 Fecha: ${evento.fecha || 'No especificada'}
 Hora: ${evento.hora || 'No especificada'}
 Categoría: ${evento.categoria || 'No especificada'}
+Reservaciones: ${amount}
 ${evento.ubicacion ? `Ubicación: ${evento.ubicacion}\n` : ''}
 ${evento.descripcion ? `Descripción: ${evento.descripcion}\n` : ''}
 `
@@ -118,4 +126,6 @@ ${evento.descripcion ? `Descripción: ${evento.descripcion}\n` : ''}
   }
 }
 
+
+module.exports = { enviarCorreoEvento}
 module.exports = { enviarCorreoConfirmacion }

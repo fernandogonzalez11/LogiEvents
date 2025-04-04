@@ -713,7 +713,7 @@ app.get('/api/send_event_email', async (req, res) => {
     const q = req.query;
     const email = q["email"];
     const event_id = q["event_id"];
-
+    const amount = q["amount"];
     // Validate email
     if (!validateEmail(email)) return res.status(400).json({ "error": "Correo electrónico inválido" });
 
@@ -727,7 +727,7 @@ app.get('/api/send_event_email', async (req, res) => {
             return res.status(404).json({ "error": "Evento no encontrado" });
 
         // Send email
-        const result = await enviarCorreoEvento(email, row[0]);
+        const result = await enviarCorreoEvento(email, row[0], amount);
 
         return res.status(200).json({ success: result });
     } catch (error) {
