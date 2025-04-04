@@ -131,7 +131,7 @@ app.get('/login/', (req, res) => sendHTML(res, "login"));
 app.get('/admin/', (req, res) => sendHTML(res, "admin-panel"));
 app.get('/createevent1/', (req, res) => sendHTML(res, "create-event/page1"));
 app.get('/createevent2/', (req, res) => sendHTML(res, "create-event/page2"));
-app.get('/editevent/', (req, res) => sendHTML(res, "edit-event"));
+app.get('/event/edit/', (req, res) => sendHTML(res, "edit-event"));
 app.get('/event/', (req, res) => sendHTML(res, "event-detail"));
 app.get('/events/', (req, res) => {
     if (!req.session.userId) return res.status(403).redirect("/login/");
@@ -151,6 +151,7 @@ app.get('/logout/', (req, res) => {
         res.redirect(redirectURI); // Redirect to login page after logout
     });
 });
+app.get('/statistics', (req, res) => sendHTML(res, "statistics"));
 
 
 app.get('/api/login/', async (req, res) => {
