@@ -1,7 +1,11 @@
 const botResponses = {
     option1: "Para cambiar la información de tu usuario, simplemente accede al icono del perfil en esta misma página y cambia los campos que desees con información válida.",
-    option2: "Esto es una función reservada para administradores. Ingresa al panel de administrador y dirigete al botón de \"Crear Evento\", desde ahí puedes rellenar la información que aplica para el evento que desees agragar.",
-    option3: "Para reservar espacios en un evento, haz click sobre el nombre de un evento en esta misma página, posteriormente ingresa a \"Reservar Entrada\" y llena el formulario con la información de la reserva que desees realizar.",
+    option2: "Para reservar espacios en un evento, haz click sobre el nombre de un evento en esta misma página, posteriormente ingresa a \"Reservar Entrada\" y llena el formulario con la información de la reserva que desees realizar.",
+    option3: "Esto es una función reservada para administradores. Ingresa al panel de administrador y dirigete al botón de \"Crear Evento\", desde ahí puedes rellenar la información que aplica para el evento que desees agragar.",
+    option4: "Esto es una función reservada para administradores. Ingresa al panel de administrador y busca el evento que quieras modificar. Al seleccionar el símbolo del lápiz será trasladado a la página con información del evento y puede modificar la información que desee.",
+    option5: "Esto es una función reservada para administradores. Ingresa al panel de administrador y busca el evento que quieras eliminar. Debe presionar el símbolo del basurero.\n Se desplegará una solicitud por un correo electrónico de validación. Ingrese su dirección de correo y espere que le llegue un correo de nosotros con el código de verificación que debe ingresar.\n Adicionalmente, si el evento está agotado, se le pedirá un proceso similar con su número de teléfono.",
+    
+    
     default: "I'm not sure how to answer that question. Please try another option."
   };
 

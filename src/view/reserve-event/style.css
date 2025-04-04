@@ -191,6 +191,8 @@
     height: 61.24px;
     overflow: hidden;
     position: absolute;
+    background: none;
+    border:none;
   }
   
   .icon:nth-child(1) {
