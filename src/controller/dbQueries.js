@@ -33,12 +33,13 @@ const Queries = {
     SET_AS_UNAVAILABLE: 'UPDATE Event SET estado = "Agotado" WHERE id = ?',
 }
 
-const db = new Database(process.env.SQLITE_CONNECTION, (err) => {
-    if(err) {
-        return console.log(err.message);
-    }
-    console.log("Connected to database!");
-});
+function getDatabaseConnection() {
+    return new Database(process.env.SQLITE_CONNECTION, (err) => {
+        if(err) {
+            return console.log(err.message);
+        }
+    });
+}
 
 function preprocess(sql) {
     if (!Object.values(Queries).includes(sql)) throw new Error("Query not included in Queries enum");
@@ -58,6 +59,7 @@ function preprocess(sql) {
  */
 async function query(sql, values) {
     sql = preprocess(sql);
+    const db = getDatabaseConnection();
     return await db.sql(sql, ...values);
 }
 
