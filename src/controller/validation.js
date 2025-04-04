@@ -16,11 +16,13 @@ const {
  */
 const EMAIL_REGEX = /^[^@]+@[^@]+\.[^@]+$/;
 // EMP-001
-const EMPLOYEE_ID_REGEX = /EMP-\d{3}/;
+const EMPLOYEE_ID_REGEX = /[A-Za-z]{2}\d{4}/;
 // 4 letras y 4 números
 const PASSWORD_REGEX = /^(?=(.*[A-Za-z]){4,})(?=(.*\d){4,}).{8,}$/;
 // +50612345678
 const TWILIO_PHONE_REGEX = new RegExp(`\\+${COUNTRY_CODE}\\d{8}`);
+// Rol
+const ROLE_REGEX = /^[a-zA-Z()]+$/;
 
 /**
  * 
@@ -84,6 +86,10 @@ function validateEmployeeID(empID) {
     return EMPLOYEE_ID_REGEX.test(empID);
 }
 
+function validateRole(role) {
+    return ROLE_REGEX.test(role);
+}
+
 module.exports = {
     validateCedula,
     validateEmail,
@@ -91,5 +97,6 @@ module.exports = {
     validatePhone,
     validateUsername,
     validatePassword,
-    validateTwilioPhone
+    validateTwilioPhone,
+    validateRole
 }
