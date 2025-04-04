@@ -7,6 +7,7 @@ const { User } = require('./models/User');
 const { validatePassword, validatePhone, validateEmail } = require('./controller/validation');
 const { sendTwilioMessage } = require('./controller/sendTwilio');
 const { enviarCorreoConfirmacion } = require('./controller/sendEmail');
+const { enviarCorreoEvento } = require('./controller/sendEmail'); //This right?
 const Constants = require('./models/Constants');
 const { Queries } = require('./controller/dbQueries');
 const db = require('./controller/dbQueries');
@@ -704,6 +705,34 @@ app.get('/api/getEventsToDisplay', async (req, res) => {
     } catch (err) {
         console.log("Error al obtener eventos!")
         return handleError(err, res);
+    }
+});
+
+
+app.get('/api/send_event_email', async (req, res) => {
+    const q = req.query;
+    const email = q["email"];
+    const event_id = q["event_id"];
+
+    // Validate email
+    if (!validateEmail(email)) return res.status(400).json({ "error": "Correo electrónico inválido" });
+
+    // Validate event ID
+    if (!event_id || isNaN(event_id)) return res.status(400).json({ "error": "ID de evento inválido" });
+
+    try {
+        // Get event data
+        const row = await db.query(Queries.GET_EVENT_BY_ID, [event_id]);
+        if (!row.length) 
+            return res.status(404).json({ "error": "Evento no encontrado" });
+
+        // Send email
+        const result = await enviarCorreoEvento(email, row[0]);
+
+        return res.status(200).json({ success: result });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ "error": "Error del servidor" });
     }
 });
 

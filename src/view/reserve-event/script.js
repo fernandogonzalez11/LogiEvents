@@ -51,8 +51,22 @@ function verifySMSCode() {
     });
 }
 
-async function sendMessage(phone) {
-  return fetch(`/api/send_message?id=${currentVerificationID}&phone=${phone}`)
+function sendMessage(phone) {
+  fetch(`/api/send_message?id=${currentVerificationID}&phone=${phone}`)
+    .then((res) => res.json())
+    .then((data) => {
+      if (data["error"]) {
+        Swal.fire({ icon: "error", text: data["error"] });
+        return false;
+      }
+
+      Swal.fire({ icon: "info", text: "Código enviado, por favor revise su teléfono" });
+    })
+    .catch((err) => Swal.fire({ icon: "error", text: err }));
+}
+
+async function sendEventEmail(email) {
+  return fetch(`/api/send_event_email?email=${email}&event_id=${eventJSON.id}`)
     .then((res) => res.json())
     .then((data) => {
       if (data["error"]) {
@@ -61,16 +75,17 @@ async function sendMessage(phone) {
       }
 
       Swal.fire({
-        icon: "info",
-        text: "Código enviado, por favor revise su teléfono",
+        icon: "success",
+        text: `Detalles del evento enviados a ${email}`
       });
       return true;
     })
     .catch((err) => {
-      Swal.fire({ icon: "error", text: err });
+      Swal.fire({ icon: "error", text: "Error de conexión" });
       return false;
     });
 }
+
 
 function cancel() {
   document.getElementById("sms-verification").style.display = "none";
@@ -78,7 +93,7 @@ function cancel() {
 
 async function finalReserveEvent() {
   const correct = await verifySMSCode();
-
+  email = document.getElementById("email").value;
   if (correct) {
     fetch(`/api/event/reserve?id=${currentVerificationID}`)
       .then((res) => res.json())
@@ -87,6 +102,7 @@ async function finalReserveEvent() {
           Swal.fire({ icon: "error", text: data["error"] });
           return;
         } else if (data["success"]) {
+          sendEventEmail(email);
           Swal.fire({
             icon: "success",
             text: "Evento reservado exitosamente",
@@ -97,3 +113,4 @@ async function finalReserveEvent() {
       });
   };
 }
+
