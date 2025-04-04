@@ -33,8 +33,13 @@ async function displayEvent(event) {
         document.getElementById('event-image').src = `/api/event/image/${event.id}`;
     }
 
+    const checkObj = await fetch(`/api/check_reserved?event_id=${event.id}`)
+        .then(res => res.json());
+
+    console.log(checkObj);
+
     // Set reserve button if applicable
-    if (event.estado != "Activo"){
+    if (event.estado != "Activo" || checkObj.reserved){
         button = document.getElementById("reserve-button");
         button.disabled = true;
         button.classList.add('disabled-button');

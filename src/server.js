@@ -790,7 +790,21 @@ app.get('/api/event/reserve', async (req, res) => {
         console.error(error);
         return res.status(500).json({ "error": "Error del servidor al procesar la reserva" });
     }
-}); 
+});
+
+app.get('/api/check_reserved', async (req, res) => {
+    try {
+        const q = req.query;
+        // verification ID
+        const eventID = q["event_id"];
+        
+        const rows = await db.query(Queries.GET_RESERVATION, [eventID, req.session.userId]);
+        return res.status(200).json({ "reserved": rows.length > 0 });
+    } catch {
+        console.error(error);
+        return res.status(500).json({ "error": "Problema al revisar si un evento ya está reservado" });
+    }
+})
 
 const htmlPath = path.join(__dirname, 'view');
 // Set the "html" folder as the location for templates/static files

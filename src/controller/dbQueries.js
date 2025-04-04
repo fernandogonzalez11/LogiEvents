@@ -31,9 +31,10 @@ const Queries = {
     UPDATE_EVENT: `UPDATE Event SET capacidad = ?, precio = ?, ubicacion = ?, image_data = ?, image_type = ? WHERE id = ?`,
     UPDATE_EVENT_WITHOUT_IMAGE: `UPDATE Event SET capacidad = ?, precio = ?, ubicacion = ? WHERE id = ?`,
     INSERT_RESERVATION: 'INSERT INTO Reservation (event_id, user_id, amount) VALUES (?, ?, ?)',
+    GET_RESERVATION: 'SELECT event_id, user_id, amount FROM Reservation WHERE event_id = ? AND user_id = ?',
     DECREASE_AVAILABILITY: 'UPDATE Event SET cupo = cupo - ? WHERE id = ?',
     SET_AS_UNAVAILABLE: 'UPDATE Event SET estado = "Agotado" WHERE id = ?',
-    GET_MY_EVENTS: 'SELECT E.* FROM Event E JOIN Reservation R ON E.id = R.event_id WHERE R.user_id = ?;'
+    GET_MY_EVENTS: 'SELECT E.* FROM Event E JOIN Reservation R ON E.id = R.event_id WHERE R.user_id = ?;',
 }
 
 function getDatabaseConnection() {
