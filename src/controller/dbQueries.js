@@ -60,7 +60,9 @@ function preprocess(sql) {
 async function query(sql, values) {
     sql = preprocess(sql);
     const db = getDatabaseConnection();
-    return await db.sql(sql, ...values);
+    const result = await db.sql(sql, ...values);
+    db.close();
+    return result;
 }
 
 module.exports = { Queries, query }

@@ -2,6 +2,8 @@ let currentVerificationID = -1;
 const eventData = sessionStorage.getItem("currentEvent");
 const eventJSON = JSON.parse(eventData);
 
+document.getElementById("event-name").textContent = eventJSON.name;
+
 function reserveEvent() {
   amountOfReservations = document.getElementById("spaces-selection").value;
   email = document.getElementById("email").value;
