@@ -404,6 +404,7 @@ body {
 #adminbutton {
   color: white;
   font-family: Inter;
+  display:none;
 }
 
 .event-unavailable {

@@ -42,17 +42,17 @@
         <div id="cancel-text">Cancelar</div>
       </button>
     </div>
-    <div id="icons-container">
-      <div class="icon" data-size="48">
-        <img alt="Log out" src="/reserve-event/../global_assets/logout.svg">
-      </div>
-      <div class="icon" data-size="48">
-        <img alt="User" src="/reserve-event/../global_assets/user.svg">
-      </div>
-      <div class="icon" data-size="48">
-        <img alt="Home" src="/reserve-event/../global_assets/home.svg">
-      </div>
-      
+      <div id="icons-container">
+        <button class="icon" onclick="goToEvents()">
+            <img alt="Home", src="/edit-profile/admin/../../global_assets/home.svg">
+        </button>
+        
+        <button class="icon" onclick="goToEditProfile()">
+            <img alt="User" src="/edit-profile/admin/../../global_assets/user.svg">
+        </button>
+        <button class="icon" onclick="goToLogout()">
+            <img alt="Log out" src="/edit-profile/admin/../../global_assets/logout.svg">
+        </button>
     </div>
   </div>
   <div id="sms-verification" class="dialog-container" style="display: none">
