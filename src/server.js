@@ -151,7 +151,6 @@ app.get('/logout/', (req, res) => {
         res.redirect(redirectURI); // Redirect to login page after logout
     });
 });
-app.get('/statistics', (req, res) => sendHTML(res, "statistics"));
 
 
 app.get('/api/login/', async (req, res) => {
