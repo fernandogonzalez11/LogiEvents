@@ -574,7 +574,9 @@ app.get('/api/getEventsToDisplay', async (req, res) => {
 // receives event ID
 app.get('/event/reserve', async (req, res) => {
     // returns verification row ID
-
+    const user = await getCurrentUser(req, res);
+    if (!user) return;
+    
     const q = req.query;
     // verification ID
     const id = q["id"];

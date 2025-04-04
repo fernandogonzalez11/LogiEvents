@@ -1,15 +1,15 @@
 let currentVerificationID = -1;
 const eventData = sessionStorage.getItem("currentEvent");
-const event = JSON.parse(eventData);
+const evento = JSON.parse(eventData);
 
 function reserveEvent() {
   amountOfReservations = document.getElementById("spaces-selection").value;
   email = document.getElementById("email").value;
   phone = document.getElementById("phone").value;
-  fetch(`/event/reserve?id=${eventID}&amount=${amountOfReservations}&correo=${email}&phone=${phone}`)
+  fetch(`/event/reserve?id=${evento.id}&amount=${amountOfReservations}&correo=${email}&phone=${phone}`)
     .then((res) => res.json())
     .then((data) => {
-      if (data["error"]) {s
+      if (data["error"]) {
         Swal.fire({ icon: "error", text: data["error"] });
         return;
       }
@@ -71,6 +71,7 @@ function finalReserveEvent() {
           return;
         } else if (data["success"]) {
           Swal.fire({ icon: "success", text: "Evento reservado exitosamente" });
+          
           window.location.reload();
           return;
         }
