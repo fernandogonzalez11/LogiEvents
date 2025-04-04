@@ -634,9 +634,6 @@ app.get('/event/reserve', async (req, res) => {
 
 // receives verification row ID
 app.get('/api/event/reserve', async (req, res) => {
-<<<<<<< Updated upstream
-    return res.status(200).json({ "success": true })
-=======
     try {
         const q = req.query;
         // verification ID
@@ -670,7 +667,6 @@ app.get('/api/event/reserve', async (req, res) => {
         console.error(error);
         return res.status(500).json({ "error": "Error del servidor al procesar la reserva" });
     }
->>>>>>> Stashed changes
 }); 
 
 const htmlPath = path.join(__dirname, 'view');
