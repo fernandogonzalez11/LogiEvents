@@ -288,11 +288,21 @@ function isValidNumber(input, options = {}) {
         min: null,
         max: null,
         maxDecimals: 2,
-        decimalSeparator: ',',
+        decimalSeparator: '.',
         fieldName: 'Este campo',
         required: true
     };
     const config = { ...defaults, ...options };
+
+    let str = String(input).trim().replace(',', '.');
+
+    if (isNaN(str) || isNaN(parseFloat(str)) || str.split('.').length >= 3) {
+        return {
+            isValid: false,
+            message: `${config.fieldName} debe ser un número válido (no use comas [,] y que sea un numero)`,
+            cleanValue: null
+        };
+    }
 
     if (config.required && (input === '' || input === null || input === undefined)) {
         return {
@@ -305,16 +315,6 @@ function isValidNumber(input, options = {}) {
     if (!config.required && (input === '' || input === null || input === undefined)) {
         return { 
             isValid: true,
-            cleanValue: null
-        };
-    }
-
-    let str = String(input).trim().replace(/\./g, '').replace(',', '.');
-
-    if (isNaN(str) || isNaN(parseFloat(str))) {
-        return {
-            isValid: false,
-            message: `${config.fieldName} debe ser un número válido`,
             cleanValue: null
         };
     }

@@ -2,6 +2,7 @@
 
 body {
   font-family: Inter;
+  background-color: #b3d5e6;
 }
 
 .admin-dashboard {
@@ -81,7 +82,7 @@ body {
 .admin-dashboard .group {
   position: absolute;
   width: 1217px;
-  height: 482px;
+  height: 130%;
   top: 1px;
   left: 2px;
 }
@@ -90,13 +91,13 @@ body {
   display: flex;
   flex-direction: column;
   width: 1110px;
-  height: 414px;
   font-family: "Inter-Regular", Helvetica;
   align-items: flex-start;
   gap: 16px;
   position: absolute;
   top: 68px;
   left: 0;
+
 } 
 
 .admin-dashboard .accordion-item {
@@ -314,7 +315,7 @@ body {
   gap: 11.78px;
   padding: 17.67px;
   position: absolute;
-  top: 640px;
+  top: 105%;
   left: 25px;
   background-color: #b3b3b3;
   border-radius: 8.53px;

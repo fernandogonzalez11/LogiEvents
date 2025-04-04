@@ -78,11 +78,21 @@
                 min: null,
                 max: null,
                 maxDecimals: 2,
-                decimalSeparator: ',',
+                decimalSeparator: '.',
                 fieldName: 'Este campo',
                 required: true
             };
             const config = { ...defaults, ...options };
+
+            let str = String(input).trim().replace(',', '.');
+
+            if (isNaN(str) || isNaN(parseFloat(str)) || str.split('.').length >= 3) {
+                return {
+                    isValid: false,
+                    message: `${config.fieldName} debe ser un número válido (no use comas [,] y que sea un numero)`,
+                    cleanValue: null
+                };
+            }
 
             if (config.required && (input === '' || input === null || input === undefined)) {
                 return {
@@ -95,16 +105,6 @@
             if (!config.required && (input === '' || input === null || input === undefined)) {
                 return { 
                     isValid: true,
-                    cleanValue: null
-                };
-            }
-
-            let str = String(input).trim().replace(/\./g, '').replace(',', '.');
-
-            if (isNaN(str) || isNaN(parseFloat(str))) {
-                return {
-                    isValid: false,
-                    message: `${config.fieldName} debe ser un número válido`,
                     cleanValue: null
                 };
             }
@@ -216,7 +216,7 @@
 
                 const data = await response.json();
 
-                if (!data.susuccess) {
+                if (data.success === false) {
                     throw new Error(data.message || 'Error en la solicitud');
                 }
 
@@ -230,8 +230,6 @@
                 });
             }
         }
-
-    
     </script>
 </body>
 </html>
