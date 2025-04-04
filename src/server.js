@@ -7,6 +7,7 @@ const { User } = require('./models/User');
 const { validatePassword, validatePhone, validateEmail } = require('./controller/validation');
 const { sendTwilioMessage } = require('./controller/sendTwilio');
 const { enviarCorreoConfirmacion } = require('./controller/sendEmail');
+const { enviarCorreoEvento } = require('./controller/sendEmail'); //This right?
 const Constants = require('./models/Constants');
 const { Queries } = require('./controller/dbQueries');
 const db = require('./controller/dbQueries');
@@ -571,6 +572,34 @@ app.get('/api/getEventsToDisplay', async (req, res) => {
     }
 });
 
+
+app.get('/api/send_event_email', async (req, res) => {
+    const q = req.query;
+    const email = q["email"];
+    const event_id = q["event_id"];
+
+    // Validate email
+    if (!validateEmail(email)) return res.status(400).json({ "error": "Correo electrónico inválido" });
+
+    // Validate event ID
+    if (!event_id || isNaN(event_id)) return res.status(400).json({ "error": "ID de evento inválido" });
+
+    try {
+        // Get event data
+        const row = await db.query(Queries.GET_EVENT_BY_ID, [event_id]);
+        if (!row.length) 
+            return res.status(404).json({ "error": "Evento no encontrado" });
+
+        // Send email
+        const result = await enviarCorreoEvento(email, row[0]);
+
+        return res.status(200).json({ success: result });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ "error": "Error del servidor" });
+    }
+});
+
 // receives event ID
 app.get('/event/reserve', async (req, res) => {
     // returns verification row ID
@@ -605,7 +634,43 @@ app.get('/event/reserve', async (req, res) => {
 
 // receives verification row ID
 app.get('/api/event/reserve', async (req, res) => {
+<<<<<<< Updated upstream
     return res.status(200).json({ "success": true })
+=======
+    try {
+        const q = req.query;
+        // verification ID
+        const id = q["id"];
+        const email = q["email"];
+        const amount = req.session.eventReservationAmount;
+
+        let verification = await db.query(Queries.GET_VERIFICATION, [id]);
+        if (!verification.length) return res.status(404).json({ "error": "Verificación no existe o expiró" });
+        verification = verification[0];
+
+        // get the event and user IDs from here
+        const eventID = verification["event_id"];
+        const userID = verification["user_id"];
+
+        console.log("Reserving event " + eventID.toString() + " for user " + userID.toString());
+        // make the transaction queries
+        await db.query(Queries.DECREASE_AVAILABILITY, [amount, eventID]);
+        await db.query(Queries.INSERT_RESERVATION, [eventID, userID, amount]);
+        delete req.session.eventReservationAmount;
+
+        //Cambiar esto apara que quede como el delete. I know this is wrong, donde se llama este bicho para pasarle todo el even JSON ??
+        const result = await enviarCorreoEvento(email, eventID);
+
+        if (!result) return res.status(500).json({ "error": "Error del servidor al enviar correo" });
+        
+        // Gotta take ts wit me
+        return res.status(200).json({ "success": true });
+        
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ "error": "Error del servidor al procesar la reserva" });
+    }
+>>>>>>> Stashed changes
 }); 
 
 const htmlPath = path.join(__dirname, 'view');

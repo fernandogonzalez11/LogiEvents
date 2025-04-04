@@ -38,4 +38,84 @@ async function enviarCorreoConfirmacion(destinatario, codigo) {
   }
 }
 
+// Correo con información de evento
+async function enviarCorreoEvento(destinatario, evento) {
+  try {
+    const mensaje = {
+      from: "LogiEvents Manager <logievents.manager@gmail.com>",
+      to: destinatario,
+      subject: `Detalles del evento: ${evento.name}`,
+      html: `
+        <html>
+          <head>
+            <style>
+              body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+              .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+              .header { background-color: #2c3e50; color: white; padding: 20px; text-align: center; }
+              .details { margin: 20px 0; border-collapse: collapse; width: 100%; }
+              .details th { background-color: #f2f2f2; text-align: left; padding: 8px; }
+              .details td { padding: 8px; border-bottom: 1px solid #ddd; }
+              .footer { margin-top: 20px; font-size: 0.9em; color: #777; }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <h1>${evento.name}</h1>
+              </div>
+              
+              <table class="details">
+                <tr>
+                  <th>Fecha:</th>
+                  <td>${evento.fecha || 'No especificada'}</td>
+                </tr>
+                <tr>
+                  <th>Hora:</th>
+                  <td>${evento.hora || 'No especificada'}</td>
+                </tr>
+                <tr>
+                  <th>Categoría:</th>
+                  <td>${evento.categoria || 'No especificada'}</td>
+                </tr>
+                ${evento.ubicacion ? `
+                <tr>
+                  <th>Ubicación:</th>
+                  <td>${evento.ubicacion}</td>
+                </tr>
+                ` : ''}
+                ${evento.descripcion ? `
+                <tr>
+                  <th>Descripción:</th>
+                  <td>${evento.descripcion}</td>
+                </tr>
+                ` : ''}
+              </table>
+              
+              <div class="footer">
+                <p>Atentamente,<br>Equipo LogiEvents Manager</p>
+                <p>Si tienes alguna pregunta, no dudes en contactarnos.</p>
+              </div>
+            </div>
+          </body>
+        </html>
+      `,
+      text: `Detalles del evento:
+Nombre: ${evento.nombre}
+Fecha: ${evento.fecha || 'No especificada'}
+Hora: ${evento.hora || 'No especificada'}
+Categoría: ${evento.categoria || 'No especificada'}
+${evento.ubicacion ? `Ubicación: ${evento.ubicacion}\n` : ''}
+${evento.descripcion ? `Descripción: ${evento.descripcion}\n` : ''}
+`
+    };
+    
+    await transporter.sendMail(mensaje);
+    console.log(`✔ Correo de evento enviado a ${destinatario}`);
+    return true;
+  } catch (error) {
+    console.error(`✖ Error al enviar correo de evento: ${error.message}`);
+    return false;
+  }
+}
+
 module.exports = { enviarCorreoConfirmacion }
