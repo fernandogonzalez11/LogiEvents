@@ -20,6 +20,8 @@ const { buffer } = require('stream/consumers');
 const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
+const {Event} = require('./models/Event');
+const {Reservation} = require('./models/Reservation');
 
 const PASSWORD_ERROR = "Contraseña inválida (al menos 4 letras y 4 números)";
 
@@ -320,10 +322,6 @@ app.post('/api/update_user', async (req, res) => {
     return res.status(200).json({ "success": true });
 });
 
-function isFloat(num) {
-    return Number.isFinite(num) || Number.isInteger(num);
-}
-
 app.get('/api/getEvents', async (req, res) => {
     try {
         const eventsList = await db.query(Queries.GET_EVENTS_FOR_ADMIN, []);
@@ -333,7 +331,6 @@ app.get('/api/getEvents', async (req, res) => {
         res.status(500).json({ error: 'Error al obtener eventos' });
     }
 });
-
 
 app.post('/api/createAevent', upload.single('image'), async (req, res) => {
     try {
@@ -392,6 +389,24 @@ app.post('/api/createAevent', upload.single('image'), async (req, res) => {
             cupo = 0;
         }
 
+        const eventToCreat = new Event({
+            name : name,
+            organizerId : user.id_empleado,
+            description : description,
+            date : date,
+            time : time,
+            location : location,
+            capacity : parseInt(capacity),
+            price : parseFloat(price),
+            status : status, 
+            category : category,
+            imageData : imageData, 
+            imageType : imageType,
+            availableSlots : cupo,
+        });
+
+        console.log(eventToCreat);
+
         await db.query(Queries.ADD_NEW_EVENT, [
             name, 
             user.id_empleado,
@@ -420,7 +435,6 @@ app.post('/api/createAevent', upload.single('image'), async (req, res) => {
     }
 });
 
-// Image retrieval endpoint remains the same
 app.get('/api/event/image/:eventId', async (req, res) => {
     try {
         const { eventId } = req.params;
@@ -645,7 +659,6 @@ app.get('/api/event/delete', async (req, res) => {
     }
 });
 
-// the API route called when pressing the trash icon
 app.get('/event/delete', async (req, res) => {
     const user = await getCurrentUser(req, res);
     if (!user) return;
@@ -702,7 +715,6 @@ app.get('/api/getEventsToDisplay', async (req, res) => {
     }
 });
 
-
 app.get('/api/send_event_email', async (req, res) => {
     const q = req.query;
     const email = q["email"];
@@ -730,7 +742,6 @@ app.get('/api/send_event_email', async (req, res) => {
     }
 });
 
-// receives event ID
 app.get('/event/reserve', async (req, res) => {
     // returns verification row ID
     const user = await getCurrentUser(req, res);
@@ -764,7 +775,6 @@ app.get('/event/reserve', async (req, res) => {
     return res.status(200).json({ "id": resultID });
 });
 
-// receives verification row ID
 app.get('/api/event/reserve', async (req, res) => {
     try {
         const q = req.query;
@@ -807,7 +817,6 @@ app.get('/api/check_reserved', async (req, res) => {
 })
 
 const htmlPath = path.join(__dirname, 'view');
-// Set the "html" folder as the location for templates/static files
 app.use(express.static(htmlPath));
 
 const PORT = process.env.PORT || 3000;

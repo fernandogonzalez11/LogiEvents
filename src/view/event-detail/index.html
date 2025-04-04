@@ -48,17 +48,12 @@
     </div>
 
     <script>
-        
-        // Navigation functions
         function goToEvents() {
             window.location.href = '/events';
         }
-        
         function goToReserveEvent() {
             window.location.href = `/reserve?id=${eventId}`;
         }
-        
-        // Initialize page
         document.addEventListener('DOMContentLoaded', displayEvent);
     </script>
 </body>
