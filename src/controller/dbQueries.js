@@ -21,13 +21,16 @@ const Queries = {
     ADD_VERIFICATION: 'INSERT INTO Verification(user_id, event_id, code, word) ' + 
                       'VALUES(?, ?, ?, ?)',
     DELETE_VERIFICATION: 'DELETE FROM Verification WHERE id = ?',
-    GET_VERIFICATION: 'SELECT id, code, word, event_id FROM Verification WHERE id = ?',
+    GET_VERIFICATION: 'SELECT id, code, word, event_id, user_id FROM Verification WHERE id = ?',
     GET_EVENTS_FOR_ADMIN : 'SELECT id, name, organizador_id, fecha, hora, ubicacion ' + 
                             'FROM Event ORDER BY fecha DESC',
     GET_EVENTS_SORTED_BY_RESERVES: 'SELECT name, capacidad, cupo, estado FROM Event ORDER BY (capacidad - cupo) DESC',
     GET_EVENTS_SORTED_BY_DATE: 'SELECT * FROM Event ORDER BY fecha DESC',
     GET_EVENT_BY_ID: 'SELECT * FROM Event WHERE id = ?',
     GET_EVENT_AND_CAPACITY: 'SELECT id, capacidad, cupo FROM Event WHERE id = ?',
+    INSERT_RESERVATION: 'INSERT INTO Reservation (event_id, user_id, amount) VALUES (?, ?, ?)',
+    DECREASE_AVAILABILITY: 'UPDATE Event SET cupo = cupo - ? WHERE id = ?',
+    SET_AS_UNAVAILABLE: 'UPDATE Event SET estado = "Agotado" WHERE id = ?',
 }
 
 const db = new Database(process.env.SQLITE_CONNECTION, (err) => {

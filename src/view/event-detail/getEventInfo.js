@@ -2,8 +2,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const eventData = sessionStorage.getItem('currentEvent');
     const event = JSON.parse(eventData);
     displayEvent(event);
-    sessionStorage.removeItem('currentEvent');
-    
+    //sessionStorage.removeItem('currentEvent');
 });
 
 async function displayEvent(event) {
@@ -32,5 +31,12 @@ async function displayEvent(event) {
         document.getElementById('event-image').src = event.image_url;
     } else if (event.image_data) {
         document.getElementById('event-image').src = `/api/event/image/${event.id}`;
+    }
+
+    // Set reserve button if applicable
+    if (event.estado != "Activo"){
+        button = document.getElementById("reserve-button");
+        button.disabled = true;
+        button.classList.add('disabled-button');
     }
 }

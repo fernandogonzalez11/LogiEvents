@@ -77,6 +77,17 @@ body, html {
     color: black;
 }
 
+/* Style for disabled reserve button */
+.reserve-button.disabled-button {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    border: 1px solid #999999;
+}
+
+.reserve-button.disabled-button:hover {
+    background-color: #cccccc;
+}
 .event-name-label,
 .event-date-label,
 .organizer-label,
