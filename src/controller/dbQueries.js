@@ -28,6 +28,8 @@ const Queries = {
     GET_EVENTS_SORTED_BY_DATE: 'SELECT * FROM Event ORDER BY fecha DESC',
     GET_EVENT_BY_ID: 'SELECT * FROM Event WHERE id = ?',
     GET_EVENT_AND_CAPACITY: 'SELECT id, capacidad, cupo FROM Event WHERE id = ?',
+    UPDATE_EVENT: `UPDATE Event SET capacidad = ?, precio = ?, ubicacion = ?, image_data = ?, image_type = ? WHERE id = ?`,
+    UPDATE_EVENT_WITHOUT_IMAGE: `UPDATE Event SET capacidad = ?, precio = ?, ubicacion = ? WHERE id = ?`,
     INSERT_RESERVATION: 'INSERT INTO Reservation (event_id, user_id, amount) VALUES (?, ?, ?)',
     DECREASE_AVAILABILITY: 'UPDATE Event SET cupo = cupo - ? WHERE id = ?',
     SET_AS_UNAVAILABLE: 'UPDATE Event SET estado = "Agotado" WHERE id = ?',
@@ -38,6 +40,15 @@ function getDatabaseConnection() {
         if(err) {
             return console.log(err.message);
         }
+    try {
+        db.run(`USE DATABASE ${Constants.DATABASE}; ` + `PRAGMA encoding = 'UTF-8';`);
+        db.run(`USE DATABASE ${Constants.DATABASE}; ` + `PRAGMA page_size = 4096;`);
+        db.run(`USE DATABASE ${Constants.DATABASE}; ` + `PRAGMA cache_size = 10000;`);
+
+    } catch (error) {
+        console.log("[Unsuccessful] : Unable large BLOB support");
+    }
+
     });
 }
 

@@ -38,7 +38,9 @@ function renderEvents(events) {
 
     eventElement.innerHTML = `
           <div class="edit-and-delete">
-            <button id="edit" class="edit-btn" onclick="goToEditEvent()">
+            <button id="edit" class="edit-btn" onclick="goToEditSelectedEvent(${
+              event.id
+            })">
               <img class="edit" src="/admin-panel/img/edit.svg" />
             </button>
 
@@ -83,6 +85,38 @@ function deleteEvent(id) {
       console.log(currentVerificationID);
     })
     .catch((err) => Swal.fire({ icon: "error", text: err }));
+}
+
+async function goToEditSelectedEvent(id) {
+  try {
+
+      if (!id || isNaN(id)) {
+          throw new Error("ID de evento inválido");
+      }
+
+      const response = await fetch(`/api/getEventToEdit/${id}`);
+      
+      if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Error fetching event");
+      }
+
+      const data = await response.json();
+
+      if (!data.success || !data.event) {
+          throw new Error("Evento no encontrado");
+      }
+
+      sessionStorage.setItem('currentEvent', JSON.stringify(data.event));
+      window.location.href='/edit-event/';
+
+  } catch (error) {
+      console.error("Error:", error);
+      Swal.fire({
+          icon: 'error',
+          text: error.message || 'No se pudo cargar el evento para edición'
+      });
+  }
 }
 
 function verifyEmailCode() {

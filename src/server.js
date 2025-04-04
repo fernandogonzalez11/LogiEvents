@@ -14,6 +14,11 @@ const Redis = require('redis');
 const { RedisStore } = require('connect-redis');
 const cors = require('cors');
 const randomWords = require('random-word-slugs');
+const sharp = require('sharp');
+const { buffer } = require('stream/consumers');
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 const PASSWORD_ERROR = "Contraseña inválida (al menos 4 letras y 4 números)";
 
@@ -329,37 +334,69 @@ app.get('/api/getEvents', async (req, res) => {
 });
 
 
-app.post('/api/createAevent', async (req, res) => {
+app.post('/api/createAevent', upload.single('image'), async (req, res) => {
     try {
         // Obtener el ID del empleado/organizador
         const user = await getCurrentUser(req, res);
         if (!user) return;
-        if (user.type != 'administrador') return res.status(403).json({ "error": "Usuario actual no es administrador" });
-        
-        // Extraer datos del evento
-        let {name, description, date, time, location, 
-            capacity, price, status, category, imageData, imageType, 
-            cupo} = req.body;
-        
-        // Validaciones...
-        if (!imageData || !imageType) {
-            return res.json({ success: false, message: 'La imagen es requerida' });
+        if (user.type != 'administrador') return res.json({ success: false, message: 'Solo administradores pueden crear nuevos eventos' });
+
+        // Verificar si el archivo fue recibido
+        if (!req.file) {
+            return res.json({
+                success: false,
+                message: 'No se recibió ninguna imagen'
+            });
         }
 
-        if (Number.isInteger(capacity) === false || isFloat(price) === false) {
-            return res.json({ success: false, message: 'Verifique que precio y capacidad tengan el formato requerido ' });
+
+        let imageData, imageType;
+        try {
+            imageData = req.file.buffer.toString('base64');
+            imageType = req.file.mimetype;
+            const processedImage = await sharp(req.file.buffer)
+                .resize(1200, 1200, { fit: 'inside' })
+                .jpeg({ quality: 80 })
+                .toBuffer();
+            imageData = processedImage.toString('base64');
+            imageType = 'image/jpeg';
+        } catch (imgError) {
+            console.error('Error procesando imagen:', imgError);
+            return res.json({
+                success: false,
+                message: 'Error procesando la imagen'
+            });
         }
-        // Verificar si el evento ya existe
+
+        let { 
+            name, 
+            description, 
+            date, 
+            time, 
+            location, 
+            capacity, 
+            price, 
+            status, 
+            category, 
+            cupo 
+        } = req.body;
+
+        console.log("Datos procesados:", {
+            name, description, date, time, location,
+            capacity, price, status, category, cupo,
+            imageSize: imageData.length
+        });
+        
+        //----------------------------------
         const existingEvents = await db.query(Queries.GET_EVENT_BY_NAME, [name]);
         if (existingEvents.length > 0) {
-            return res.json({ success: false, message: 'El evento ya existe' });
+            return res.status(500).json({ success: false, message: 'El evento ya existe' });
         }
        
         if (status === "Agotado") {
             cupo = 0;
         }
 
-        // Crear el evento
         await db.query(Queries.ADD_NEW_EVENT, [
             name, 
             user.id_empleado,
@@ -380,10 +417,15 @@ app.post('/api/createAevent', async (req, res) => {
         
     } catch (err) {
         console.error('Error al crear evento:', err);
-        res.json({ success: false, message: 'Error del servidor' });
+        res.status(500).json({ 
+            success: false, 
+            message: 'Error del servidor',
+            error: process.env.NODE_ENV === 'development' ? err.message : undefined
+        });
     }
 });
 
+// Image retrieval endpoint remains the same
 app.get('/api/event/image/:eventId', async (req, res) => {
     try {
         const { eventId } = req.params;
@@ -392,7 +434,7 @@ app.get('/api/event/image/:eventId', async (req, res) => {
             [eventId]
         );
 
-        if (!row || row.length === 0) {
+        if (!row || row.length === 0 || !row[0].image_data) {
             return res.status(404).send('Imagen no encontrada');
         }
 
@@ -406,7 +448,90 @@ app.get('/api/event/image/:eventId', async (req, res) => {
         console.error('Error fetching image:', err);
         res.status(500).send('Error al recuperar la imagen');
     }
-}); 
+});
+
+app.get('/api/getEventToEdit/:id', async (req, res) => {
+    try {
+        const eventId = req.params.id;
+        
+        if (!eventId || isNaN(eventId)) {
+            return res.json({ 
+                success: false, 
+                message: 'ID de evento inválido' 
+            });
+        }
+
+        // Query database
+        const event = await db.query(Queries.GET_EVENT_BY_ID, [eventId]);
+
+        if (event.length === 0) {
+            return res.json({ 
+                success: false, 
+                message: 'Evento no encontrado' 
+            });
+        }
+
+        res.json({
+            success: true,
+            event: event[0]
+        });
+
+    } catch (error) {
+        console.error('Error fetching event:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Error del servidor al obtener el evento' 
+        });
+    }
+});
+
+app.post('/api/updateEvent', upload.single('image'), async (req, res) => {
+    try {
+        const { id, capacity, price, location } = req.body;
+        
+        if (!id || !capacity || !price || !location) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Todos los campos son requeridos' 
+            });
+        }
+
+        if (isNaN(capacity) || isNaN(price)) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Capacidad y precio deben ser números válidos' 
+            });
+        }
+
+        const updateData = {
+            capacity: parseInt(capacity),
+            price: parseFloat(price),
+            location
+        };
+
+        if (req.file) {
+            updateData.image_data = req.file.buffer.toString('base64');
+            updateData.image_type = req.file.mimetype;
+        }
+
+        await db.query(
+            req.file ? Queries.UPDATE_EVENT : Queries.UPDATE_EVENT_WITHOUT_IMAGE,
+            req.file ? 
+                [updateData.capacity, updateData.price, updateData.location, 
+                 updateData.image_data, updateData.image_type, id] :
+                [updateData.capacity, updateData.price, updateData.location, id]
+        );
+
+        res.json({ success: true });
+
+    } catch (error) {
+        console.error('Error updating event:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Error del servidor al actualizar el evento' 
+        });
+    }
+});
 
 app.get('/api/send_message', async (req, res) => {
     const q = req.query;

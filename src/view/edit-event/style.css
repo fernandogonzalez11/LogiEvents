@@ -17,6 +17,17 @@ input {
     overflow: hidden;
 }
 
+.error-border {
+    border: 4px solid #ff4444 !important;
+}
+
+.error-message {
+    color: #ff4444;
+    font-size: 14px; /* Slightly larger */
+    
+    font-weight: 500; /* Medium weight */
+    display: none;
+}
 .main-box {
     width: 1011.27px;
     height: 664.93px;
@@ -71,12 +82,25 @@ input {
     top: 50px;
 }
 
+#capacity-error {
+    width: 240px;
+    left: 0px;
+    top: 135px;
+    position: absolute;
+}
+
 .price-input {
     width: 200px;
     left: 273.87px;
     top: 50px;
 }
 
+#price-error {
+    width: 240px;
+    left: 275px;
+    top: 135px;
+    position: absolute;
+}
 .location {
     width: 435px;
     height: 131px;
@@ -169,7 +193,7 @@ input {
 }
 
 .image-input {
-    width: 720px;
+    width: 680px;
     height: 24px;
     min-width: 398.87px;
     padding-left: 16px;
@@ -177,7 +201,7 @@ input {
     padding-top: 12px;
     padding-bottom: 12px;
     left: 246px;
-    top: 402px;
+    top: 357px;
     position: absolute;
     background: white;
     border-radius: 6.65px;
@@ -189,11 +213,21 @@ input {
 }
 
 .image-label {
-    width: 980px;
+    width: 200px;
+    padding: 12px;
     left: 16px;
-    top: 357px;
+    top: 350px;
     position: absolute;
-    color: black;
+    background: #2c2c2c;
+    overflow: hidden;
+    border-radius: 8px;
+    outline: 1px #2c2c2c solid;
+    outline-offset: -1px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    display: inline-flex;
+    color: white;
     font-size: 26.59px;
     font-weight: 400;
     line-height: 37.23px;

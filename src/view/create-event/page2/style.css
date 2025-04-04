@@ -155,6 +155,8 @@ input {
     left: 479.13px;
     top: 239px;
     position: absolute;
+    font-size: 26.59px;
+    font-weight: 400;
 }
 
 .status-label {
@@ -180,6 +182,8 @@ input {
     border-radius: 6.65px;
     outline: 1px #d9d9d9 solid;
     outline-offset: -0.5px;
+    font-size: 22px;
+    font-weight: 400;
 }
 
 .status-text {
@@ -334,8 +338,12 @@ input {
     align-items: center;
     gap: 10px;
     display: inline-flex;
+    font-size: 26.59px;
+    font-weight: 400;
 }
 .cancel-button {
+    font-size: 26.59px;
+    font-weight: 400;
     padding: 10px;
     left: 20px;
     top: 592px;

@@ -1,50 +1,274 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Evento</title>
     <link rel="stylesheet" href="/edit-event/style.css" />
-    <style>
-        @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
-    </style>
     <script defer src="../script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="container">
         <div class="main-box">
+            <div class="edit-event" id="edit-event-name">Editar evento</div>
+            
+            <!-- Capacity Section -->
             <div class="capacity-price">
                 <div class="capacity">Capacidad</div>
+                <input class="capacity-input" id="capacity" type="text"/>
+                <span id="capacity-error" class="error-message"></span>
+
                 <div class="price">Precio</div>
-                <input class="capacity-input" />
-                <input class="price-input" />
+                <input class="price-input" id="price" type="text" />
+                <span id="price-error" class="error-message"></span>
             </div>
+            
+            <!-- Location Section -->
             <div class="location">
                 <div class="location-label">Ubicación</div>
-                <input class="location-input" />
+                <input class="location-input" id="location" />
+                <span id="location-error" class="error-message"></span>
             </div>
-            <div class="edit-event">Editar evento</div>
-            <button class="confirm-button">
+            
+            <!-- Image Section -->
+            <div class="image-label">Imagen</div>
+            
+            <div class="image-input" id="image-preview">
+                <input type="file" id="image-file" accept="image/*" />
+                <span id="image-error" class="error-message"></span>
+            </div>
+
+            <!-- Action Buttons -->
+            <button class="confirm-button" id="confirm-btn" onclick="updateEvent()">
                 <div class="confirm-text">Confirmar</div>
             </button>
-            <button class="cancel-button", onclick="goToEvents()">
+            <button class="cancel-button" onclick="goToEvents()">
                 <div class="cancel-text">Cancelar</div>
             </button>
-            <div class="image-input"></div>
-            <div class="image-label">Imagen</div>
-            <button class="upload-file">
-                <div class="upload-text">Cargar archivo...</div>
-            </button>
         </div>
+        
         <div class="icons">
             <div class="icon-1">
-                <img alt="Home" src="/edit-event/../global_assets/home.svg">
+                <img alt="Home" src="/edit-event/../global_assets/home.svg" onclick="goToEvents()">
             </div>
             <div class="icon-2">
-                <img alt="User" src="/edit-event/../global_assets/user.svg">
+                <img alt="User" src="/edit-event/../global_assets/user.svg" onclick="goToEditProfile()">
             </div>
             <div class="icon-3">
-                <img alt="Log out" src="/edit-event/../global_assets/logout.svg">
+                <img alt="Log out" src="/edit-event/../global_assets/logout.svg" onclick="goToLogout()">
             </div>
         </div>
     </div>
+
+    <script>
+        // Load event data when page loads
+        document.addEventListener('DOMContentLoaded', async () => {
+            const eventData = JSON.parse(sessionStorage.getItem('currentEvent'));
+            if (!eventData) {
+                Swal.fire({ icon: 'error', text: 'No se encontraron datos del evento' });
+                window.location.href = '/events';
+                return;
+            }
+
+            // Populate form fields
+            document.getElementById('capacity').value = eventData.capacidad;
+            document.getElementById('price').value = eventData.precio;
+            document.getElementById('location').value = eventData.ubicacion;
+
+            // Set up event listeners
+            setupValidation();
+        });
+
+        function setupValidation() {
+            // Number validation for capacity (integer)
+            document.getElementById('capacity').addEventListener('input', function() {
+                this.value = this.value.replace(/[^0-9]/g, '');
+                validateField(this, 'capacity-error', {
+                    required: true,
+                    isInteger: true,
+                    min: 1,
+                    max: 100000
+                });
+            });
+
+
+            document.getElementById('price').addEventListener('input', function() {
+                // Allow numbers and one decimal point or comma
+                this.value = this.value.replace(/[^0-9,.]/g, '')
+                                       .replace(/([,.])(?=.*\1)/g, '');
+                
+                // Replace comma with period for validation
+                const normalized = this.value.replace(',', '.');
+                validateField(this, 'price-error', {
+                    required: true,
+                    isDecimal: true,
+                    min: 0,
+                    max: 1000000,
+                    maxDecimals: 2
+                });
+            });
+
+            document.getElementById('location').addEventListener('input', function() {
+                validateField(this, 'location-error', { required: true });
+            });
+
+            document.getElementById('image-file').addEventListener('change', function() {
+                validateField(this, 'image-error', { 
+                    required: false,
+                    isImage: true,
+                    maxSizeMB: 5
+                });
+            });
+
+        }
+
+        function validateField(input, errorElementId, rules) {
+            const errorElement = document.getElementById(errorElementId);
+            const value = input.value.trim();
+            let isValid = true;
+            let message = '';
+
+            // Required validation
+            if (rules.required && !value) {
+                isValid = false;
+                message = 'Este campo es requerido';
+            }
+
+            // Integer validation
+            if (isValid && rules.isInteger && value && !/^\d+$/.test(value)) {
+                isValid = false;
+                message = 'Debe ser un número entero';
+            }
+
+            // Decimal validation
+            if (isValid && rules.isDecimal && value) {
+                const decimalParts = value.replace(',', '.').split('.');
+                if (decimalParts.length > 1 && decimalParts[1].length > (rules.maxDecimals || 2)) {
+                    isValid = false;
+                    message = `Máximo ${rules.maxDecimals || 2} decimales permitidos`;
+                }
+            }
+
+            // Range validation
+            if (isValid && value) {
+                const numValue = parseFloat(value.replace(',', '.'));
+                
+                if (rules.min !== undefined && numValue < rules.min) {
+                    isValid = false;
+                    message = `El valor mínimo es ${rules.min}`;
+                }
+                
+                if (rules.max !== undefined && numValue > rules.max) {
+                    isValid = false;
+                    message = `El valor máximo es ${rules.max}`;
+                }
+            }
+
+            // Image validation
+            if (isValid && rules.isImage && input.files && input.files[0]) {
+                const file = input.files[0];
+                const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                
+                if (!validTypes.includes(file.type)) {
+                    isValid = false;
+                    message = 'Solo se permiten imágenes JPEG, PNG o GIF';
+                }
+                
+                if (rules.maxSizeMB && file.size > rules.maxSizeMB * 1024 * 1024) {
+                    isValid = false;
+                    message = `La imagen no puede exceder ${rules.maxSizeMB}MB`;
+                }
+            }
+
+            // Update UI
+            if (isValid) {
+                input.classList.remove('error-border');
+                errorElement.style.display = 'none';
+            } else {
+                input.classList.add('error-border');
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+
+            return isValid;
+        }
+
+        function validateAllFields() {
+            const validations = [
+                validateField(document.getElementById('capacity'), 'capacity-error', {
+                    required: true,
+                    isInteger: true,
+                    min: 1,
+                    max: 100000
+                }),
+                validateField(document.getElementById('price'), 'price-error', {
+                    required: true,
+                    isDecimal: true,
+                    min: 0,
+                    max: 1000000,
+                    maxDecimals: 2
+                }),
+                validateField(document.getElementById('location'), 'location-error', { 
+                    required: true 
+                })
+            ];
+
+            return validations.every(v => v);
+        }
+
+        async function updateEvent() {
+            if (!validateAllFields()) {
+                Swal.fire({ icon: 'error', text: 'Por favor corrija los errores en el formulario' });
+                return;
+            }
+
+            const eventData = JSON.parse(sessionStorage.getItem('currentEvent'));
+            if (!eventData) {
+                Swal.fire({ icon: 'error', text: 'No se encontraron datos del evento' });
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('id', eventData.id);
+            formData.append('capacity', document.getElementById('capacity').value);
+            formData.append('price', document.getElementById('price').value.replace(',', '.'));
+            formData.append('location', document.getElementById('location').value);
+
+            const imageFile = document.getElementById('image-file').files[0];
+            if (imageFile) {
+                formData.append('image', imageFile);
+            }
+
+            try {
+                const response = await fetch('/api/updateEvent', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Error al actualizar el evento');
+                }
+
+                const data = await response.json();
+                if (data.success) {
+                    Swal.fire({ 
+                        icon: 'success', 
+                        text: 'Evento actualizado exitosamente',
+                    });
+                    goToEvents();
+                } else {
+                    throw new Error(data.message || 'Error al actualizar el evento');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                Swal.fire({ 
+                    icon: 'error', 
+                    text: error.message || 'Error al actualizar el evento' 
+                });
+            }
+        }
+    </script>
 </body>
 </html>
