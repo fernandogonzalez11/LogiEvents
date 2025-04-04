@@ -458,8 +458,7 @@ app.get('/api/send_email', async (req, res) => {
 app.get('/api/check_sms_code', async (req, res) => {
     try {
         const user = await getCurrentUser(req, res);
-        if (!user) return;
-        if (user.type != 'administrador') return res.status(403).json({ "error": "Usuario actual no es administrador" });
+        if (!user) return res.status(500).json({ "error": "El usuario es inexistente" });
 
         const q = req.query;
         // verification row ID
@@ -480,8 +479,7 @@ app.get('/api/check_sms_code', async (req, res) => {
 app.get('/api/check_email_code', async (req, res) => {
     try {
         const user = await getCurrentUser(req, res);
-        if (!user) return;
-        if (user.type != 'administrador') return res.status(403).json({ "error": "Usuario actual no es administrador" });
+        if (!user) return res.status(500).json({ "error": "El usuario es inexistente" });
 
         const q = req.query;
         // verification row ID
@@ -583,6 +581,7 @@ app.get('/event/reserve', async (req, res) => {
     let amount = q["amount"];
     const email = q["email"];
     const phone = q["phone"];
+
     try {
         amount = parseInt(amount)
     } catch (error) {
@@ -599,13 +598,37 @@ app.get('/event/reserve', async (req, res) => {
     
 
     const resultID = await createVerificationCodes(user.id, id);
+    req.session.eventReservationAmount = amount;
 
     return res.status(200).json({ "id": resultID });
 });
 
 // receives verification row ID
 app.get('/api/event/reserve', async (req, res) => {
-    return res.status(200).json({ "success": true })
+    try {
+        const q = req.query;
+        // verification ID
+        const id = q["id"];
+        const amount = req.session.eventReservationAmount;
+
+        let verification = await db.query(Queries.GET_VERIFICATION, [id]);
+        if (!verification.length) return res.status(404).json({ "error": "Verificación no existe o expiró" });
+        verification = verification[0];
+
+        // get the event and user IDs from here
+        const eventID = verification["event_id"];
+        const userID = verification["user_id"];
+
+        console.log("Reserving event " + eventID.toString() + " for user " + userID.toString());
+        // make the transaction queries
+        await db.query(Queries.DECREASE_AVAILABILITY, [amount, eventID]);
+        await db.query(Queries.INSERT_RESERVATION, [eventID, userID, amount]);
+        delete req.session.eventReservationAmount;
+        return res.status(200).json({ "success": true });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ "error": "Error del servidor al procesar la reserva" });
+    }
 }); 
 
 const htmlPath = path.join(__dirname, 'view');

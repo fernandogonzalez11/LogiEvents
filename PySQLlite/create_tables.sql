@@ -36,6 +36,7 @@ CREATE TABLE Event (
 CREATE TABLE Reservation (
     event_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
+    amount INTEGER NOT NULL,
     FOREIGN KEY (event_id) REFERENCES Event(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES User(id)
 );
