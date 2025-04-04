@@ -33,6 +33,7 @@ const Queries = {
     INSERT_RESERVATION: 'INSERT INTO Reservation (event_id, user_id, amount) VALUES (?, ?, ?)',
     DECREASE_AVAILABILITY: 'UPDATE Event SET cupo = cupo - ? WHERE id = ?',
     SET_AS_UNAVAILABLE: 'UPDATE Event SET estado = "Agotado" WHERE id = ?',
+    GET_MY_EVENTS: 'SELECT E.* FROM Event E JOIN Reservation R ON E.id = R.event_id WHERE R.user_id = ?;'
 }
 
 function getDatabaseConnection() {
@@ -46,7 +47,7 @@ function getDatabaseConnection() {
         db.run(`USE DATABASE ${Constants.DATABASE}; ` + `PRAGMA cache_size = 10000;`);
 
     } catch (error) {
-        console.log("[Unsuccessful] : Unable large BLOB support");
+        
     }
 
     });

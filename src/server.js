@@ -682,6 +682,19 @@ app.get('/api/getEventsByReserves', async (req, res) => {
     }
 });
 
+app.get('/api/getMyEventsToDisplay', async (req, res) => {
+    try {
+        const user = await getCurrentUser(req, res);
+        rows = await db.query(db.Queries.GET_MY_EVENTS,[user.id]);
+        if (!rows) return;
+
+        return res.json(rows);
+    } catch (err) {
+        console.log("Error al obtener eventos!")
+        return handleError(err, res);
+    }
+});
+
 app.get('/api/getEventsToDisplay', async (req, res) => {
     try {
         rows = await db.query(db.Queries.GET_EVENTS_SORTED_BY_DATE,[]);
