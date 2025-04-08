@@ -126,7 +126,6 @@
   }
   
   #event-name {
-    width: 194px;
     height: 59px;
     left: 408px;
     top: 107px;
@@ -136,6 +135,7 @@
     font-size: 35px;
     font-weight: 400;
     word-wrap: break-word;
+    margin: auto;
   }
   
   /* Reserve and Cancel Button Styles */
