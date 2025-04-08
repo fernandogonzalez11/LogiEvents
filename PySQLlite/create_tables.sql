@@ -9,7 +9,7 @@ CREATE TABLE User (
     password TEXT NOT NULL,
     type TEXT NOT NULL CHECK (type IN ('administrador', 'usuario')),
     rol TEXT,
-    id_empleado TEXT
+    id_empleado TEXT UNIQUE
 );
 
 -- Event

@@ -183,17 +183,16 @@ input {
 }
 
 .name-label {
-    width: 347px;
     height: 46px;
-    left: 332px;
     top: 51px;
-    position: absolute;
+    position: relative;
     color: black;
     font-size: 40px;
     font-family: Inter;
     font-weight: 400;
     word-wrap: break-word;
     text-align: center;
+    margin: auto;
 }
 
 .username-label {
